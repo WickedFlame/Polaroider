@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Polaroid
+namespace Polaroider
 {
     public static class SnapshotIdExtensions
     {

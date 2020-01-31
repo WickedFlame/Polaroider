@@ -5,7 +5,7 @@ using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Polaroid.Tests.Writer
+namespace Polaroider.Tests.Writer
 {
     public class SnapshotsWriterTests
     {

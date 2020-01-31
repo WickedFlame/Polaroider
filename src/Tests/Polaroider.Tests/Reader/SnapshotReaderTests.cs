@@ -2,7 +2,7 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Polaroid.Tests
+namespace Polaroider.Tests
 {
     public class SnapshotReaderTests
     {

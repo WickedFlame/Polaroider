@@ -1,5 +1,5 @@
 ﻿
-namespace Polaroid.SnapshotReaders
+namespace Polaroider.SnapshotReaders
 {
     public class SnapshotLineReader : ILineReader
     {

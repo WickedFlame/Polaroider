@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Polaroid.SnapshotReaders;
+using Polaroider.SnapshotReaders;
 
-namespace Polaroid
+namespace Polaroider
 {
     public class SnapshotReader : ISnapshotReader
     {

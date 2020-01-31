@@ -1,5 +1,5 @@
 ﻿
-namespace Polaroid
+namespace Polaroider
 {
     internal class SnapshotCompare
     {

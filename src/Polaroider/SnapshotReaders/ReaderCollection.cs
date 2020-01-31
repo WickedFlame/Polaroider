@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Polaroid.SnapshotReaders
+namespace Polaroider.SnapshotReaders
 {
     public class ReaderCollection
     {

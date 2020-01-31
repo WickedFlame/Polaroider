@@ -20,7 +20,7 @@ os: Visual Studio 2019
 install:
   - set PATH=C:\Program Files (x86)\MSBuild\16.0\Bin;%PATH%
 #  - sudo apt-get install nunit-console
-#  - nuget restore Scribe.sln
+#  - nuget restore Polaroider.sln
 
 dotnet_csproj:
   patch: true
@@ -45,11 +45,11 @@ configuration: Release
 #  - Release
 
 before_build:
-  - nuget restore Scribe.sln
+  - nuget restore Polaroider.sln
 
 build:
   parallel: true                  # enable MSBuild parallel builds
-  project: Scribe.sln             # path to Visual Studio solution or project
+  project: Polaroider.sln             # path to Visual Studio solution or project
   publish_wap: false              # package Web Application Projects (WAP) for Web Deploy
   publish_wap_xcopy: false        # package Web Application Projects (WAP) for XCopy deployment
   publish_azure: false            # package Azure Cloud Service projects and push to artifacts
@@ -70,8 +70,8 @@ build:
 #test:
 #  assemblies:
 #    only:
-#      - Scribe.Test.dll
-#    - '**\Scribe.Configuration.Test.dll'
+#      - Polaroider.Test.dll
+#    - '**\Polaroider.Configuration.Test.dll'
 
 #  categories:
 #    - UI
@@ -105,14 +105,11 @@ build:
 #---------------------------------#
 
 artifacts:
-  - path: src\Scribe\bin\Release\netstandard2.0\Scribe.dll
-    name: Scribe.dll
+  - path: src\Polaroider\bin\Release\netstandard2.0\Polaroider.dll
+    name: Polaroider.dll
 
-#  - path: src\Scribe.Configuration\bin\Release\Scribe.Configuration.dll
-#    name: Scribe.Configuration.dll
-
-  - path: src\Scribe.Extensions\bin\Release\netstandard2.0\Scribe.Extensions.dll
-    name: Scribe.Extensions.dll
+#  - path: src\Polaroider.Configuration\bin\Release\Polaroider.Configuration.dll
+#    name: Polaroider.Configuration.dll
 
   # pushing all *.nupkg files in directory
   - path: '.\*.nupkg'
@@ -127,4 +124,4 @@ artifacts:
 #      secure: FYWX6NfjZIVw==
 #    skip_symbols: false
 #    symbol_server: https://your.symbol.server/feed
-#    artifact: Scribe.nupkg
+#    artifact: Polaroider.nupkg

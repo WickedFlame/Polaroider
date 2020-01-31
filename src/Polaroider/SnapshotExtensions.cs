@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Polaroid
+namespace Polaroider
 {
     public static class SnapshotExtensions
     {

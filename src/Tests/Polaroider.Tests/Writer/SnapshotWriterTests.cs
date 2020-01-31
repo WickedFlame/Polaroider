@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 
-namespace Polaroid.Tests.Writer
+namespace Polaroider.Tests.Writer
 {
     public class SnapshotWriterTests
     {

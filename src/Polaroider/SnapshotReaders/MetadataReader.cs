@@ -1,7 +1,7 @@
 ﻿
 using System.Linq;
 
-namespace Polaroid.SnapshotReaders
+namespace Polaroider.SnapshotReaders
 {
     public class MetadataReader : ILineReader
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Polaroid
+namespace Polaroider
 {
     public class SnapshotTokenizer
     {

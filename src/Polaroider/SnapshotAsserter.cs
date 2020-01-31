@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Polaroid
+namespace Polaroider
 {
     internal class SnapshotAsserter
     {

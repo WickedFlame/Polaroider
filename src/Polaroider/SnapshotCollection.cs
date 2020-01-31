@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Polaroid
+namespace Polaroider
 {
     public class SnapshotCollection : IEnumerable<Snapshot>
     {

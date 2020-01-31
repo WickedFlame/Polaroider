@@ -4,7 +4,7 @@ using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Polaroid.Tests
+namespace Polaroider.Tests
 {
     public class FluentApiTests
     {
