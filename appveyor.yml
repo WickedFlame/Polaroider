@@ -107,6 +107,8 @@ build:
 artifacts:
   - path: src\Polaroider\bin\Release\netstandard2.0\Polaroider.dll
     name: Polaroider.dll
+  - path: src\Polaroider\bin\Release\netstandard2.0\Polaroider.xml
+    name: Polaroider.xml
 
 #  - path: src\Polaroider.Configuration\bin\Release\Polaroider.Configuration.dll
 #    name: Polaroider.Configuration.dll
