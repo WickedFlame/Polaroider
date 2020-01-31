@@ -1,0 +1,19 @@
+﻿--- settings
+multifile: true
+---
+--- metadata
+snapshot: 1
+---
+test
+1
+
+--- metadata
+snapshot: 2
+---
+test
+2
+--- metadata
+snapshot: 3
+---
+test
+3

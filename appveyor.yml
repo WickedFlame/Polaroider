@@ -1,0 +1,130 @@
+# http://www.appveyor.com/docs/appveyor-yml
+
+
+# version format
+version: 0.5.0.{build}
+
+# you can use {branch} name in version format too
+# version: 1.0.{build}-{branch}
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
+# Do not build on tags (GitHub only)
+skip_tags: true
+
+os: Visual Studio 2019
+install:
+  - set PATH=C:\Program Files (x86)\MSBuild\16.0\Bin;%PATH%
+#  - sudo apt-get install nunit-console
+#  - nuget restore Scribe.sln
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+ 
+# to add several platforms to build matrix:
+#platform:
+#  - x86
+#  - Any CPU
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Release
+
+# to add several configurations to build matrix:
+#configuration:
+#  - Debug
+#  - Release
+
+before_build:
+  - nuget restore Scribe.sln
+
+build:
+  parallel: true                  # enable MSBuild parallel builds
+  project: Scribe.sln             # path to Visual Studio solution or project
+  publish_wap: false              # package Web Application Projects (WAP) for Web Deploy
+  publish_wap_xcopy: false        # package Web Application Projects (WAP) for XCopy deployment
+  publish_azure: false            # package Azure Cloud Service projects and push to artifacts
+  publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
+  include_nuget_references: true  # add -IncludeReferencedProjects option while packaging NuGet artifacts
+
+# MSBuild verbosity level
+# verbosity: quiet|minimal|normal|detailed
+  
+  
+  
+  
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+#test:
+#  assemblies:
+#    only:
+#      - Scribe.Test.dll
+#    - '**\Scribe.Configuration.Test.dll'
+
+#  categories:
+#    - UI
+#    - E2E
+
+# to run tests from different categories as separate jobs in parallel
+#test:
+#  categories:
+#    - A            # A category common for all jobs
+#    - [UI]         # 1st job
+#    - [DAL, BL]    # 2nd job
+
+# scripts to run before tests
+#before_test:
+#  - echo script1
+#  - ps: Write-Host "script1"
+
+# scripts to run after tests
+#after_test:
+#  - ps: .\pack.ps1   # Run a script to create the nuget package
+
+# to run your custom scripts instead of automatic tests
+#test_script:
+#  - echo This is my custom test script
+
+# to disable automatic tests 
+#test: off
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: src\Scribe\bin\Release\netstandard2.0\Scribe.dll
+    name: Scribe.dll
+
+#  - path: src\Scribe.Configuration\bin\Release\Scribe.Configuration.dll
+#    name: Scribe.Configuration.dll
+
+  - path: src\Scribe.Extensions\bin\Release\netstandard2.0\Scribe.Extensions.dll
+    name: Scribe.Extensions.dll
+
+  # pushing all *.nupkg files in directory
+  - path: '.\*.nupkg'
+  
+# providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
+# provider names are case-sensitive!
+#deploy:
+    # Deploying to NuGet feed
+#  - provider: NuGet
+#    server: https://my.nuget.server/feed
+#    api_key:
+#      secure: FYWX6NfjZIVw==
+#    skip_symbols: false
+#    symbol_server: https://your.symbol.server/feed
+#    artifact: Scribe.nupkg

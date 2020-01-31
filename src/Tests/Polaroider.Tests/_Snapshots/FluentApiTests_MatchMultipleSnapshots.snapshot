@@ -1,0 +1,16 @@
+﻿--- metadata
+option: 1
+datatype: string
+id: one
+---
+test
+snapshot
+one
+--- metadata
+option: 1
+datatype: string
+id: 2
+---
+test
+snapshot
+two
