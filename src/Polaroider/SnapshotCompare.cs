@@ -1,9 +1,9 @@
 ﻿
 namespace Polaroider
 {
-    internal class SnapshotCompare
+    internal class SnapshotCompare : ISnapshotCompare
     {
-        public static SnapshotResult Compare(Snapshot newshot, Snapshot savedshot)
+        public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot)
         {
             if (newshot == null || savedshot == null)
             {

@@ -6,5 +6,7 @@ namespace Polaroider
         SnapshotCollection Read(SnapshotId snapshotId);
 
         void Write(Snapshot snapshot, SnapshotId snapshotId);
+
+        SnapshotResult Validate(SnapshotId snapshotId, Snapshot snapshot, string id = null);
     }
 }

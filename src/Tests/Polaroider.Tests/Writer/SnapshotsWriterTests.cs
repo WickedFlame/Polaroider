@@ -34,13 +34,13 @@ namespace Polaroider.Tests.Writer
             // record the current snapshot
             var dataOne = "this is\r\na\r\ntest";
             var token = SnapshotTokenizer.Tokenize(dataOne)
-                .SetMetadata(new { id = "one" });
+                .SetMetadata(() => new {id = "one"});
 
             writer.Write(token, snapshotId);
 
             var dataTwo = "this is\r\na second\r\ntest";
             token = SnapshotTokenizer.Tokenize(dataTwo)
-                .SetMetadata(new { id = "two" });
+                .SetMetadata(() => new { id = "two" });
 
             writer.Write(token, snapshotId);
 
@@ -67,13 +67,13 @@ namespace Polaroider.Tests.Writer
             // record the current snapshot
             var dataOne = "this is\r\na\r\ntest";
             var token = SnapshotTokenizer.Tokenize(dataOne)
-                .SetMetadata(new {id = "one"});
+                .SetMetadata(() => new { id = "one"});
 
             writer.Write(token, snapshotId);
 
             var dataTwo = "this is\r\na second\r\ntest";
             token = SnapshotTokenizer.Tokenize(dataTwo)
-                .SetMetadata(new { id = "two" });
+                .SetMetadata(() => new { id = "two" });
 
             writer.Write(token, snapshotId);
 
@@ -87,7 +87,7 @@ namespace Polaroider.Tests.Writer
             // update a snapshot
             dataTwo = "this is\r\na updated second\r\ntest";
             token = SnapshotTokenizer.Tokenize(dataTwo)
-                .SetMetadata(new { id = "two" });
+                .SetMetadata(() => new { id = "two" });
 
             writer.Write(token, snapshotId);
 
@@ -102,7 +102,7 @@ namespace Polaroider.Tests.Writer
 
             dataOne = "this is\r\na updated first\r\ntest";
             token = SnapshotTokenizer.Tokenize(dataOne)
-                .SetMetadata(new { id = "one" });
+                .SetMetadata(() => new { id = "one" });
 
 
             writer.Write(token, snapshotId);

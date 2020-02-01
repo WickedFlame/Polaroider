@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/WickedFlame/Polaroider</RepositoryUrl>
     <Authors>Christian Walpen</Authors>
     <Company>WickedFlame</Company>
     <Description>Automated Snapshottesting for .NET</Description>
@@ -15,6 +15,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Title>Polaroider</Title>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>http://wickedflame.github.io/</PackageProjectUrl>
   </PropertyGroup>
 
@@ -23,10 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+
   </ItemGroup>
 
 </Project>
