@@ -31,7 +31,7 @@ namespace Polaroider
             _snapshotWriter.Write(snapshot, snapshotId);
         }
 
-        public SnapshotResult Validate(SnapshotId snapshotId, Snapshot snapshot, string id = null)
+        public SnapshotResult Validate(SnapshotId snapshotId, Snapshot snapshot)
         {
             var snapshots = Read(snapshotId);
             if (snapshots == null)
@@ -40,7 +40,7 @@ namespace Polaroider
                 return SnapshotResult.SnapshotUpdated(snapshot, null);
             }
 
-            var savedToken = snapshots?.FirstOrDefault(s => s.GetId() == id);
+            var savedToken = snapshots?.GetSnapshot(snapshot.Metadata);
 
             return _snapshotCompare.Compare(snapshot, savedToken);
         }

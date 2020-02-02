@@ -7,9 +7,9 @@ namespace Polaroider
 {
     public class Snapshot : IEnumerable<Line>
     {
-        private List<Line> _lines = new List<Line>();
+        private readonly List<Line> _lines = new List<Line>();
 
-        public Dictionary<string, string> Metadata = new Dictionary<string, string>();
+        public SnapshotMetadata Metadata = new SnapshotMetadata();
 
         public int Count => _lines.Count;
 

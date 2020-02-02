@@ -13,33 +13,35 @@ namespace Polaroider
         /// </summary>
         /// <param name="snapshot">The object to comapre</param>
         public static void MatchSnapshot(this string snapshot)
-            => MatchSnapshot(snapshot, null);
+        {
+            SnapshotTokenizer.Tokenize(snapshot)
+                .MatchSnapshot();
+        }
 
         /// <summary>
         /// Compares the provided object with the saved snapshot that has the corresponding Id
         /// </summary>
         /// <param name="snapshot">The object to comapre</param>
-        /// <param name="id">The Id of the stored snapshot</param>
-        public static void MatchSnapshot(this string snapshot, string id)
+        /// <param name="meta">The Id of the stored snapshot</param>
+        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta)
         {
-            var newToken = SnapshotTokenizer.Tokenize(snapshot);
+            SnapshotTokenizer.Tokenize(snapshot)
+                .SetMetadata(meta)
+                .MatchSnapshot();
+        }
 
+        /// <summary>
+        /// Compares the provided snapshot with the saved snapshot
+        /// </summary>
+        /// <param name="snapshot">The snapshot to compare</param>
+        public static void MatchSnapshot(this Snapshot snapshot)
+        {
             var resolver = new SnapshotIdResolver();
             var snapshotId = resolver.ResloveId();
 
             var client = GetClient();
-            var result = client.Validate(snapshotId, newToken, id);
+            var result = client.Validate(snapshotId, snapshot);
             SnapshotAsserter.AssertSnapshot(result);
-        }
-
-        internal static string GetId(this Snapshot snapshot)
-        {
-            return snapshot.Metadata.ContainsKey("id") ? snapshot.Metadata["id"] : null;
-        }
-
-        internal static bool HasMetadata(this Snapshot snapshot)
-        {
-            return snapshot.Metadata.Any();
         }
 
         /// <summary>
@@ -47,11 +49,11 @@ namespace Polaroider
         /// </summary>
         /// <typeparam name="T">The type of metadata</typeparam>
         /// <param name="snapshot">The snapshot to add the metadata to</param>
-        /// <param name="obj">The object containing the metadata</param>
+        /// <param name="meta">The object containing the metadata</param>
         /// <returns></returns>
-        public static Snapshot SetMetadata<T>(this Snapshot snapshot, Func<T> obj)
+        public static Snapshot SetMetadata<T>(this Snapshot snapshot, Func<T> meta)
         {
-            var data = obj.Invoke();
+            var data = meta.Invoke();
             if (data == null)
             {
                 return snapshot;
@@ -70,6 +72,21 @@ namespace Polaroider
             }
 
             return snapshot;
+        }
+
+        internal static bool HasMetadata(this Snapshot snapshot)
+        {
+            return snapshot.Metadata.Count > 0;
+        }
+
+        internal static bool SnapshotContainsMetadata(this Snapshot snapshot, SnapshotMetadata metadata)
+        {
+            if (metadata.All(item => snapshot.Metadata.ContainsKey(item.Key) && snapshot.Metadata[item.Key] == item.Value))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

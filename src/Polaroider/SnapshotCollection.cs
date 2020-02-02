@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Polaroider
 {
@@ -20,6 +21,11 @@ namespace Polaroider
         public void Add(Snapshot snapshot)
         {
             _snapshots.Add(snapshot);
+        }
+
+        public Snapshot GetSnapshot(SnapshotMetadata metadata)
+        {
+            return _snapshots.FirstOrDefault(s => s.SnapshotContainsMetadata(metadata));
         }
     }
 }

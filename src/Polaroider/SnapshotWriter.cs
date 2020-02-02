@@ -14,9 +14,10 @@ namespace Polaroider
             {
                 var reader = new SnapshotReader();
                 var tmp = reader.Read(snapshotId);
+
                 foreach (var token in tmp)
                 {
-                    if (snapshot.GetId() != token.GetId())
+                    if (!token.SnapshotContainsMetadata(snapshot.Metadata))
                     {
                         collection.Add(token);
                     }
