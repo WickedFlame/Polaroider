@@ -2,6 +2,8 @@
 
 Automated Snapshottesting for .NET
 
+[GitHub](https://github.com/WickedFlame/Polaroider)
+
 ## Create Snapshot
 Polaroider automaticaly saves the Snapshots to the folder _Snapshots
 ```csharp
@@ -19,7 +21,6 @@ public class MyClass
 The simplest way to update a Snapshot is to delete the Sanpshot file from the folder _Snapshots. Run the test again and the Snapshot is recreated.
 
 ## Multiple Snapshots per test
-
 
 ## Add metadata to the Snapshot
 The Snapshot can contain metadata.
