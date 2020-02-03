@@ -5,6 +5,7 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### 0.3.0
+- Snapshotting objects
 - Basic refactoring of Exception
 - Added SnapshotResult to SnapshotMatchException
 

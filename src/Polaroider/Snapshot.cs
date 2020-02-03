@@ -15,9 +15,10 @@ namespace Polaroider
 
         public Line this[int index] => _lines[index];
 
-        public void Add(Line row)
+        public Snapshot Add(Line row)
         {
             _lines.Add(row);
+            return this;
         }
 
         public IEnumerator<Line> GetEnumerator()

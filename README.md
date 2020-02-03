@@ -7,7 +7,6 @@ Automated Snapshottesting for .NET
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
 
 ## Upcomming features
-- Snapshotting objects
 - Show exact position of missmatch in the exceptionmessage
 - Loading saved Snapshots to access the Metadata
 - Update tests to run on [Travis-ci](https://travis-ci.org/WickedFlame/Polaroider)
