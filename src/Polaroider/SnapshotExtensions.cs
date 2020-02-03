@@ -44,6 +44,14 @@ namespace Polaroider
             SnapshotAsserter.AssertSnapshot(result);
         }
 
+        public static void MatchSnapshot(this object snapshot)
+        {
+            var mapper = ObjectMapper.Mapper.GetMapper(snapshot.GetType());
+            var token = mapper.Map(snapshot);
+
+            token.MatchSnapshot();
+        }
+
         /// <summary>
         /// Add metatdata to the snapshot
         /// </summary>

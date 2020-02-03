@@ -23,8 +23,4 @@
     <DocumentationFile>bin\Release\netstandard2.0\Polaroider.xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-
-  </ItemGroup>
-
 </Project>
