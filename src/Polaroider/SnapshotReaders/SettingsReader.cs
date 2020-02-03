@@ -10,10 +10,6 @@ namespace Polaroider.SnapshotReaders
         {
         }
 
-        public void Reset()
-        {
-        }
-
         public bool NewSnapshot(Snapshot snapshot)
         {
             return false;

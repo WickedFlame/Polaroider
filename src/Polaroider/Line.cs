@@ -5,13 +5,10 @@ namespace Polaroider
     {
         private readonly string _value;
 
-        public Line(string value, int index)
+        public Line(string value)
         {
             _value = value;
-            Index = index;
         }
-
-        public int Index { get; } = -1;
 
         public string Value => _value;
 

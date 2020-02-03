@@ -8,9 +8,9 @@ namespace Polaroider
         {
             var token = new Snapshot();
             var lines = snapshot.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            for (var i = 0; i < lines.Length; i++)
+            foreach (var line in lines)
             {
-                token.Add(new Line(lines[i], i));
+                token.Add(new Line(line));
             }
 
             return token;

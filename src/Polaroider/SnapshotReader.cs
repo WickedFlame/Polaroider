@@ -37,7 +37,6 @@ namespace Polaroider
             Snapshot snapsot = null;
 
             var reader = _dataReaders[ReaderType.data];
-            reader.Reset();
 
             foreach (var line in ReadAllLines(file))
             {
@@ -54,7 +53,6 @@ namespace Polaroider
                 if (line == "---")
                 {
                     reader = _dataReaders[ReaderType.data];
-                    reader.Reset();
                     continue;
                 }
 
@@ -64,8 +62,6 @@ namespace Polaroider
                     if (Enum.TryParse<ReaderType>(property, out var key))
                     {
                         reader = _dataReaders[key];
-                        reader.Reset();
-
                         if(reader.NewSnapshot(snapsot))
                         {
                             snapsot = null;

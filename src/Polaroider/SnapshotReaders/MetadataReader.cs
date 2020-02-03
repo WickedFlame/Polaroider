@@ -18,8 +18,6 @@ namespace Polaroider.SnapshotReaders
             item.Metadata.Add(key, value.Trim());
         }
 
-        public void Reset() { }
-
         public bool NewSnapshot(Snapshot snapshot)
         {
             return snapshot != null && (snapshot.Any() || snapshot.Metadata.Any());

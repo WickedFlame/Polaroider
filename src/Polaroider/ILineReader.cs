@@ -5,8 +5,6 @@ namespace Polaroider
     {
         void ReadLine(string line, Snapshot snapshot);
 
-        void Reset();
-        
         /// <summary>
         /// Checks if it is needed to create a new Snapshot after the current shot
         /// </summary>
