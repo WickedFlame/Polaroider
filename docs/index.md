@@ -2,7 +2,8 @@
 
 Automated Snapshottesting for .NET
 
-[GitHub](https://github.com/WickedFlame/Polaroider)
+- [GitHub](https://github.com/WickedFlame/Polaroider)
+- [Changelog](changelog)
 
 ## Create Snapshot
 Polaroider automaticaly saves the Snapshots to the folder _Snapshots
