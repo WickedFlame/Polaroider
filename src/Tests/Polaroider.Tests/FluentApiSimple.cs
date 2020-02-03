@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Polaroider.Tests
 {
-    public class FluentApiTests
+    public class FluentApiSimple
     {
         [Test]
         public void MatchSnapshot()
