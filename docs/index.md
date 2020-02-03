@@ -40,7 +40,7 @@ public class MyClass
 Snapshots can contain metadata. The snapshot is compared with the saved snapshot that contains the same metadata.
 It is not needed to provide all metadata contained on the saved snapshot, only the data needed to identify the saved snapshot.
 
-The following code matches the snapshot that contains the Key "id" with the value "one* in the metadata
+The following code matches the snapshot that contains the Key "id" with the value "one" in the metadata
 ```csharp
 public class MyClass
 {
