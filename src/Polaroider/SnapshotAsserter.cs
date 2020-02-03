@@ -10,7 +10,7 @@ namespace Polaroider
             switch (snapshotResult.Status)
             {
                 case SnapshotStatus.SnapshotsDoNotMatch:
-                    Throw(snapshotResult, s => new SnapshotsDoNotMatchException(s));
+                    Throw(snapshotResult, s => new SnapshotMatchException(s, snapshotResult));
                     break;
 
                 case SnapshotStatus.SnapshotDoesNotExist:
@@ -33,20 +33,4 @@ namespace Polaroider
             throw exception(message.ToString());
         }
     }
-
-    public class SnapshotsDoNotMatchException : Exception
-    {
-        public SnapshotsDoNotMatchException(string message)
-            : base(message)
-        {
-        }
-    }
-
-    //public class SnapshotDoesNotExistException : Exception
-    //{
-    //    public SnapshotDoesNotExistException(SnapshotResult result)
-    //        /*: base(Messages.GetSnapResultMessage(result))*/
-    //    {
-    //    }
-    //}
 }

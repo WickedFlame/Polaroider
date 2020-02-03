@@ -19,7 +19,7 @@ namespace Polaroider.Tests
         public void MismatchSnapshot()
         {
             Action match = () => "test\r\nfail".MatchSnapshot();
-            match.Should().Throw<SnapshotsDoNotMatchException>();
+            match.Should().Throw<SnapshotMatchException>();
         }
 
         [Test]

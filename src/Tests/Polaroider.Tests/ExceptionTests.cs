@@ -15,7 +15,7 @@ namespace Polaroider.Tests
             {
                 "this\r\nis\r\ninvalid".MatchSnapshot();
             }
-            catch (SnapshotsDoNotMatchException e)
+            catch (SnapshotMatchException e)
             {
                 e.Message.Should().Be(string.Join(Environment.NewLine, 
                     "Snapshots do not match at Line 3", 
