@@ -21,6 +21,13 @@ namespace Polaroider
             return this;
         }
 
+        public Snapshot Add(object row)
+        {
+            var line = new Line(row.ToString());
+            _lines.Add(line);
+            return this;
+        }
+
         public IEnumerator<Line> GetEnumerator()
         {
             return _lines.GetEnumerator();

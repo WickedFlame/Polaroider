@@ -17,7 +17,13 @@ namespace Polaroider
 
         public static void Configure<T>(Func<T, Snapshot> map) where T : class
         {
-            Mapper._mappers.Add(typeof(T), new CustomMap<T>(map));
+            var key = typeof(T);
+            if (Mapper._mappers.ContainsKey(key))
+            {
+                Mapper._mappers.Remove(key);
+            }
+
+            Mapper._mappers.Add(key, new CustomMap<T>(map));
         }
 
         internal IObjectMapper GetMapper(Type type)
