@@ -53,7 +53,7 @@ build:
   publish_wap: false              # package Web Application Projects (WAP) for Web Deploy
   publish_wap_xcopy: false        # package Web Application Projects (WAP) for XCopy deployment
   publish_azure: false            # package Azure Cloud Service projects and push to artifacts
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  publish_nuget: false #true             # package projects with .nuspec files and push to artifacts
   publish_nuget_symbols: true     # generate and publish NuGet symbol packages
   include_nuget_references: true  # add -IncludeReferencedProjects option while packaging NuGet artifacts
 
