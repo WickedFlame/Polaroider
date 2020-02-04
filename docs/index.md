@@ -22,7 +22,7 @@ public class MyClass
 The simplest way to update a Snapshot is to delete the Sanpshot file from the folder _Snapshots. Run the test again and the Snapshot is recreated.
 
 ## Multiple Snapshots per test
-Snapshots are saved by Classname and Methodname. If it is needed to save multiple Snapshots in a test, just provide metadata with the snapshot. The snapshots can then be identified by the metadata.
+Snapshots are saved by Class- and Methodname. If it is needed to save multiple Snapshots in a test, just provide some metadata with the snapshot. The snapshots can then be identified by that metadata.
 ```csharp
 public class MyClass
 {
