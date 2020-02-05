@@ -16,7 +16,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <Title>Polaroider</Title>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageProjectUrl>http://wickedflame.github.io/</PackageProjectUrl>
+    <PackageProjectUrl>http://wickedflame.github.io/Polaroider</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
