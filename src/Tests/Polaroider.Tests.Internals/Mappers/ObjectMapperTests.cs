@@ -8,6 +8,21 @@ namespace Polaroider.Tests.Internals.Mappers
     public class ObjectMapperTests
     {
         [Test]
+        public void CreateMapping()
+        {
+            // overwrite the configured mapping
+            ObjectMapper.Configure<Map>(m =>
+            {
+                var snapshot = new Snapshot()
+                    .Add(m.Value);
+                return snapshot;
+            });
+
+            var item = new Map { Value = "test" };
+            item.MatchSnapshot();
+        }
+
+        [Test]
         public void OverwriteMapping()
         {
             ObjectMapper.Configure<Map>(m =>

@@ -41,15 +41,20 @@ namespace Polaroider
 
             var client = GetClient();
             var result = client.Validate(snapshotId, snapshot);
+            if (result.Status == SnapshotStatus.SnapshotDoesNotExist)
+            {
+                client.Write(snapshot, snapshotId);
+                result = SnapshotResult.SnapshotUpdated(snapshot, null);
+            }
+
             SnapshotAsserter.AssertSnapshot(result);
         }
 
         public static void MatchSnapshot<T>(this T snapshot)
         {
             var mapper = ObjectMapper.Mapper.GetMapper(typeof(T));
-            var token = mapper.Map(snapshot);
-
-            token.MatchSnapshot();
+            mapper.Map(snapshot)
+                .MatchSnapshot();
         }
 
         /// <summary>

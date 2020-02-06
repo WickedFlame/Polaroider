@@ -1,4 +1,10 @@
 ---metadata
+id: 2
+---data
+test
+snapshot
+two
+---metadata
 id: one
 ---data
 test

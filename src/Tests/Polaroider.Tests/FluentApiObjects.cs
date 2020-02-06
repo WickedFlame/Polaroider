@@ -55,5 +55,12 @@ namespace Polaroider.Tests
 
             item.MatchSnapshot();
         }
+
+        [Test]
+        public void AddMetadata()
+        {
+            var item = new { value = 1, data = "this is a test" };
+            item.MatchSnapshot();
+        }
     }
 }

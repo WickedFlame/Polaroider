@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
@@ -70,6 +71,14 @@ namespace Polaroider.Tests
 
             match = () => token.MatchSnapshot();
             match.Should().NotThrow();
+
+            var snapshotResolver = new SnapshotIdResolver();
+            var reader = new SnapshotReader();
+            var snapshots = reader.Read(snapshotResolver.ResloveId());
+
+            snapshots.Count().Should().Be(2);
+            snapshots.Any(s => s.Metadata["id"] == "one").Should().BeTrue();
+            snapshots.Any(s => s.Metadata["id"] == "2").Should().BeTrue();
         }
     }
 }
