@@ -9,31 +9,9 @@ namespace Polaroider
         private static ISnapshotClient GetClient() => Client.Value;
 
         /// <summary>
-        /// Compares the provided object with the saved snapshot
+        /// compares the provided snapshot with the saved snapshot
         /// </summary>
-        /// <param name="snapshot">The object to comapre</param>
-        public static void MatchSnapshot(this string snapshot)
-        {
-            SnapshotTokenizer.Tokenize(snapshot)
-                .MatchSnapshot();
-        }
-
-        /// <summary>
-        /// Compares the provided object with the saved snapshot that has the corresponding Id
-        /// </summary>
-        /// <param name="snapshot">The object to comapre</param>
-        /// <param name="meta">The Id of the stored snapshot</param>
-        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta)
-        {
-            SnapshotTokenizer.Tokenize(snapshot)
-                .SetMetadata(meta)
-                .MatchSnapshot();
-        }
-
-        /// <summary>
-        /// Compares the provided snapshot with the saved snapshot
-        /// </summary>
-        /// <param name="snapshot">The snapshot to compare</param>
+        /// <param name="snapshot">the snapshot to compare</param>
         public static void MatchSnapshot(this Snapshot snapshot)
         {
             var resolver = new SnapshotIdResolver();
@@ -50,10 +28,36 @@ namespace Polaroider
             SnapshotAsserter.AssertSnapshot(result);
         }
 
+        /// <summary>
+        /// compares the provided string with the saved snapshot
+        /// </summary>
+        /// <param name="snapshot">the string to comapre</param>
+        public static void MatchSnapshot(this string snapshot)
+        {
+            SnapshotTokenizer.Tokenize(snapshot)
+                .MatchSnapshot();
+        }
+
+        /// <summary>
+        /// compares the provided string with the saved snapshot that has the corresponding Id
+        /// </summary>
+        /// <param name="snapshot">the string to comapre</param>
+        /// <param name="meta">the Id of the stored snapshot</param>
+        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta)
+        {
+            SnapshotTokenizer.Tokenize(snapshot)
+                .SetMetadata(meta)
+                .MatchSnapshot();
+        }
+
+        /// <summary>
+        /// compares the provided object with the saved snapshot
+        /// </summary>
+        /// <typeparam name="T">the objecttype</typeparam>
+        /// <param name="snapshot">the object to comapre</param>
         public static void MatchSnapshot<T>(this T snapshot)
         {
-            var mapper = ObjectMapper.Mapper.GetMapper(typeof(T));
-            mapper.Map(snapshot)
+            SnapshotTokenizer.Tokenize(snapshot)
                 .MatchSnapshot();
         }
 

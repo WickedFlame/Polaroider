@@ -2,7 +2,7 @@
 namespace Polaroider
 {
     /// <summary>
-    /// Client object for reading, writing and validating snapshots
+    /// client object for reading, writing and validating snapshots
     /// </summary>
     internal class SnapshotClient : ISnapshotClient
     {
@@ -42,7 +42,7 @@ namespace Polaroider
         }
 
         /// <summary>
-        /// Writes the snapshot to the file
+        /// writes the snapshot to the file
         /// </summary>
         /// <param name="snapshot"></param>
         /// <param name="snapshotId"></param>

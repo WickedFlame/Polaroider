@@ -15,5 +15,11 @@ namespace Polaroider
 
             return token;
         }
+
+        public static Snapshot Tokenize<T>(T snapshot)
+        {
+            var mapper = ObjectMapper.Mapper.GetMapper(typeof(T));
+            return mapper.Map(snapshot);
+        }
     }
 }

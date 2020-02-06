@@ -4,8 +4,17 @@ using System.Reflection;
 
 namespace Polaroider.Mapping
 {
+    /// <summary>
+    /// default object mapper
+    /// </summary>
     public class DefaultObjectMapper : IObjectMapper
     {
+        /// <summary>
+        /// map an object to a snapshot
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public Snapshot Map<T>(T item)
         {
             var snapshot = new Snapshot();
