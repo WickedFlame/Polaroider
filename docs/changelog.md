@@ -4,6 +4,12 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 0.3.2
+- Fix snapshotting objects
+- Fix saving multiple snapshots in one file
+- Fix updating snapshots in existing file
+- Add metadata to object snapshots
+
 ### 0.3.1
 - Target NetStandard and NetFramework 4.6
 
