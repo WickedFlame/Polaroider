@@ -39,7 +39,7 @@ namespace Polaroider
         }
 
         /// <summary>
-        /// compares the provided string with the saved snapshot that has the corresponding Id
+        /// compares the provided string with the saved snapshot that has the corresponding metadata
         /// </summary>
         /// <param name="snapshot">the string to comapre</param>
         /// <param name="meta">the Id of the stored snapshot</param>
@@ -58,6 +58,19 @@ namespace Polaroider
         public static void MatchSnapshot<T>(this T snapshot)
         {
             SnapshotTokenizer.Tokenize(snapshot)
+                .MatchSnapshot();
+        }
+
+        /// <summary>
+        /// compares the provided object with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <param name="meta"></param>
+        public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
+        {
+            SnapshotTokenizer.Tokenize(snapshot)
+                .SetMetadata(meta)
                 .MatchSnapshot();
         }
 
