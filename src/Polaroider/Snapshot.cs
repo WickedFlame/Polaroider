@@ -13,7 +13,7 @@ namespace Polaroider
 
         public int Count => _lines.Count;
 
-        public Line this[int index] => _lines[index];
+        public Line this[int index] => index < _lines.Count ? _lines[index] : new Line(string.Empty);
 
         public Snapshot Add(Line row)
         {

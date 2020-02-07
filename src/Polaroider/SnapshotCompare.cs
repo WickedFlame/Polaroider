@@ -10,7 +10,13 @@ namespace Polaroider
                 return SnapshotResult.SnapshotDoesNotExist(savedshot);
             }
 
-            for (var i = 0; i < newshot.Count; i++)
+            var count = newshot.Count;
+            if (count < savedshot.Count)
+            {
+                count = savedshot.Count;
+            }
+
+            for (var i = 0; i < count; i++)
             {
                 if (!newshot[i].Equals(savedshot[i]))
                 {
