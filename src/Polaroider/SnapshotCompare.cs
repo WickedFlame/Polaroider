@@ -3,6 +3,12 @@ namespace Polaroider
 {
     internal class SnapshotCompare : ISnapshotCompare
     {
+        /// <summary>
+        /// compare two snapshots with each other
+        /// </summary>
+        /// <param name="newshot"></param>
+        /// <param name="savedshot"></param>
+        /// <returns></returns>
         public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot)
         {
             if (newshot == null || savedshot == null)

@@ -4,6 +4,9 @@ using Polaroider.SnapshotReaders;
 
 namespace Polaroider
 {
+    /// <summary>
+    /// read snapshot files
+    /// </summary>
     public class SnapshotReader : ISnapshotReader
     {
         private readonly ReaderCollection _dataReaders;

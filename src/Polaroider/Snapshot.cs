@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Polaroider
 {
@@ -9,18 +8,39 @@ namespace Polaroider
     {
         private readonly List<Line> _lines = new List<Line>();
 
+        /// <summary>
+        /// gets the metatdata associated with the snapshot
+        /// </summary>
         public SnapshotMetadata Metadata = new SnapshotMetadata();
 
+        /// <summary>
+        /// gets the count of lines
+        /// </summary>
         public int Count => _lines.Count;
 
+        /// <summary>
+        /// gets the line at the given index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Line this[int index] => index < _lines.Count ? _lines[index] : new Line(string.Empty);
 
+        /// <summary>
+        /// add a line to the snapshot
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
         public Snapshot Add(Line row)
         {
             _lines.Add(row);
             return this;
         }
 
+        /// <summary>
+        /// add a line to the snapshot
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
         public Snapshot Add(object row)
         {
             var line = new Line(row.ToString());
@@ -28,6 +48,10 @@ namespace Polaroider
             return this;
         }
 
+        /// <summary>
+        /// get the enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<Line> GetEnumerator()
         {
             return _lines.GetEnumerator();

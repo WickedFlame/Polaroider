@@ -5,6 +5,10 @@ namespace Polaroider
 {
     internal class SnapshotAsserter
     {
+        /// <summary>
+        /// assert invalid snapshots
+        /// </summary>
+        /// <param name="snapshotResult"></param>
         public static void AssertSnapshot(SnapshotResult snapshotResult)
         {
             switch (snapshotResult.Status)

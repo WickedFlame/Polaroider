@@ -2,8 +2,16 @@
 
 namespace Polaroider
 {
+    /// <summary>
+    /// write snapshots to file
+    /// </summary>
     public class SnapshotWriter : ISnapshotWriter
     {
+        /// <summary>
+        /// write the snapshot to file
+        /// </summary>
+        /// <param name="snapshot"></param>
+        /// <param name="snapshotId"></param>
         public void Write(Snapshot snapshot, SnapshotId snapshotId)
         {
             var collection = new SnapshotCollection();
