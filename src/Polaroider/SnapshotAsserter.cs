@@ -26,6 +26,7 @@ namespace Polaroider
         private static void Throw<T>(SnapshotResult result, Func<string, T> exception) where T : Exception
         {
             var message = new StringBuilder();
+            message.Append(Environment.NewLine);
             message.AppendLine($"Snapshots do not match at Line {result.Index + 1}");
             message.AppendLine($" - {result.OldSnapshot[result.Index]}");
             message.Append($" + {result.NewSnapshot[result.Index]}");
