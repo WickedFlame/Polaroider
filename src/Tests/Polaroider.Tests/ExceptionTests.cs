@@ -13,15 +13,19 @@ namespace Polaroider.Tests
         {
             try
             {
-                "this\r\nis\r\ninvalid".MatchSnapshot();
+                "this\r\nis\r\na invalid string".MatchSnapshot();
             }
             catch (SnapshotMatchException e)
             {
                 e.Message.Should().Be(string.Join(Environment.NewLine, 
                     "",
                     "Snapshots do not match at Line 3", 
-                    " - valid", 
-                    " + invalid"));
+                    " - a valid string", 
+                    " + a invalid string",
+                    "",
+                    "Strings differ at Index 2",
+                    " - a valid string",
+                    " + a invalid string"));
 
                 return;
             }
