@@ -11,8 +11,8 @@ namespace Polaroider.Tests
         [Test]
         public void SnapshotIdResolver_ResolveSnapshotId()
         {
-            var resolver = new SnapshotIdResolver();
-            var id = resolver.ResloveId();
+            var resolver = new SnapshotSetupResolver();
+            var id = resolver.ResloveSnapshotSetup();
 
             id.ClassName.Should().Be(@"SnapshotIdResolverTests");
             id.MethodName.Should().Be("SnapshotIdResolver_ResolveSnapshotId");

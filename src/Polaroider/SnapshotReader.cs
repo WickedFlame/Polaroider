@@ -27,7 +27,7 @@ namespace Polaroider
         /// If the type ends with Test or Tests the name of the tesdata file will be used without the ending
         /// </summary>
         /// <returns></returns>
-        public SnapshotCollection Read(SnapshotId snapshotId)
+        public SnapshotCollection Read(SnapshotSetup snapshotId)
         {
             var file = snapshotId.GetFilePath();
 

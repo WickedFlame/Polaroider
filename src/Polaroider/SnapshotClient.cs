@@ -34,32 +34,32 @@ namespace Polaroider
         /// <summary>
         /// reads the snapshots from file
         /// </summary>
-        /// <param name="snapshotId"></param>
+        /// <param name="setup"></param>
         /// <returns></returns>
-        public SnapshotCollection Read(SnapshotId snapshotId)
+        public SnapshotCollection Read(SnapshotSetup setup)
         {
-            return _snapshotReader.Read(snapshotId);
+            return _snapshotReader.Read(setup);
         }
 
         /// <summary>
         /// writes the snapshot to the file
         /// </summary>
         /// <param name="snapshot"></param>
-        /// <param name="snapshotId"></param>
-        public void Write(Snapshot snapshot, SnapshotId snapshotId)
+        /// <param name="setup"></param>
+        public void Write(Snapshot snapshot, SnapshotSetup setup)
         {
-            _snapshotWriter.Write(snapshot, snapshotId);
+            _snapshotWriter.Write(snapshot, setup);
         }
 
         /// <summary>
         /// validates the snapshot against the saved snapshot
         /// </summary>
-        /// <param name="snapshotId"></param>
+        /// <param name="setup"></param>
         /// <param name="snapshot"></param>
         /// <returns></returns>
-        public SnapshotResult Validate(SnapshotId snapshotId, Snapshot snapshot)
+        public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup)
         {
-            var snapshots = Read(snapshotId);
+            var snapshots = Read(setup);
             var savedToken = snapshots?.GetSnapshot(snapshot.Metadata);
 
             return _snapshotCompare.Compare(snapshot, savedToken);

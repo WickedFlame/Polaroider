@@ -11,17 +11,17 @@ namespace Polaroider
         /// write the snapshot to file
         /// </summary>
         /// <param name="snapshot"></param>
-        /// <param name="snapshotId"></param>
-        public void Write(Snapshot snapshot, SnapshotId snapshotId)
+        /// <param name="setup"></param>
+        public void Write(Snapshot snapshot, SnapshotSetup setup)
         {
             var collection = new SnapshotCollection();
             collection.Add(snapshot);
 
-            var file = snapshotId.GetFilePath();
+            var file = setup.GetFilePath();
             if (File.Exists(file))
             {
                 var reader = new SnapshotReader();
-                var tmp = reader.Read(snapshotId);
+                var tmp = reader.Read(setup);
 
                 foreach (var token in tmp)
                 {
@@ -32,9 +32,9 @@ namespace Polaroider
                 }
             }
 
-            Directory.CreateDirectory(Path.GetDirectoryName(snapshotId.GetFilePath()));
+            Directory.CreateDirectory(Path.GetDirectoryName(setup.GetFilePath()));
 
-            using (var writer = new StreamWriter(snapshotId.GetFilePath(), false))
+            using (var writer = new StreamWriter(setup.GetFilePath(), false))
             {
                 foreach(var token in collection)
                 {

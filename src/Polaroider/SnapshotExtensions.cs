@@ -14,14 +14,14 @@ namespace Polaroider
         /// <param name="snapshot">the snapshot to compare</param>
         public static void MatchSnapshot(this Snapshot snapshot)
         {
-            var resolver = new SnapshotIdResolver();
-            var snapshotId = resolver.ResloveId();
+            var resolver = new SnapshotSetupResolver();
+            var setup = resolver.ResloveSnapshotSetup();
 
             var client = GetClient();
-            var result = client.Validate(snapshotId, snapshot);
+            var result = client.Validate(snapshot, setup);
             if (result.Status == SnapshotStatus.SnapshotDoesNotExist)
             {
-                client.Write(snapshot, snapshotId);
+                client.Write(snapshot, setup);
                 result = SnapshotResult.SnapshotUpdated(snapshot, null);
             }
 

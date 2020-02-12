@@ -29,8 +29,8 @@ namespace Polaroider.Tests
             Action match = () => "test\r\nsnapshot".MatchSnapshot();
             match.Should().NotThrow();
 
-            var resolver = new SnapshotIdResolver();
-            var file = resolver.ResloveId().GetFilePath();
+            var resolver = new SnapshotSetupResolver();
+            var file = resolver.ResloveSnapshotSetup().GetFilePath();
 
             // Assert
             System.IO.File.Exists(file).Should().BeTrue();
@@ -72,9 +72,9 @@ namespace Polaroider.Tests
             match = () => token.MatchSnapshot();
             match.Should().NotThrow();
 
-            var snapshotResolver = new SnapshotIdResolver();
+            var snapshotResolver = new SnapshotSetupResolver();
             var reader = new SnapshotReader();
-            var snapshots = reader.Read(snapshotResolver.ResloveId());
+            var snapshots = reader.Read(snapshotResolver.ResloveSnapshotSetup());
 
             snapshots.Count().Should().Be(2);
             snapshots.Any(s => s.Metadata["id"] == "one").Should().BeTrue();

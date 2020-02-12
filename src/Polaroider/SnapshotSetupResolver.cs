@@ -6,9 +6,16 @@ using System.Reflection;
 
 namespace Polaroider
 {
-    public class SnapshotIdResolver
+    /// <summary>
+    /// Create snapshotsetups
+    /// </summary>
+    public class SnapshotSetupResolver
     {
-        public SnapshotId ResloveId()
+        /// <summary>
+        /// Resoves the snapshot setup based on the stacktrace
+        /// </summary>
+        /// <returns></returns>
+        public SnapshotSetup ResloveSnapshotSetup()
         {
             var stackTrace = new StackTrace(1, true);
             foreach (var stackFrame in stackTrace.GetFrames() ?? new StackFrame[0])
@@ -25,7 +32,7 @@ namespace Polaroider
                     continue;
                 }
 
-                return new SnapshotId(stackFrame.GetFileName(), method);
+                return new SnapshotSetup(stackFrame.GetFileName(), method);
             }
 
             return null;

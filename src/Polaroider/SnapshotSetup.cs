@@ -3,12 +3,15 @@ using System.Reflection;
 
 namespace Polaroider
 {
-    public class SnapshotId
+    /// <summary>
+    /// SnapshotSetup
+    /// </summary>
+    public class SnapshotSetup
     {
         private readonly MethodBase _method;
         private readonly string _fullPath;
 
-        public SnapshotId(string fileName, MethodBase method)
+        public SnapshotSetup(string fileName, MethodBase method)
         {
             _fullPath = fileName;
             _method = method;
@@ -17,12 +20,24 @@ namespace Polaroider
             Directory = Path.GetDirectoryName(fileName);
         }
 
+        /// <summary>
+        /// the filename of the testclass
+        /// </summary>
         public string FileName { get; }
 
+        /// <summary>
+        /// the directory containing the testclass
+        /// </summary>
         public string Directory { get; }
 
+        /// <summary>
+        /// the name of the testmethod
+        /// </summary>
         public string MethodName => _method.Name;
 
+        /// <summary>
+        /// the testclass name
+        /// </summary>
         public string ClassName => _method.DeclaringType?.Name;
     }
 }
