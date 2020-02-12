@@ -8,6 +8,7 @@ nav_order: 99
 ### 0.3.3
 - The length of both snapshots is measured and compared
 - Show the exact index and part of the mismatching strings
+- Internal refactorings
 
 ### 0.3.2
 - Fix snapshotting objects
