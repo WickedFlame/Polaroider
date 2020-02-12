@@ -19,13 +19,20 @@ namespace Polaroider.Tests
             {
                 e.Message.Should().Be(string.Join(Environment.NewLine, 
                     "",
-                    "Snapshots do not match at Line 3", 
-                    " - a valid string", 
-                    " + a invalid string",
+                    "Snapshots do not match",
+                    " - Line 3",
+                    " - Index 2",
+                    "{",
+                    "  - a valid string",
+                    "  + a invalid string",
+                    "}",
                     "",
-                    "Strings differ at Index 2",
-                    " - a valid string",
-                    " + a invalid string"));
+                    "Full line:",
+                    "{",
+                    "  - a valid string", 
+                    "  + a invalid string",
+                    "}"
+                    ));
 
                 return;
             }

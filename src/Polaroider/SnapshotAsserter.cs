@@ -31,11 +31,16 @@ namespace Polaroider
         {
             var message = new StringBuilder();
             message.Append(Environment.NewLine);
-            message.AppendLine($"Snapshots do not match at Line {result.Index + 1}");
-            message.AppendLine($" - {result.OldSnapshot[result.Index]}");
-            message.AppendLine($" + {result.NewSnapshot[result.Index]}");
-            message.AppendLine(string.Empty);
+            message.AppendLine($"Snapshots do not match");
+            message.AppendLine($" - Line {result.Index + 1}");
             message.Append(Difference(result.OldSnapshot[result.Index].Value, result.NewSnapshot[result.Index].Value));
+            message.AppendLine(string.Empty);
+            message.AppendLine("Full line:");
+            message.AppendLine("{");
+            message.AppendLine($"  - {result.OldSnapshot[result.Index]}");
+            message.AppendLine($"  + {result.NewSnapshot[result.Index]}");
+            message.Append("}");
+
 
             throw exception(message.ToString());
         }
@@ -58,9 +63,11 @@ namespace Polaroider
             var lengthSaved = savedLine.Length >= start + 40 ? 40 : savedLine.Length - start;
 
             var sb = new StringBuilder();
-            sb.AppendLine($"Strings differ at Index {index}");
-            sb.AppendLine($" - {savedLine.Substring(start, lengthSaved)}");
-            sb.Append($" + {newLine.Substring(start, lengthNew)}");
+            sb.AppendLine($" - Index {index}");
+            sb.AppendLine("{");
+            sb.AppendLine($"  - {savedLine.Substring(start, lengthSaved)}");
+            sb.AppendLine($"  + {newLine.Substring(start, lengthNew)}");
+            sb.AppendLine("}");
 
             return sb.ToString();
         }
