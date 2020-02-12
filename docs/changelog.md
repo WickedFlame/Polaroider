@@ -5,7 +5,7 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
-### 0.3.3
+### 0.4.0
 - The length of both snapshots is measured and compared
 - Show the exact part of the mismatching strings in the exceptionmessage
 - Internal refactorings
