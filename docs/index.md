@@ -1,3 +1,6 @@
+---
+layout: "default"
+---
 # Polaroider
 
 Automated Snapshottesting for .NET
