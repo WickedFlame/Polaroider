@@ -29,23 +29,23 @@ namespace Polaroider
 
         private static void Throw<T>(SnapshotResult result, Func<string, T> exception) where T : Exception
         {
+            var (saved, actual, index) = Difference(result.OldSnapshot[result.Index].Value, result.NewSnapshot[result.Index].Value);
+
             var message = new StringBuilder();
             message.Append(Environment.NewLine);
             message.AppendLine($"Snapshots do not match");
-            message.AppendLine($" - Line {result.Index + 1}");
-            message.Append(Difference(result.OldSnapshot[result.Index].Value, result.NewSnapshot[result.Index].Value));
+            message.AppendLine($" - Line {result.Index + 1} position {index}");
+            message.AppendLine($"Expected - {saved}");
+            message.AppendLine($"Actual   - {actual}");
             message.AppendLine(string.Empty);
-            message.AppendLine("Full line:");
-            message.AppendLine("{");
-            message.AppendLine($"  - {result.OldSnapshot[result.Index]}");
-            message.AppendLine($"  + {result.NewSnapshot[result.Index]}");
-            message.Append("}");
-
+            message.AppendLine("Line:");
+            message.AppendLine($"Expected - {result.OldSnapshot[result.Index]}");
+            message.Append($"Actual   - {result.NewSnapshot[result.Index]}");
 
             throw exception(message.ToString());
         }
 
-        private static string Difference(string savedLine, string newLine)
+        private static (string, string, int) Difference(string savedLine, string newLine)
         {
             var index = DifferenceIndex(savedLine, newLine);
             if (index < 0)
@@ -62,14 +62,7 @@ namespace Polaroider
             var lengthNew = newLine.Length >= start + 40 ? 40 : newLine.Length - start;
             var lengthSaved = savedLine.Length >= start + 40 ? 40 : savedLine.Length - start;
 
-            var sb = new StringBuilder();
-            sb.AppendLine($" - Index {index}");
-            sb.AppendLine("{");
-            sb.AppendLine($"  - {savedLine.Substring(start, lengthSaved)}");
-            sb.AppendLine($"  + {newLine.Substring(start, lengthNew)}");
-            sb.AppendLine("}");
-
-            return sb.ToString();
+            return (savedLine.Substring(start, lengthSaved), newLine.Substring(start, lengthNew), index);
         }
 
         static int DifferenceIndex(string str1, string str2)
