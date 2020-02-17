@@ -74,7 +74,7 @@ value:
   name: test
 ```
 
-### Custom mapping of objects
+### COnfigure mapping for objects
 Use ObjectMapper.Configure to define a custom mapping of objects to snapshots
 ```csharp
 ObjectMapper.Configure<CustomClass>(m =>
