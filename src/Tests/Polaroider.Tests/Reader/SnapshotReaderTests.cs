@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -21,7 +22,12 @@ namespace Polaroider.Tests
             var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
 
             snapshot.Should().NotBeNull();
-            snapshot.Single().ToString().Should().Be("test\r\nvalue");
+
+            var sb = new StringBuilder();
+            sb.AppendLine("test");
+            sb.Append("value");
+
+            snapshot.Single().ToString().Should().Be(sb.ToString());
         }
 
         [Test]
@@ -35,7 +41,11 @@ namespace Polaroider.Tests
             snapshot.Single().Metadata["option"].Should().Be("1");
             snapshot.Single().Metadata["datatype"].Should().Be("string");
 
-            snapshot.Single().ToString().Should().Be("test\r\nmetadata");
+            var sb = new StringBuilder();
+            sb.AppendLine("test");
+            sb.Append("metadata");
+
+            snapshot.Single().ToString().Should().Be(sb.ToString());
         }
 
         [Test]
@@ -45,7 +55,12 @@ namespace Polaroider.Tests
             var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
 
             snapshot.Should().NotBeNull();
-            snapshot.Single().ToString().Should().Be("test\r\nsettings");
+            
+            var sb = new StringBuilder();
+            sb.AppendLine("test");
+            sb.Append("settings");
+
+            snapshot.Single().ToString().Should().Be(sb.ToString());
         }
 
         [Test]
@@ -62,7 +77,11 @@ namespace Polaroider.Tests
             {
                 shots[i-1].Metadata.Count.Should().Be(1);
                 shots[i-1].Metadata["snapshot"].Should().Be($"{i}");
-                shots[i-1].ToString().TrimEnd().Should().Be($"test\r\n{i}");
+
+                var sb = new StringBuilder();
+                sb.AppendLine("test");
+                sb.Append(i);
+                shots[i-1].ToString().TrimEnd().Should().Be(sb.ToString());
             }
         }
     }
