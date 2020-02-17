@@ -10,4 +10,3 @@ Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/
 ## Upcomming features
 - API to update Snapshots
 - Loading saved Snapshots to access the Metadata
-- Update tests to run on [Travis-ci](https://travis-ci.org/WickedFlame/Polaroider)
