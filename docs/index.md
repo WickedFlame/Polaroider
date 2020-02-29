@@ -11,7 +11,7 @@ Automated Snapshottesting for .NET
 Polaroider is a Approval Testing Framework that creates and compares snapshots of objects
 
 ### Assertion testing
-Testing all properties of objects using conventional Assertion testing needs multiple asserts
+Conventional assertion testing needs multiple assertion checks to test all properties of an object
 ```csharp
 // arrange
 var repository = new PersonRepository();
@@ -28,7 +28,7 @@ Assert.IsEqual(person.Address.Streetnumber, 3);
 ```
 
 ### Approval testing
-Reduce all to just one assertion check using Snappshottesting
+Approval testing reduces all assertions to just one assertion check with the help of Snappshottesting
 ```csharp
 // arrange
 var repository = new PersonRepository();
