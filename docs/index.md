@@ -8,6 +8,7 @@ Automated Snapshottesting for .NET
 - [GitHub](https://github.com/WickedFlame/Polaroider)
 - [Changelog](changelog)
 
+Simplify UnitTesting with snapshots.
 Polaroider is a Approval Testing Framework that creates and compares snapshots of objects
 
 ### Assertion testing
