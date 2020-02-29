@@ -1,7 +1,9 @@
 <ul class="nav nav-list">
     <li class="nav-header">Getting Started</li>
     <li {% if page.url == "/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/">Overview</a></li>
+    <li {% if page.url == "/api.html" %}class="active"{% endif %}><a href="{{ site.baseurl }}/api">Snapshot testing</a></li>
     <li {% if page.url == "/changelog.html" %}class="active"{% endif %}><a href="{{ site.baseurl }}/changelog">Changelog</a></li>
+    <li {% if page.url == "/roadmap.html" %}class="active"{% endif %}><a href="{{ site.baseurl }}/roadmap">Roadmap</a></li>
 
     <!-- <li class="nav-header">How-To</li>
     <li {% if page.url == "/HowTo/ProfileCode.html" %}class="active"{% endif %}><a href="{{ site.baseurl }}/HowTo/ProfileCode">Profile Code</a></li>

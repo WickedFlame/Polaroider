@@ -8,89 +8,34 @@ Automated Snapshottesting for .NET
 - [GitHub](https://github.com/WickedFlame/Polaroider)
 - [Changelog](changelog)
 
-## Create Snapshot
-Polaroider automaticaly saves the Snapshots to the folder _Snapshots
+Polaroider is a Approval Testing Framework that creates and compares snapshots of objects
+
+### Assertion testing
+Testing all properties of objects using conventional Assertion testing needs multiple asserts
 ```csharp
-public class MyClass
-{
-    [Nunit.Framwork.Test]
-    public void TestSomething()
-    {
-        "This is a test snapshot".MatchSnapshot();
-    }
-}
+// arrange
+var repository = new PersonRepository();
+
+// act
+var person = repository.LoadTesPerson(...);
+
+// assert
+Assert.IsEqual(person.Firstname, "Chris");
+Assert.IsEqual(person.Lastname, "Walpen");
+Assert.IsEqual(person.Company, "WickedFlame");
+Assert.IsEqual(person.Address.Street, "Teststreet");
+Assert.IsEqual(person.Address.Streetnumber, 3);
 ```
 
-## Update Snapshot
-The simplest way to update a Snapshot is to delete the Sanpshot file from the folder _Snapshots. Run the test again and the Snapshot is recreated.
-
-## Multiple Snapshots per test
-Snapshots are saved by Class- and Methodname. If it is needed to save multiple Snapshots in a test, just provide some metadata with the snapshot. The snapshots can then be identified by that metadata.
+### Approval testing
+Reduce all to just one assertion check using Snappshottesting
 ```csharp
-public class MyClass
-{
-    [Nunit.Framwork.Test]
-    public void TestSomething()
-    {
-        "This is a test snapshot".MatchSnapshot(() => new { id = "one"});
+// arrange
+var repository = new PersonRepository();
 
-        "This is another test snapshot".MatchSnapshot(() => new { id = "two"});
-    }
-}
-```
+// act
+var person = repository.LoadTesPerson(...);
 
-### Get Snapshot by metadata
-Snapshots can contain metadata. The snapshot is compared with the saved snapshot that contains the same metadata.
-It is not needed to provide all metadata contained on the saved snapshot, only the data needed to identify the saved snapshot.
-
-The following code matches the snapshot that contains the Key "id" with the value "one" in the metadata
-```csharp
-public class MyClass
-{
-    [Nunit.Framwork.Test]
-    public void TestSomething()
-    {
-        "This is a test snapshot".MatchSnapshot(() => new { id = "one"});
-    }
-}
-```
-
-## Snapshotting objects
-Objects are mapped by property and value. Hirarchie is displayed by indentation
-```csharp
-var obj = new {
-    id = 1,
-    value = new {
-        name = "test"
-    }
-}
-
-obj.MatchSnapshot();
-```
-The generated snapshot looks the following:
-```csharp
-id: 1
-value:
-  name: test
-```
-
-### COnfigure mapping for objects
-Use ObjectMapper.Configure to define a custom mapping of objects to snapshots
-```csharp
-ObjectMapper.Configure<CustomClass>(m =>
-{
-    // create snapshot object and add the lines
-    var token = new Snapshot()
-        .Add(m.Value);
-    return token;
-});
-```
-
-#### Using Tokenizer to create a Snapshot object
-```csharp
-ObjectMapper.Configure<CustomClass>(m =>
-{
-    var token = SnapshotTokenizer.Tokenize(m.Value);
-    return token;
-});
+// assert
+person.MatchSnapshot();
 ```

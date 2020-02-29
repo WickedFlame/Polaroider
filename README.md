@@ -10,3 +10,4 @@ Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/
 ## Upcomming features
 - API to update Snapshots
 - Loading saved Snapshots to access the Metadata
+- Add support for MSTest, cUnit, xUnit
