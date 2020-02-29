@@ -82,6 +82,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 ```
 
 #### Using Tokenizer to create a Snapshot object
+SnapshotTokenizer uses already configured mappers to create snapshottokens of objects or creates tokens based on strings
 ```csharp
 ObjectMapper.Configure<CustomClass>(m =>
 {
