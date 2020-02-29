@@ -3,8 +3,6 @@ title: Snapshot testing
 layout: "default"
 nav_order: 2
 ---
-# Snapshot testing
-
 ## Create Snapshot
 Polaroider automaticaly saves the Snapshots to the folder _Snapshots
 ```csharp
