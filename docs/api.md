@@ -3,12 +3,7 @@ title: Snapshot testing
 layout: "default"
 nav_order: 2
 ---
-# Polaroider
-
-Automated Snapshottesting for .NET
-
-- [GitHub](https://github.com/WickedFlame/Polaroider)
-- [Changelog](changelog)
+# Snapshot testing
 
 ## Create Snapshot
 Polaroider automaticaly saves the Snapshots to the folder _Snapshots
