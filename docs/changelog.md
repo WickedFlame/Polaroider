@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 1.0.2
+- Update Snapshots with Attributes
+
 ### 0.4.0
 - The length of both snapshots is measured and compared
 - Show the exact part of the mismatching strings in the exceptionmessage
