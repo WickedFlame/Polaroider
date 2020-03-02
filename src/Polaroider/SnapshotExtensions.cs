@@ -19,7 +19,7 @@ namespace Polaroider
 
             var client = GetClient();
             var result = client.Validate(snapshot, setup);
-            if (result.Status == SnapshotStatus.SnapshotDoesNotExist)
+            if (result.Status == SnapshotStatus.SnapshotDoesNotExist || result.Status == SnapshotStatus.UpdateSnapshot)
             {
                 client.Write(snapshot, setup);
                 result = SnapshotResult.SnapshotUpdated(snapshot, null);

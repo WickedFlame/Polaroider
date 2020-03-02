@@ -18,6 +18,9 @@ namespace Polaroider
 
             FileName = Path.GetFileName(fileName);
             Directory = Path.GetDirectoryName(fileName);
+
+            UpdateSnapshot = _method.GetCustomAttribute<UpdateSnapshotAttribute>() != null || 
+                             _method.DeclaringType.GetCustomAttribute<UpdateSnapshotAttribute>() != null;
         }
 
         /// <summary>
@@ -39,5 +42,10 @@ namespace Polaroider
         /// the testclass name
         /// </summary>
         public string ClassName => _method.DeclaringType?.Name;
+
+        /// <summary>
+        /// indicates if the snapshot has to be updated
+        /// </summary>
+        public bool UpdateSnapshot { get; }
     }
 }

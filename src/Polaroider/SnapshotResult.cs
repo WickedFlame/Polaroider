@@ -34,6 +34,9 @@ namespace Polaroider
         /// </summary>
         public int Index { get; }
 
+        internal static SnapshotResult UpdateSnapshot(Snapshot snapshot)
+            => new SnapshotResult(SnapshotStatus.UpdateSnapshot, null, snapshot, -1);
+
         internal static SnapshotResult SnapshotDoesNotExist(Snapshot snapshot)
             => new SnapshotResult(SnapshotStatus.SnapshotDoesNotExist, null, snapshot, -1);
 

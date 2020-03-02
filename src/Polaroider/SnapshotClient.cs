@@ -59,6 +59,11 @@ namespace Polaroider
         /// <returns></returns>
         public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup)
         {
+            if (setup.UpdateSnapshot)
+            {
+                return SnapshotResult.UpdateSnapshot(snapshot);
+            }
+
             var snapshots = Read(setup);
             var savedToken = snapshots?.GetSnapshot(snapshot.Metadata);
 
