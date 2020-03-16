@@ -2,7 +2,7 @@
 
 
 # version format
-version: 1.0.3.{build}
+version: 1.0.4.{build}
 
 # you can use {branch} name in version format too
 # version: 1.0.{build}-{branch}

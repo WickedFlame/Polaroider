@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 1.0.3
+- Strongnamed the assembly
+
 ### 1.0.2
 - Update Snapshots with Attributes
 
