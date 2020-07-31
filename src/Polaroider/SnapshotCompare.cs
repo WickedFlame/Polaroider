@@ -1,15 +1,24 @@
 ﻿
+using System;
+
 namespace Polaroider
 {
-    internal class SnapshotCompare : ISnapshotCompare
+	public delegate bool LineComparer(Line newLine, Line savedLine);
+
+    public class SnapshotCompare : ISnapshotCompare
     {
-        /// <summary>
-        /// compare two snapshots with each other
-        /// </summary>
-        /// <param name="newshot"></param>
-        /// <param name="savedshot"></param>
-        /// <returns></returns>
-        public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot)
+		private static readonly LineComparer _defaultComparer = (newLine, savedLine) => newLine.Equals(savedLine);
+
+		/// <summary>
+		/// compare two snapshots with each other
+		/// </summary>
+		/// <param name="newshot"></param>
+		/// <param name="savedshot"></param>
+		/// <returns></returns>
+		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot) 
+		    => Compare(newshot, savedshot, SnapshotConfig.Default);
+
+		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot, SnapshotConfig config)
         {
             if (newshot == null || savedshot == null)
             {
@@ -22,10 +31,12 @@ namespace Polaroider
                 count = savedshot.Count;
             }
 
+            var comparer = config.LineComparer ?? _defaultComparer;
+
             for (var i = 0; i < count; i++)
             {
-                if (!newshot[i].Equals(savedshot[i]))
-                {
+				if (!comparer(newshot[i], savedshot[i]))
+				{
                     return SnapshotResult.SnapshotsDoNotMatch(newshot, savedshot, i);
                 }
             }

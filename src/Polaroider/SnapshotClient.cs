@@ -56,10 +56,11 @@ namespace Polaroider
         /// </summary>
         /// <param name="setup"></param>
         /// <param name="snapshot"></param>
+        /// <param name="config"></param>
         /// <returns></returns>
-        public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup)
+        public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup, SnapshotConfig config)
         {
-            if (setup.UpdateSnapshot)
+            if (setup.UpdateSnapshot || config.UpdateSnapshot)
             {
                 return SnapshotResult.UpdateSnapshot(snapshot);
             }
@@ -67,7 +68,7 @@ namespace Polaroider
             var snapshots = Read(setup);
             var savedToken = snapshots?.GetSnapshot(snapshot.Metadata);
 
-            return _snapshotCompare.Compare(snapshot, savedToken);
+            return _snapshotCompare.Compare(snapshot, savedToken, config);
         }
     }
 }

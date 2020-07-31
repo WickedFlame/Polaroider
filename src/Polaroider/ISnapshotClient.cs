@@ -25,7 +25,8 @@ namespace Polaroider
         /// </summary>
         /// <param name="snapshotId"></param>
         /// <param name="snapshot"></param>
+        /// <param name="config"></param>
         /// <returns></returns>
-        SnapshotResult Validate(Snapshot snapshot, SnapshotSetup snapshotId);
+        SnapshotResult Validate(Snapshot snapshot, SnapshotSetup snapshotId, SnapshotConfig config);
     }
 }

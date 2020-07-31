@@ -6,6 +6,7 @@ namespace Polaroider
     public static class SnapshotExtensions
     {
         private static Lazy<ISnapshotClient> Client = new Lazy<ISnapshotClient>(() => new SnapshotClient());
+
         private static ISnapshotClient GetClient() => Client.Value;
 
         /// <summary>
@@ -13,12 +14,24 @@ namespace Polaroider
         /// </summary>
         /// <param name="snapshot">the snapshot to compare</param>
         public static void MatchSnapshot(this Snapshot snapshot)
-        {
+	        => MatchSnapshot(snapshot, c => {});
+
+		/// <summary>
+		/// compares the provided snapshot with the saved snapshot
+		/// </summary>
+		/// <param name="snapshot">the snapshot to compare</param>
+		/// <param name="configSetup">the configuration to use</param>
+		public static void MatchSnapshot(this Snapshot snapshot, Action<SnapshotConfig> configSetup)
+		{
+			var config = new SnapshotConfig();
+			configSetup?.Invoke(config);
+			config.MergeDefault();
+
             var resolver = new SnapshotSetupResolver();
             var setup = resolver.ResloveSnapshotSetup();
 
             var client = GetClient();
-            var result = client.Validate(snapshot, setup);
+            var result = client.Validate(snapshot, setup, config);
             if (result.Status == SnapshotStatus.SnapshotDoesNotExist || result.Status == SnapshotStatus.UpdateSnapshot)
             {
                 client.Write(snapshot, setup);
@@ -28,50 +41,86 @@ namespace Polaroider
             SnapshotAsserter.AssertSnapshot(result);
         }
 
-        /// <summary>
-        /// compares the provided string with the saved snapshot
-        /// </summary>
-        /// <param name="snapshot">the string to comapre</param>
-        public static void MatchSnapshot(this string snapshot)
+		/// <summary>
+		/// compares the provided string with the saved snapshot
+		/// </summary>
+		/// <param name="snapshot">the string to comapre</param>
+		public static void MatchSnapshot(this string snapshot)
+			=> MatchSnapshot(snapshot, c => { });
+
+		/// <summary>
+		/// compares the provided string with the saved snapshot
+		/// </summary>
+		/// <param name="snapshot">the string to comapre</param>
+		/// <param name="config">the configuration</param>
+		public static void MatchSnapshot(this string snapshot, Action<SnapshotConfig> config)
         {
             SnapshotTokenizer.Tokenize(snapshot)
-                .MatchSnapshot();
+                .MatchSnapshot(config);
         }
 
-        /// <summary>
-        /// compares the provided string with the saved snapshot that has the corresponding metadata
-        /// </summary>
-        /// <param name="snapshot">the string to comapre</param>
-        /// <param name="meta">the Id of the stored snapshot</param>
-        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta)
+		/// <summary>
+		/// compares the provided string with the saved snapshot that has the corresponding metadata
+		/// </summary>
+		/// <param name="snapshot">the string to comapre</param>
+		/// <param name="meta">the Id of the stored snapshot</param>
+		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta) 
+			=> MatchSnapshot(snapshot, meta, c => { });
+
+		/// <summary>
+		/// compares the provided string with the saved snapshot that has the corresponding metadata
+		/// </summary>
+		/// <param name="snapshot">the string to comapre</param>
+		/// <param name="meta">the Id of the stored snapshot</param>
+		/// <param name="config">the configuration</param>
+		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, Action<SnapshotConfig> config)
         {
             SnapshotTokenizer.Tokenize(snapshot)
                 .SetMetadata(meta)
-                .MatchSnapshot();
+                .MatchSnapshot(config);
         }
 
-        /// <summary>
-        /// compares the provided object with the saved snapshot
-        /// </summary>
-        /// <typeparam name="T">the objecttype</typeparam>
-        /// <param name="snapshot">the object to comapre</param>
-        public static void MatchSnapshot<T>(this T snapshot)
+		/// <summary>
+		/// compares the provided object with the saved snapshot
+		/// </summary>
+		/// <typeparam name="T">the objecttype</typeparam>
+		/// <param name="snapshot">the object to comapre</param>
+		public static void MatchSnapshot<T>(this T snapshot)
+			=> MatchSnapshot(snapshot, c => { });
+
+		/// <summary>
+		/// compares the provided object with the saved snapshot
+		/// </summary>
+		/// <typeparam name="T">the objecttype</typeparam>
+		/// <param name="snapshot">the object to comapre</param>
+		/// <param name="config">the configuration</param>
+		public static void MatchSnapshot<T>(this T snapshot, Action<SnapshotConfig> config)
         {
             SnapshotTokenizer.Tokenize(snapshot)
-                .MatchSnapshot();
+                .MatchSnapshot(config);
         }
 
-        /// <summary>
-        /// compares the provided object with the saved snapshot that has the corresponding metadata
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="snapshot"></param>
-        /// <param name="meta"></param>
-        public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
+		/// <summary>
+		/// compares the provided object with the saved snapshot that has the corresponding metadata
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="snapshot"></param>
+		/// <param name="meta"></param>
+		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
+			=> MatchSnapshot(snapshot, meta, c => { });
+
+		/// <summary>
+		/// compares the provided object with the saved snapshot that has the corresponding metadata
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="snapshot"></param>
+		/// <param name="meta"></param>
+		/// <param name="config">the configuration</param>
+		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, Action<SnapshotConfig> config)
         {
             SnapshotTokenizer.Tokenize(snapshot)
                 .SetMetadata(meta)
-                .MatchSnapshot();
+                .MatchSnapshot(config);
         }
 
         /// <summary>
