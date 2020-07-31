@@ -18,7 +18,7 @@ namespace Polaroider.Tests
 			var savedsnap = SnapshotTokenizer.Tokenize(sn.ToString());
 
 			var config = new SnapshotConfig();
-			config.CompareLine((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
+			config.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
 			
 			sn = new StringBuilder()
 				.AppendLine("Line    1")
@@ -53,7 +53,7 @@ namespace Polaroider.Tests
 			snapshot = SnapshotTokenizer.Tokenize(sn.ToString());
 			snapshot.MatchSnapshot(c =>
 			{
-				c.CompareLine((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
+				c.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
 			});
 		}
 	}

@@ -3,21 +3,18 @@ using System;
 
 namespace Polaroider
 {
-	public delegate bool LineComparer(Line newLine, Line savedLine);
-
+	/// <summary>
+	/// compare snapshots
+	/// </summary>
     public class SnapshotCompare : ISnapshotCompare
     {
-		private static readonly LineComparer _defaultComparer = (newLine, savedLine) => newLine.Equals(savedLine);
-
-		/// <summary>
+	    /// <summary>
 		/// compare two snapshots with each other
 		/// </summary>
 		/// <param name="newshot"></param>
 		/// <param name="savedshot"></param>
+		/// <param name="config">the configuration</param>
 		/// <returns></returns>
-		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot) 
-		    => Compare(newshot, savedshot, SnapshotConfig.Default);
-
 		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot, SnapshotConfig config)
         {
             if (newshot == null || savedshot == null)
@@ -31,11 +28,11 @@ namespace Polaroider
                 count = savedshot.Count;
             }
 
-            var comparer = config.LineComparer ?? _defaultComparer;
+            var comparer = config.Comparer ?? LineCompare.Default;
 
             for (var i = 0; i < count; i++)
             {
-				if (!comparer(newshot[i], savedshot[i]))
+				if (!comparer.Compare(newshot[i], savedshot[i]))
 				{
                     return SnapshotResult.SnapshotsDoNotMatch(newshot, savedshot, i);
                 }
