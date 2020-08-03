@@ -115,3 +115,48 @@ ObjectMapper.Configure<CustomClass>(m =>
     return token;
 });
 ```
+
+### Parse lines for custom output
+```csharp
+sn = new StringBuilder()
+    .AppendLine("Line    1")
+    .AppendLine("   Line 2")
+    .AppendLine("  Line     3")
+    .ToString();
+
+options = SnapshotOptions.Create(o =>
+{
+    // read lines without whitespaces
+    o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+});
+
+sn.MatchSnapshot(options);
+```
+
+### Alter the comparer
+```csharp
+sn = new StringBuilder()
+    .AppendLine("Line    1")
+    .AppendLine("   Line 2")
+    .AppendLine("  Line     3")
+    .ToString();
+
+options = SnapshotOptions.Create(o =>
+{
+    // ignore whitespaces when comparing
+    o.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
+});
+
+sn.MatchSnapshot(options);
+```
+
+### Global SnapshotOptions
+```csharp
+SnapshotOptions.Setup(o =>
+{
+    // read lines without whitespaces
+    o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+});
+
+sn.MatchSnapshot();
+```

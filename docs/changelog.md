@@ -5,6 +5,11 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### NEXT
+- Added Options to the fluent API
+- Custom line comparer
+- Parse lines to customize the output
+
 ### 1.0.3
 - Strongnamed the assembly
 

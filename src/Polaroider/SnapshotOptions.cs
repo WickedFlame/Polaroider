@@ -12,7 +12,7 @@ namespace Polaroider
 		/// <summary>
 		/// gets the default configuration
 		/// </summary>
-		public static SnapshotOptions Default { get; } = new SnapshotOptions();
+		public static SnapshotOptions Default { get; private set; } = new SnapshotOptions();
 
 		/// <summary>
 		/// the configured comparer
@@ -35,7 +35,10 @@ namespace Polaroider
 		/// <param name="setup"></param>
 		public static void Setup(Action<SnapshotOptions> setup)
 		{
-			setup(Default);
+			var options = new SnapshotOptions();
+			setup(options);
+
+			Default = options;
 		}
 
 		/// <summary>
@@ -65,6 +68,7 @@ namespace Polaroider
 
 			options.Comparer = options.Comparer ?? SnapshotOptions.Default.Comparer;
 			options.UpdateSnapshot = options.UpdateSnapshot ? options.UpdateSnapshot : SnapshotOptions.Default.UpdateSnapshot;
+			options.Parser = options.Parser ?? SnapshotOptions.Default.Parser;
 
 			return options;
 		}
