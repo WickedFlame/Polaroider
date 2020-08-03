@@ -8,14 +8,14 @@ namespace Polaroider
 	/// </summary>
     public class SnapshotCompare : ISnapshotCompare
     {
-	    /// <summary>
+		/// <summary>
 		/// compare two snapshots with each other
 		/// </summary>
 		/// <param name="newshot"></param>
 		/// <param name="savedshot"></param>
-		/// <param name="config">the configuration</param>
+		/// <param name="options">the options</param>
 		/// <returns></returns>
-		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot, SnapshotConfig config)
+		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot, SnapshotOptions options)
         {
             if (newshot == null || savedshot == null)
             {
@@ -28,7 +28,7 @@ namespace Polaroider
                 count = savedshot.Count;
             }
 
-            var comparer = config.Comparer ?? LineCompare.Default;
+            var comparer = options.Comparer ?? LineCompare.Default;
 
             for (var i = 0; i < count; i++)
             {

@@ -14,24 +14,29 @@ namespace Polaroider
         /// </summary>
         /// <param name="snapshot">the snapshot to compare</param>
         public static void MatchSnapshot(this Snapshot snapshot)
-	        => MatchSnapshot(snapshot, c => {});
+	        => MatchSnapshot(snapshot, (SnapshotOptions)null);
 
 		/// <summary>
 		/// compares the provided snapshot with the saved snapshot
 		/// </summary>
 		/// <param name="snapshot">the snapshot to compare</param>
-		/// <param name="configSetup">the configuration to use</param>
-		public static void MatchSnapshot(this Snapshot snapshot, Action<SnapshotConfig> configSetup)
+		/// <param name="options">the options to use</param>
+		public static void MatchSnapshot(this Snapshot snapshot, SnapshotOptions options)
 		{
-			var config = new SnapshotConfig();
-			configSetup?.Invoke(config);
-			config.MergeDefault();
+			if(options != null)
+			{
+				options.MergeDefault();
+			}
+			else
+			{
+				options = SnapshotOptions.Default;
+			}
 
             var resolver = new SnapshotSetupResolver();
             var setup = resolver.ResloveSnapshotSetup();
 
             var client = GetClient();
-            var result = client.Validate(snapshot, setup, config);
+            var result = client.Validate(snapshot, setup, options);
             if (result.Status == SnapshotStatus.SnapshotDoesNotExist || result.Status == SnapshotStatus.UpdateSnapshot)
             {
                 client.Write(snapshot, setup);
@@ -46,17 +51,17 @@ namespace Polaroider
 		/// </summary>
 		/// <param name="snapshot">the string to comapre</param>
 		public static void MatchSnapshot(this string snapshot)
-			=> MatchSnapshot(snapshot, c => { });
+			=> MatchSnapshot(snapshot, (SnapshotOptions)null);
 
 		/// <summary>
 		/// compares the provided string with the saved snapshot
 		/// </summary>
 		/// <param name="snapshot">the string to comapre</param>
 		/// <param name="config">the configuration</param>
-		public static void MatchSnapshot(this string snapshot, Action<SnapshotConfig> config)
+		public static void MatchSnapshot(this string snapshot, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot)
-                .MatchSnapshot(config);
+                .MatchSnapshot(options);
         }
 
 		/// <summary>
@@ -65,7 +70,7 @@ namespace Polaroider
 		/// <param name="snapshot">the string to comapre</param>
 		/// <param name="meta">the Id of the stored snapshot</param>
 		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta) 
-			=> MatchSnapshot(snapshot, meta, c => { });
+			=> MatchSnapshot(snapshot, meta, (SnapshotOptions)null);
 
 		/// <summary>
 		/// compares the provided string with the saved snapshot that has the corresponding metadata
@@ -73,11 +78,11 @@ namespace Polaroider
 		/// <param name="snapshot">the string to comapre</param>
 		/// <param name="meta">the Id of the stored snapshot</param>
 		/// <param name="config">the configuration</param>
-		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, Action<SnapshotConfig> config)
+		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot)
                 .SetMetadata(meta)
-                .MatchSnapshot(config);
+                .MatchSnapshot(options);
         }
 
 		/// <summary>
@@ -86,7 +91,7 @@ namespace Polaroider
 		/// <typeparam name="T">the objecttype</typeparam>
 		/// <param name="snapshot">the object to comapre</param>
 		public static void MatchSnapshot<T>(this T snapshot)
-			=> MatchSnapshot(snapshot, c => { });
+			=> MatchSnapshot(snapshot, (SnapshotOptions)null);
 
 		/// <summary>
 		/// compares the provided object with the saved snapshot
@@ -94,10 +99,10 @@ namespace Polaroider
 		/// <typeparam name="T">the objecttype</typeparam>
 		/// <param name="snapshot">the object to comapre</param>
 		/// <param name="config">the configuration</param>
-		public static void MatchSnapshot<T>(this T snapshot, Action<SnapshotConfig> config)
+		public static void MatchSnapshot<T>(this T snapshot, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot)
-                .MatchSnapshot(config);
+                .MatchSnapshot(options);
         }
 
 		/// <summary>
@@ -107,7 +112,7 @@ namespace Polaroider
 		/// <param name="snapshot"></param>
 		/// <param name="meta"></param>
 		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
-			=> MatchSnapshot(snapshot, meta, c => { });
+			=> MatchSnapshot(snapshot, meta, (SnapshotOptions)null);
 
 		/// <summary>
 		/// compares the provided object with the saved snapshot that has the corresponding metadata
@@ -116,11 +121,11 @@ namespace Polaroider
 		/// <param name="snapshot"></param>
 		/// <param name="meta"></param>
 		/// <param name="config">the configuration</param>
-		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, Action<SnapshotConfig> config)
+		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot)
                 .SetMetadata(meta)
-                .MatchSnapshot(config);
+                .MatchSnapshot(options);
         }
 
         /// <summary>

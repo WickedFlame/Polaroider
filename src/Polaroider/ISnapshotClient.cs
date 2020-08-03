@@ -20,13 +20,13 @@ namespace Polaroider
         /// <param name="snapshotId"></param>
         void Write(Snapshot snapshot, SnapshotSetup snapshotId);
 
-        /// <summary>
-        /// validates the snapshot against the saved snapshot
-        /// </summary>
-        /// <param name="snapshotId"></param>
-        /// <param name="snapshot"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        SnapshotResult Validate(Snapshot snapshot, SnapshotSetup snapshotId, SnapshotConfig config);
+		/// <summary>
+		/// validates the snapshot against the saved snapshot
+		/// </summary>
+		/// <param name="snapshotId"></param>
+		/// <param name="snapshot"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		SnapshotResult Validate(Snapshot snapshot, SnapshotSetup snapshotId, SnapshotOptions options);
     }
 }

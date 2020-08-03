@@ -17,7 +17,7 @@ namespace Polaroider.Tests
 
 			var savedsnap = SnapshotTokenizer.Tokenize(sn.ToString());
 
-			var config = new SnapshotConfig();
+			var config = new SnapshotOptions();
 			config.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
 			
 			sn = new StringBuilder()
@@ -40,10 +40,10 @@ namespace Polaroider.Tests
 				.AppendLine("Line 3");
 
 			var snapshot = SnapshotTokenizer.Tokenize(sn.ToString());
-			snapshot.MatchSnapshot(c =>
+			snapshot.MatchSnapshot(SnapshotOptions.Create(c =>
 			{
 				c.UpdateSavedSnapshot();
-			});
+			}));
 
 			sn = new StringBuilder()
 				.AppendLine("Line    1")
@@ -51,10 +51,22 @@ namespace Polaroider.Tests
 				.AppendLine("  Line     3");
 
 			snapshot = SnapshotTokenizer.Tokenize(sn.ToString());
-			snapshot.MatchSnapshot(c =>
+
+			var options = new SnapshotOptions
 			{
-				c.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
+				Comparer = new LineCompare((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)))
+			};
+			
+			snapshot.MatchSnapshot(options);
+
+
+
+			options = SnapshotOptions.Create(o =>
+			{
+				o.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));
 			});
+
+			snapshot.MatchSnapshot(options);
 		}
 	}
 }

@@ -51,16 +51,16 @@ namespace Polaroider
             _snapshotWriter.Write(snapshot, setup);
         }
 
-        /// <summary>
-        /// validates the snapshot against the saved snapshot
-        /// </summary>
-        /// <param name="setup"></param>
-        /// <param name="snapshot"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup, SnapshotConfig config)
+		/// <summary>
+		/// validates the snapshot against the saved snapshot
+		/// </summary>
+		/// <param name="setup"></param>
+		/// <param name="snapshot"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public SnapshotResult Validate(Snapshot snapshot, SnapshotSetup setup, SnapshotOptions options)
         {
-            if (setup.UpdateSnapshot || config.UpdateSnapshot)
+            if (setup.UpdateSnapshot || options.UpdateSnapshot)
             {
                 return SnapshotResult.UpdateSnapshot(snapshot);
             }
@@ -68,7 +68,7 @@ namespace Polaroider
             var snapshots = Read(setup);
             var savedToken = snapshots?.GetSnapshot(snapshot.Metadata);
 
-            return _snapshotCompare.Compare(snapshot, savedToken, config);
+            return _snapshotCompare.Compare(snapshot, savedToken, options);
         }
     }
 }
