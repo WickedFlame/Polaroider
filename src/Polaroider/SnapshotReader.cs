@@ -11,6 +11,9 @@ namespace Polaroider
     {
         private readonly ReaderCollection _dataReaders;
 
+		/// <summary>
+		/// 
+		/// </summary>
         public SnapshotReader()
         {
             _dataReaders = ReaderCollection.Collection;

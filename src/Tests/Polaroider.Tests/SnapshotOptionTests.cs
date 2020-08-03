@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Polaroider.Tests
 {
-	public class SnapshotConfigurationTests
+	public class SnapshotOptionsTests
 	{
 		[Test]
-		public void SnapshotConfig_Configure()
+		public void SnapshotOptions_Configure()
 		{
 			var sn = new StringBuilder()
 				.AppendLine("Line 1")
@@ -28,11 +29,12 @@ namespace Polaroider.Tests
 			var newsnap = SnapshotTokenizer.Tokenize(sn.ToString());
 
 			var comparer = new SnapshotCompare();
-			comparer.Compare(newsnap, savedsnap, config);
+			var result = comparer.Compare(newsnap, savedsnap, config);
+			result.Status.Should().Be(SnapshotStatus.SnapshotsMatch);
 		}
 
 		[Test]
-		public void Snapshot_Config()
+		public void Snapshot_Options()
 		{
 			var sn = new StringBuilder()
 				.AppendLine("Line 1")

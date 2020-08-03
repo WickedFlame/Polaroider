@@ -57,10 +57,10 @@ namespace Polaroider
 		/// compares the provided string with the saved snapshot
 		/// </summary>
 		/// <param name="snapshot">the string to comapre</param>
-		/// <param name="config">the configuration</param>
+		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot(this string snapshot, SnapshotOptions options)
         {
-            SnapshotTokenizer.Tokenize(snapshot)
+            SnapshotTokenizer.Tokenize(snapshot, options)
                 .MatchSnapshot(options);
         }
 
@@ -77,10 +77,10 @@ namespace Polaroider
 		/// </summary>
 		/// <param name="snapshot">the string to comapre</param>
 		/// <param name="meta">the Id of the stored snapshot</param>
-		/// <param name="config">the configuration</param>
+		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, SnapshotOptions options)
         {
-            SnapshotTokenizer.Tokenize(snapshot)
+            SnapshotTokenizer.Tokenize(snapshot, options)
                 .SetMetadata(meta)
                 .MatchSnapshot(options);
         }
@@ -98,10 +98,10 @@ namespace Polaroider
 		/// </summary>
 		/// <typeparam name="T">the objecttype</typeparam>
 		/// <param name="snapshot">the object to comapre</param>
-		/// <param name="config">the configuration</param>
+		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot<T>(this T snapshot, SnapshotOptions options)
         {
-            SnapshotTokenizer.Tokenize(snapshot)
+            SnapshotTokenizer.MapToToken(snapshot)
                 .MatchSnapshot(options);
         }
 
@@ -120,10 +120,10 @@ namespace Polaroider
 		/// <typeparam name="T"></typeparam>
 		/// <param name="snapshot"></param>
 		/// <param name="meta"></param>
-		/// <param name="config">the configuration</param>
+		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, SnapshotOptions options)
         {
-            SnapshotTokenizer.Tokenize(snapshot)
+            SnapshotTokenizer.MapToToken(snapshot)
                 .SetMetadata(meta)
                 .MatchSnapshot(options);
         }

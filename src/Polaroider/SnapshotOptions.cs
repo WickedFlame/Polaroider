@@ -20,6 +20,11 @@ namespace Polaroider
 		public ILineCompare Comparer { get; set; }
 
 		/// <summary>
+		/// the configured line parser
+		/// </summary>
+		public ILineParser Parser { get; set; }
+
+		/// <summary>
 		/// update the snapshot
 		/// </summary>
 		public bool UpdateSnapshot { get; set; }
@@ -46,12 +51,22 @@ namespace Polaroider
 		}
 	}
 
+	/// <summary>
+	/// extensions for snapshotoptions
+	/// </summary>
 	public static class SnapshotOptionsExtensions
 	{
-		internal static void MergeDefault(this SnapshotOptions options)
+		internal static SnapshotOptions MergeDefault(this SnapshotOptions options)
 		{
+			if (options == null)
+			{
+				return SnapshotOptions.Default;
+			}
+
 			options.Comparer = options.Comparer ?? SnapshotOptions.Default.Comparer;
 			options.UpdateSnapshot = options.UpdateSnapshot ? options.UpdateSnapshot : SnapshotOptions.Default.UpdateSnapshot;
+
+			return options;
 		}
 
 		/// <summary>
@@ -63,6 +78,17 @@ namespace Polaroider
 		public static SnapshotOptions SetComparer(this SnapshotOptions options, Func<Line, Line, bool> comparer)
 		{
 			options.Comparer = new LineCompare(comparer);
+			return options;
+		}
+
+		public static SnapshotOptions SetParser(this SnapshotOptions options, Func<string, string> parser)
+		{
+			return SetParser(options, line => new Line(parser(line)));
+		}
+
+		public static SnapshotOptions SetParser(this SnapshotOptions options, Func<string, Line> parser)
+		{
+			options.Parser = new LineParser(parser);
 			return options;
 		}
 
