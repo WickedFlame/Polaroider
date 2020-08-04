@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Polaroider.SnapshotReaders
 {
-    public class MetadataReader : ILineReader
+    internal class MetadataReader : ILineReader
     {
         public void ReadLine(string line, Snapshot item)
         {

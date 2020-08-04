@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Polaroider
 {
+	/// <summary>
+	/// extensions for snapshot class
+	/// </summary>
     public static class SnapshotExtensions
     {
         private static Lazy<ISnapshotClient> Client = new Lazy<ISnapshotClient>(() => new SnapshotClient());

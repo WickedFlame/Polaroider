@@ -74,7 +74,7 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// sets the comparer
+		/// alter the way lines are compared
 		/// </summary>
 		/// <param name="options"></param>
 		/// <param name="comparer"></param>
@@ -85,14 +85,20 @@ namespace Polaroider
 			return options;
 		}
 
-		public static SnapshotOptions SetParser(this SnapshotOptions options, Func<string, string> parser)
+		/// <summary>
+		/// add a directive to the tokenizer to alter the input value that used for the compare
+		/// </summary>
+		/// <param name="options"></param>
+		/// <param name="directive"></param>
+		/// <returns></returns>
+		public static SnapshotOptions AddDirective(this SnapshotOptions options, Func<string, string> directive)
 		{
-			return SetParser(options, line => new Line(parser(line)));
-		}
+			if (options.Parser == null)
+			{
+				options.Parser = new LineParser();
+			}
 
-		public static SnapshotOptions SetParser(this SnapshotOptions options, Func<string, Line> parser)
-		{
-			options.Parser = new LineParser(parser);
+			options.Parser.AddDirective(directive);
 			return options;
 		}
 

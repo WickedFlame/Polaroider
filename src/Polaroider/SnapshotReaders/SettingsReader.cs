@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Polaroider.SnapshotReaders
 {
-    public class SettingsReader : ILineReader
+    internal class SettingsReader : ILineReader
     {
         public void ReadLine(string line, Snapshot item)
         {

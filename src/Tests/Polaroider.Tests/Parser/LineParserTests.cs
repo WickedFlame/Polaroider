@@ -12,7 +12,7 @@ namespace Polaroider.Tests.Parser
 		public void LineParser_Parse()
 		{
 			var options = new SnapshotOptions();
-			options.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+			options.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
 
 
 			var sn = new StringBuilder()
@@ -44,7 +44,7 @@ namespace Polaroider.Tests.Parser
 		{
 			var options = SnapshotOptions.Create(o =>
 			{
-				o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+				o.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
 				o.UpdateSavedSnapshot();
 			});
 
@@ -66,7 +66,7 @@ namespace Polaroider.Tests.Parser
 
 			options = SnapshotOptions.Create(o =>
 			{
-				o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+				o.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
 			});
 
 			sn.MatchSnapshot(options);

@@ -1,7 +1,7 @@
 ﻿
 namespace Polaroider.SnapshotReaders
 {
-    public class SnapshotLineReader : ILineReader
+    internal class SnapshotLineReader : ILineReader
     {
         public void ReadLine(string line, Snapshot item)
         {

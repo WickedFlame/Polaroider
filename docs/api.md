@@ -116,7 +116,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 });
 ```
 
-### Parse lines for custom output
+### Add a directive to alter the value that is compared
 ```csharp
 sn = new StringBuilder()
     .AppendLine("Line    1")
@@ -126,14 +126,15 @@ sn = new StringBuilder()
 
 options = SnapshotOptions.Create(o =>
 {
-    // read lines without whitespaces
-    o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+    // read lines without whitespaces and in uppercase
+    o.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+    o.AddDirective(line => line.ToUpper());
 });
 
 sn.MatchSnapshot(options);
 ```
 
-### Alter the comparer
+### Alter the way lines are compared
 ```csharp
 sn = new StringBuilder()
     .AppendLine("Line    1")

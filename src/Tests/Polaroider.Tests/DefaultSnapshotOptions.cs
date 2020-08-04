@@ -12,7 +12,7 @@ namespace Polaroider.Tests
 		{
 			SnapshotOptions.Setup(o =>
 			{
-				o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
+				o.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
 			});
 
 			var options = SnapshotOptions.Create(o =>
