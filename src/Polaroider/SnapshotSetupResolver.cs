@@ -49,9 +49,10 @@ namespace Polaroider
         {
             private static readonly IEnumerable<string> _attributes = new List<string>
             {
-                "NUnit.Framework.",
-                "NUnit.Framework.TestAttribute",
-                "Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute"
+                "nunit.framework.",
+                "nunit.framework.testattribute",
+                "microsoft.visualstudio.testtools.unittesting.testmethodattribute",
+				"xunit.factattribute"
             };
 
             internal static bool IsTestMethod(MemberInfo method)
@@ -63,8 +64,10 @@ namespace Polaroider
                         var type = a.AttributeType;
                         do
                         {
-                            if (type.FullName.StartsWith(attributeName))
-                                return true;
+                            if (type.FullName.ToLower().StartsWith(attributeName))
+                            {
+	                            return true;
+                            }
 
                             type = type.BaseType;
                         } while (type != null);
