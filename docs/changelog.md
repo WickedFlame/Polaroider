@@ -5,7 +5,7 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
-### NEXT
+### 1.1.0
 - Added Options to the fluent API
 - Custom line comparer
 - Parse lines to customize the output
