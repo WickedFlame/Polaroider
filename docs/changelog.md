@@ -9,6 +9,7 @@ nav_order: 99
 - Added Options to the fluent API
 - Custom line comparer
 - Parse lines to customize the output
+- Added support for Xunit
 
 ### 1.0.3
 - Strongnamed the assembly

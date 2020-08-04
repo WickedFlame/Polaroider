@@ -40,3 +40,8 @@ var person = repository.LoadTesPerson(...);
 // assert
 person.MatchSnapshot();
 ```
+
+## Supported Testframeworks
+- MSTest
+- NUnit
+- Xunit
