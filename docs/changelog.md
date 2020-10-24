@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 1.1.2
+- Snapshottin null sub objects caused an error
+
 ### 1.1.0
 - Added Options to the fluent API
 - Custom line comparer
