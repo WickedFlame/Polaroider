@@ -25,6 +25,11 @@ namespace Polaroider.Mapping
 
         private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
         {
+	        if (item == null)
+	        {
+		        return;
+	        }
+
             if (item is IList list)
             {
                 foreach (var lstItem in list)
