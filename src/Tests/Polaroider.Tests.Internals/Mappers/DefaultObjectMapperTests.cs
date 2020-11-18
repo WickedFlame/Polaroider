@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
@@ -61,5 +62,79 @@ namespace Polaroider.Tests.Internals.Mappers
 
             snapshot.ToString().Should().BeEquivalentTo(sb);
         }
-    }
+
+        [Test]
+        public void Map_List()
+        {
+	        var list = new List<MapItem>
+	        {
+		        new MapItem {Value = "one"},
+		        new MapItem {Value = "two"},
+		        new MapItem {Value = "three"}
+	        };
+
+	        var mapper = new DefaultObjectMapper();
+	        var snapshot = mapper.Map(list);
+
+	        var sb = string.Join(Environment.NewLine, new[]
+	        {
+		        "Value: one",
+		        "Value: two",
+		        "Value: three"
+	        });
+
+	        snapshot.ToString().Should().BeEquivalentTo(sb);
+		}
+
+		[Test]
+        public void Map_IEnumerable()
+        {
+	        var list = new List<MapItem>
+	        {
+		        new MapItem {Value = "one"},
+		        new MapItem {Value = "two"},
+		        new MapItem {Value = "three"}
+	        };
+
+	        var mapper = new DefaultObjectMapper();
+	        var snapshot = mapper.Map(list.Select(i => new { i.Value }));
+
+	        var sb = string.Join(Environment.NewLine, new[]
+	        {
+		        "Value: one",
+		        "Value: two",
+		        "Value: three"
+	        });
+
+	        snapshot.ToString().Should().BeEquivalentTo(sb);
+		}
+
+        [Test]
+        public void Map_Array()
+        {
+	        var list = new List<MapItem>
+	        {
+		        new MapItem {Value = "one"},
+		        new MapItem {Value = "two"},
+		        new MapItem {Value = "three"}
+	        };
+
+	        var mapper = new DefaultObjectMapper();
+	        var snapshot = mapper.Map(list.ToArray());
+
+	        var sb = string.Join(Environment.NewLine, new[]
+	        {
+		        "Value: one",
+		        "Value: two",
+		        "Value: three"
+	        });
+
+	        snapshot.ToString().Should().BeEquivalentTo(sb);
+        }
+
+		public class MapItem
+        {
+	        public string Value { get; set; }
+        }
+	}
 }

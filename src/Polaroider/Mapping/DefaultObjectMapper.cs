@@ -30,7 +30,7 @@ namespace Polaroider.Mapping
 		        return;
 	        }
 
-            if (item is IList list)
+            if (item is IEnumerable list && !(item is string))
             {
                 foreach (var lstItem in list)
                 {
