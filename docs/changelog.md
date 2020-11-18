@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 1.1.3
+- Snapshotting IEnumerable did not snapshot child objects
+
 ### 1.1.2
 - Snapshotting Sub-objects that are null caused an error
 
