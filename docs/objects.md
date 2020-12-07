@@ -1,7 +1,7 @@
 ---
 title: Getting started
 layout: "default"
-nav_order: 2
+nav_order: 3
 ---
 ## Snapshotting objects
 Objects are mapped by property and value. 
