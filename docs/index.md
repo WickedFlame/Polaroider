@@ -3,7 +3,7 @@ layout: "default"
 ---
 # Polaroider
 
-Automated Snapshottesting for .NET
+Automated Snapshottesting made simple for .NET
 
 - [GitHub](https://github.com/WickedFlame/Polaroider)
 - [Changelog](changelog)
