@@ -2,11 +2,11 @@
 
 
 # version format
-version: 1.1.4.{build}
+version: 1.1.5.{build}
 
 environment:
-  rc_version: 1.1.4-RC{build}
-  base_version: 1.1.4
+  rc_version: 1.1.5-RC{build}
+  base_version: 1.1.5
 
 # you can use {branch} name in version format too
 # version: 1.0.{build}-{branch}
@@ -31,7 +31,7 @@ dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: '{version}'
-  package_version: $(base_version)
+  package_version: $(rc_version)
   assembly_version: $(base_version)
   file_version: '{version}'
   informational_version: '{version}'
