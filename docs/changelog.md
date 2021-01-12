@@ -5,6 +5,10 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### Next
+- Directives work for Snapshotting objecs
+- Snapshotting properties of Type caused a StackOverflow
+
 ### 1.1.3
 - Snapshotting IEnumerable did not snapshot child objects
 
