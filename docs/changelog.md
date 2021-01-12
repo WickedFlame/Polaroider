@@ -5,7 +5,7 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
-### Next
+### 1.1.4
 - Directives work for Snapshotting objecs
 - Snapshotting properties of Type caused a StackOverflow
 
