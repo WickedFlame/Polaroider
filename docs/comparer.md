@@ -12,7 +12,7 @@ SnapshotOptions SetComparer(Func<Line, Line, bool> comparer)
  By default Line has an override of Equals. That way Lines can be compared directly with each other.
 
 ```csharp
-.SetComparer((newline, savedline) => newline.Equals(savedline));
+SnapshotOptions.Default.SetComparer((newline, savedline) => newline.Equals(savedline));
 ```
 
 
@@ -20,13 +20,13 @@ SnapshotOptions SetComparer(Func<Line, Line, bool> comparer)
 Ignore all whitespaces when comparing the lines with each other
 
 ```csharp
-sn = new StringBuilder()
+var sn = new StringBuilder()
     .AppendLine("Line    1")
     .AppendLine("   Line 2")
     .AppendLine("  Line     3")
     .ToString();
 
-options = SnapshotOptions.Create(o =>
+var options = SnapshotOptions.Create(o =>
 {
     // ignore whitespaces when comparing
     o.SetComparer((newline, savedline) => newline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase).Equals(savedline.Value.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)));

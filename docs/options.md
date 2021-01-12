@@ -24,7 +24,8 @@ options.AddDirective(line => line.Replace(" ", string.Empty, StringComparison.Or
 
 sn.MatchSnapshot(options);
 ```
-Or
+
+Or by using the options factory
 ```csharp
 var options = SnapshotOptions.Create(o =>
 {

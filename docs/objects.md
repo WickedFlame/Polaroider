@@ -44,14 +44,3 @@ ObjectMapper.Configure<CustomClass>(m =>
     return token;
 });
 ```
-
-### Global SnapshotOptions
-```csharp
-SnapshotOptions.Setup(o =>
-{
-    // read lines without whitespaces
-    o.SetParser(line => line.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase));
-});
-
-sn.MatchSnapshot();
-```
