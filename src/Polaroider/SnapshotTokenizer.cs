@@ -44,10 +44,32 @@ namespace Polaroider
 		/// <typeparam name="T"></typeparam>
 		/// <param name="snapshot"></param>
 		/// <returns></returns>
-		[Obsolete("Use MapToToken instead", false)]
 		public static Snapshot Tokenize<T>(T snapshot)
 		{
 			return MapToToken<T>(snapshot, (SnapshotOptions) null);
+		}
+
+		/// <summary>
+		/// create a snapshot token of the object
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="snapshot"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public static Snapshot Tokenize<T>(T snapshot, SnapshotOptions options)
+		{
+			return MapToToken<T>(snapshot, options);
+		}
+
+		/// <summary>
+		/// create a snapshot token of the object
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="snapshot"></param>
+		/// <returns></returns>
+		public static Snapshot MapToToken<T>(T snapshot)
+		{
+			return MapToToken<T>(snapshot, (SnapshotOptions)null);
 		}
 
 		/// <summary>
