@@ -9,6 +9,8 @@ namespace Polaroider
 	/// </summary>
 	public class SnapshotOptions
 	{
+		private ILineParser _parser;
+
 		/// <summary>
 		/// gets the default configuration
 		/// </summary>
@@ -22,7 +24,11 @@ namespace Polaroider
 		/// <summary>
 		/// the configured line parser
 		/// </summary>
-		public ILineParser Parser { get; set; }
+		public ILineParser Parser 
+		{
+			get => _parser ?? (_parser = new LineParser());
+			set => _parser = value;
+		}
 
 		/// <summary>
 		/// update the snapshot
@@ -59,7 +65,7 @@ namespace Polaroider
 	/// </summary>
 	public static class SnapshotOptionsExtensions
 	{
-		internal static SnapshotOptions MergeDefault(this SnapshotOptions options)
+		public static SnapshotOptions MergeDefault(this SnapshotOptions options)
 		{
 			if (options == null)
 			{

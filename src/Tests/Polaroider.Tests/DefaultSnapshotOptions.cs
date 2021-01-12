@@ -22,13 +22,12 @@ namespace Polaroider.Tests
 
 
 			var sn = new StringBuilder()
-				.AppendLine("Line 1")
-				.AppendLine("Line 2")
-				.AppendLine("Line 3")
+				.AppendLine("Line1")
+				.AppendLine("Line2")
+				.AppendLine("Line3")
 				.ToString();
 
 			sn.MatchSnapshot(options);
-
 
 			sn = new StringBuilder()
 				.AppendLine("Line    1")
@@ -71,6 +70,49 @@ namespace Polaroider.Tests
 				.AppendLine("  Line     3")
 				.ToString();
 
+			sn.MatchSnapshot();
+
+			// reset
+			SnapshotOptions.Setup(o => { });
+		}
+
+		[Test]
+		public void DefaultSnapshotOptions_UpdateSnapshot()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.UpdateSavedSnapshot();
+			});
+			
+			var sn = new StringBuilder()
+				.AppendLine("Line 1")
+				.AppendLine("Line 2")
+				.AppendLine("Line 3")
+				.ToString();
+
+			// rewrite the snapshot
+			sn.MatchSnapshot(options);
+
+
+			sn = new StringBuilder()
+				.AppendLine("Line    1")
+				.AppendLine("   Line 2")
+				.AppendLine("  Line     3")
+				.ToString();
+
+			Action fail = () => sn.MatchSnapshot();
+			Assert.Throws<SnapshotMatchException>(() => fail.Invoke());
+
+			// rewrite snapshot
+			sn.MatchSnapshot(options);
+
+			sn = new StringBuilder()
+				.AppendLine("Line    1")
+				.AppendLine("   Line 2")
+				.AppendLine("  Line     3")
+				.ToString();
+
+			// Final Assert
 			sn.MatchSnapshot();
 
 			// reset

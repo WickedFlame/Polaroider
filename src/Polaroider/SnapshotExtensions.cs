@@ -104,7 +104,7 @@ namespace Polaroider
 		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot<T>(this T snapshot, SnapshotOptions options)
         {
-            SnapshotTokenizer.MapToToken(snapshot)
+            SnapshotTokenizer.MapToToken(snapshot, options)
                 .MatchSnapshot(options);
         }
 
@@ -126,7 +126,7 @@ namespace Polaroider
 		/// <param name="options">the configuration</param>
 		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, SnapshotOptions options)
         {
-            SnapshotTokenizer.MapToToken(snapshot)
+            SnapshotTokenizer.MapToToken(snapshot, options)
                 .SetMetadata(meta)
                 .MatchSnapshot(options);
         }

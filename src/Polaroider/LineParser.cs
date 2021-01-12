@@ -19,11 +19,6 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// gets the default parser
-		/// </summary>
-		public static ILineParser Default => new LineParser();
-
-		/// <summary>
 		/// parse the line
 		/// </summary>
 		/// <param name="line"></param>
@@ -36,6 +31,22 @@ namespace Polaroider
 			}
 
 			return new Line(line);
+		}
+
+		/// <summary>
+		/// parse the line
+		/// </summary>
+		/// <param name="line"></param>
+		/// <returns></returns>
+		public Line Parse(Line line)
+		{
+			var value = line.Value;
+			foreach (var direcive in _directives)
+			{
+				value = direcive(value);
+			}
+
+			return new Line(value);
 		}
 
 		/// <summary>

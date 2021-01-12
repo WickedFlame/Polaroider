@@ -31,6 +31,8 @@ namespace Polaroider.Tests
 			var comparer = new SnapshotCompare();
 			var result = comparer.Compare(newsnap, savedsnap, config);
 			result.Status.Should().Be(SnapshotStatus.SnapshotsMatch);
+
+			SnapshotOptions.Setup(o => { });
 		}
 
 		[Test]
@@ -69,6 +71,111 @@ namespace Polaroider.Tests
 			});
 
 			snapshot.MatchSnapshot(options);
+
+			// reset
+			SnapshotOptions.Setup(o => { });
+		}
+
+
+
+
+		[Test]
+		public void Snapshot_Options_Merge()
+		{
+			Assert.AreNotSame(new SnapshotOptions().MergeDefault(), SnapshotOptions.Default);
+		}
+
+		[Test]
+		public void Snapshot_Options_ParserAfterMerge()
+		{
+			var options = new SnapshotOptions();
+
+			// ensure parser is created
+			var parser = options.Parser;
+			_ = SnapshotOptions.Default.Parser;
+			options = options.MergeDefault();
+			
+			Assert.AreSame(options.Parser, parser);
+		}
+
+		[Test]
+		public void Snapshot_Options_DefaultParserAfterMerge()
+		{
+			var options = new SnapshotOptions();
+
+			// ensure parser is created
+			_ = options.Parser;
+			_ = SnapshotOptions.Default.Parser;
+			options = options.MergeDefault();
+
+			Assert.AreNotSame(options.Parser, SnapshotOptions.Default.Parser);
+		}
+		
+		[Test]
+		public void Snapshot_Options_AddDirectives()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceRegex(@"(?im)[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?", "00000000-0000-0000-0000-000000000000"));
+			});
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Snapshot_Options_AddDirectives_DefaultOptions()
+		{
+			// ignore Guids when comparing
+			SnapshotOptions.Default.AddDirective(s => s.ReplaceRegex(@"(?im)[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?", "00000000-0000-0000-0000-000000000000"));
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot();
+
+			// reset
+			SnapshotOptions.Setup(o => { });
+		}
+
+		[Test]
+		public void Snapshot_Options_AddDirectives_DefaultOptions_Parser()
+		{
+			// ignore Guids when comparing
+			SnapshotOptions.Default.Parser.AddDirective(s => s.ReplaceRegex(@"(?im)[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?", "00000000-0000-0000-0000-000000000000"));
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot();
+
+			// reset
+			SnapshotOptions.Setup(o => { });
+		}
+
+		[Test]
+		public void Options_Directives_ReplaceGuid()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceGuid());
+			});
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Snapshot_Options_DefaultOptions_Parser_NotNull()
+		{
+			// ignore Guids when comparing
+			Assert.IsNotNull(SnapshotOptions.Default.Parser);
+		}
+
+		[Test]
+		public void Snapshot_Options_DefaultOptions_Parser_AfterReset()
+		{
+			// ignore Guids when comparing
+			var parser = SnapshotOptions.Default.Parser;
+
+			// reset
+			SnapshotOptions.Setup(o => { });
+
+			Assert.AreNotSame(SnapshotOptions.Default.Parser, parser);
 		}
 	}
 }
