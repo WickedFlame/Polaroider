@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -22,6 +24,12 @@ namespace Polaroider.Mapping
 
             return snapshot;
         }
+
+        private static IEnumerable<Type> _types = new List<Type>
+        {
+	        typeof(string),
+			typeof(Type)
+        };
 
         private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
         {
@@ -51,11 +59,17 @@ namespace Polaroider.Mapping
             {
                 var line = $"{property.Name}:".Indent(indentation);
 
-                if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+                if (property.PropertyType.IsValueType)
                 {
                     sb.Add(new Line($"{line} {property.GetValue(item)}"));
                     continue;
                 }
+
+                if (_types.Contains(property.PropertyType))
+                {
+	                sb.Add(new Line($"{line} {property.GetValue(item)}"));
+	                continue;
+				}
 
                 sb.Add(new Line(line));
                 MapProperies(property.GetValue(item), sb, indentation + 2);
