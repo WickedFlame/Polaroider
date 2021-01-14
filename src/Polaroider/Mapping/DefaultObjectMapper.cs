@@ -75,7 +75,13 @@ namespace Polaroider.Mapping
 
 				sb.Add(new Line(line));
 
-				
+				var typeMapper = ObjectMapper.Mapper.GetTypeMapper(property.PropertyType);
+				if (typeMapper != null)
+				{
+					var ctx = new MapperContext(sb, indentation + 2);
+					typeMapper.Map(ctx, property.GetValue(item));
+					continue;
+				}
 
 				MapProperies(property.GetValue(item), sb, indentation + 2);
 			}
