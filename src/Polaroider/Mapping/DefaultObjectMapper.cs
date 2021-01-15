@@ -59,7 +59,16 @@ namespace Polaroider.Mapping
             {
                 var line = $"{property.Name}:".Indent(indentation);
 
-                if (property.PropertyType.IsValueType)
+                if (property.PropertyType == typeof(DateTime))
+                {
+	                if (property.GetValue(item) is DateTime dte)
+	                {
+		                sb.Add(new Line($"{line} {dte:o}"));
+		                return;
+	                }
+                }
+
+				if (property.PropertyType.IsValueType)
                 {
                     sb.Add(new Line($"{line} {property.GetValue(item)}"));
                     continue;

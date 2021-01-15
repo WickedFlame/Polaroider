@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Polaroider.Tests.Mapper
@@ -23,6 +24,12 @@ namespace Polaroider.Tests.Mapper
             };
 
             itm.MatchSnapshot();
+        }
+
+        [Test]
+        public void CustomObjectMap_MapDateTime()
+        {
+	        SnapshotTokenizer.Tokenize(new {Value = new DateTime(2000, 1, 1, 1, 1, 1, 1)}).ToString().Should().Be("Value: 2000-01-01T01:01:01.0010000");
         }
 
         public class CustomMapClass
