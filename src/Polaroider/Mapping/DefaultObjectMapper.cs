@@ -30,7 +30,8 @@ namespace Polaroider.Mapping
 		{
 			{typeof(Type), new TypeConverter()},
 			{typeof(string), new StringConverter()},
-			{typeof(DateTime), new DateTimeConverter()}
+			{typeof(DateTime), new DateTimeConverter()},
+			{typeof(DateTime?), new DateTimeConverter()}
 		};
 
 		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
