@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Polaroider.Mapping.Converters;
+using Polaroider.Mapping.Formatters;
 
 namespace Polaroider.Mapping
 {
@@ -26,12 +26,12 @@ namespace Polaroider.Mapping
 			return snapshot;
 		}
 
-		public static Dictionary<Type, IValueConverter> _converters = new Dictionary<Type, IValueConverter>
+		public static Dictionary<Type, IValueFormatter> _formatters = new Dictionary<Type, IValueFormatter>
 		{
-			{typeof(Type), new TypeConverter()},
-			{typeof(string), new StringConverter()},
-			{typeof(DateTime), new DateTimeConverter()},
-			{typeof(DateTime?), new DateTimeConverter()}
+			{typeof(Type), new TypeFormatter()},
+			{typeof(string), new StringFormatter()},
+			{typeof(DateTime), new DateTimeFormatter()},
+			{typeof(DateTime?), new DateTimeFormatter()}
 		};
 
 		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
@@ -62,10 +62,10 @@ namespace Polaroider.Mapping
 			{
 				var line = $"{property.Name}:".Indent(indentation);
 
-				if (_converters.ContainsKey(property.PropertyType))
+				if (_formatters.ContainsKey(property.PropertyType))
 				{
-					var converter = _converters[property.PropertyType];
-					sb.Add(new Line($"{line} {converter.Convert(property.GetValue(item))}"));
+					var formatter = _formatters[property.PropertyType];
+					sb.Add(new Line($"{line} {formatter.Format(property.GetValue(item))}"));
 					continue;
 				}
 

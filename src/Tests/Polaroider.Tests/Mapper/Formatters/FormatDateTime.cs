@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
-using Polaroider.Mapping.Converters;
+using Polaroider.Mapping.Formatters;
 
-namespace Polaroider.Tests.Mapper.Converters
+namespace Polaroider.Tests.Mapper.Formatters
 {
-	public class ConvertDateTime
+	public class FormatDateTime
 	{
 		[Test]
 		public void Mapper_DateTime_Tokenize()
@@ -28,10 +28,10 @@ namespace Polaroider.Tests.Mapper.Converters
 		}
 
 		[Test]
-		public void Mapper_DateTime_Convert()
+		public void Mapper_DateTime_Format()
 		{
-			var converter = new DateTimeConverter();
-			converter.Convert(new DateTime(2000, 1, 1, 1, 1, 1, 1)).Should().Be("2000-01-01T01:01:01.0010000");
+			var formatter = new DateTimeFormatter();
+			formatter.Format(new DateTime(2000, 1, 1, 1, 1, 1, 1)).Should().Be("2000-01-01T01:01:01.0010000");
 		}
 	}
 }
