@@ -64,7 +64,7 @@ namespace Polaroider.Mapping
 	                if (property.GetValue(item) is DateTime dte)
 	                {
 		                sb.Add(new Line($"{line} {dte:o}"));
-		                return;
+		                continue;
 	                }
                 }
 
