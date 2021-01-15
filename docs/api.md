@@ -4,7 +4,10 @@ layout: "default"
 nav_order: 2
 ---
 ## Create Snapshot
-Polaroider automaticaly saves the Snapshots to the folder _Snapshots
+In the inital Testrun Polaroider takes a snapshot of the given object and saves this.  
+In all further runs Polaroider takes a new snapshot and compares this new snapshot with the saved snapshot.  
+If the snapshots are not equal, Polaroider throws an AssertionException.
+
 ```csharp
 public class MyClass
 {
@@ -15,6 +18,7 @@ public class MyClass
     }
 }
 ```
+Polaroider automaticaly saves the Snapshots to the folder _Snapshots. Snapshotfiles are named after the class and the method that the snapshot was taken in.
 
 ## Update Snapshot
 The simplest way to update a Snapshot is to delete the Sanpshot file from the folder _Snapshots. Run the test again and the Snapshot is recreated.
