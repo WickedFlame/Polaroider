@@ -29,7 +29,8 @@ namespace Polaroider.Mapping
 		public static Dictionary<Type, IValueConverter> _converters = new Dictionary<Type, IValueConverter>
 		{
 			{typeof(Type), new TypeConverter()},
-			{typeof(string), new StringConverter()}
+			{typeof(string), new StringConverter()},
+			{typeof(DateTime), new DateTimeConverter()}
 		};
 
 		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
@@ -60,16 +61,16 @@ namespace Polaroider.Mapping
 			{
 				var line = $"{property.Name}:".Indent(indentation);
 
-				if (property.PropertyType.IsValueType)
-				{
-					sb.Add(new Line($"{line} {property.GetValue(item)}"));
-					continue;
-				}
-
 				if (_converters.ContainsKey(property.PropertyType))
 				{
 					var converter = _converters[property.PropertyType];
 					sb.Add(new Line($"{line} {converter.Convert(property.GetValue(item))}"));
+					continue;
+				}
+
+				if (property.PropertyType.IsValueType)
+				{
+					sb.Add(new Line($"{line} {property.GetValue(item)}"));
 					continue;
 				}
 
