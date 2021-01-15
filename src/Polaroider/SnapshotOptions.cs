@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Polaroider.Mapping;
 
 namespace Polaroider
 {
@@ -92,7 +93,7 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// add a directive to the tokenizer to alter the input value that used for the compare
+		/// add a parser directive to the tokenizer to alter the input value that used for the compare
 		/// </summary>
 		/// <param name="options"></param>
 		/// <param name="directive"></param>
@@ -117,6 +118,16 @@ namespace Polaroider
 		{
 			options.UpdateSnapshot = true;
 			return options;
+		}
+
+		public static SnapshotOptions AddFormatter(this SnapshotOptions options, Type key, IValueFormatter formatter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public static SnapshotOptions UseBasicFormatters(this SnapshotOptions options)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

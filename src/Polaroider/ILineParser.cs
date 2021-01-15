@@ -22,7 +22,7 @@ namespace Polaroider
 		Line Parse(Line line);
 
 		/// <summary>
-		/// add a directive to the parser
+		/// add a parser directive to the parser
 		/// </summary>
 		/// <param name="directive"></param>
 		/// <returns></returns>
