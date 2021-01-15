@@ -32,7 +32,19 @@ namespace Polaroider.Tests.Mapper
 	        SnapshotTokenizer.Tokenize(new {Value = new DateTime(2000, 1, 1, 1, 1, 1, 1)}).ToString().Should().Be("Value: 2000-01-01T01:01:01.0010000");
         }
 
-        public class CustomMapClass
+        [Test]
+        public void CustomObjectMap_MapDateTime_Nullable()
+        {
+	        SnapshotTokenizer.Tokenize(new { Value = (DateTime?)new DateTime(2000, 1, 1, 1, 1, 1, 1) }).ToString().Should().Be("Value: 2000-01-01T01:01:01.0010000");
+        }
+
+        [Test]
+        public void CustomObjectMap_MapDateTime_Nullable_Null()
+        {
+	        SnapshotTokenizer.Tokenize(new { Value = (DateTime?)null}).ToString().Should().Be("Value: ");
+        }
+
+		public class CustomMapClass
         {
             public string Value { get; set; }
 
