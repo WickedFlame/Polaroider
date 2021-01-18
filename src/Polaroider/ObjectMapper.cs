@@ -10,7 +10,6 @@ namespace Polaroider
     public class ObjectMapper
     {
         private readonly Dictionary<Type, IObjectMapper> _mappers = new Dictionary<Type, IObjectMapper>();
-        private readonly Dictionary<Type, ITypeMapper> _typeMappers = new Dictionary<Type, ITypeMapper>();
 
         private static ObjectMapper _mapper;
 
@@ -19,18 +18,6 @@ namespace Polaroider
         }
 
         internal static ObjectMapper Mapper => _mapper ?? (_mapper = new ObjectMapper());
-
-        public Dictionary<Type, ITypeMapper> TypeMappers => _typeMappers;
-
-        public ITypeMapper GetTypeMapper(Type type)
-        {
-	        if (_typeMappers.ContainsKey(type))
-	        {
-		        return _typeMappers[type];
-	        }
-
-			return null;
-        }
 
         /// <summary>
         /// Configure a mapping to convert a object to a snapshot 
@@ -48,11 +35,6 @@ namespace Polaroider
             Mapper._mappers.Add(key, new CustomMap<T>(map));
         }
 
-        public static void Configure<T>(Action<MapperContext, T> map) where T : class
-        {
-	        Mapper.TypeMappers.Add(typeof(T), new TypeMapper<T>(map));
-        }
-
         internal IObjectMapper GetMapper(Type type)
         {
             if (_mappers.ContainsKey(type))
@@ -61,14 +43,6 @@ namespace Polaroider
             }
 
             return new DefaultObjectMapper();
-        }
-
-        public static void Remove<T>()
-        {
-	        if (Mapper.TypeMappers.ContainsKey(typeof(T)))
-	        {
-		        Mapper.TypeMappers.Remove(typeof(T));
-	        }
         }
     }
 }

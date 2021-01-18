@@ -11,7 +11,7 @@ namespace Polaroider.Mapping
             _map = map;
         }
 
-        public Snapshot Map<T1>(T1 item)
+        public Snapshot Map<T1>(T1 item, SnapshotOptions options)
         {
             return _map(item as T);
         }

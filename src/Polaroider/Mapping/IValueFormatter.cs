@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Interface for formatting types to string
 	/// </summary>
-	public interface IValueFormatter
+	public interface IValueFormatter : IMapper
 	{
 		/// <summary>
 		/// format the object to a string

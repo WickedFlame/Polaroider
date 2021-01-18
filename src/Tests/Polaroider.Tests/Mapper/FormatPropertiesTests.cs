@@ -10,6 +10,12 @@ namespace Polaroider.Tests.Mapper
 {
 	public class FormatPropertiesTests
 	{
+		[NUnit.Framework.SetUp]
+		public void Setup()
+		{
+			SnapshotOptions.Setup(o => { });
+		}
+
 		[Test]
 		public void Mapper_Properties_String()
 		{
@@ -40,26 +46,26 @@ namespace Polaroider.Tests.Mapper
 		{
 			var options = SnapshotOptions.Create(o =>
 			{
-				o.AddFormatter(typeof(CustomObjectFormatter), new CustomObjectFormatter());
+				o.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
 			});
 
 			new
 			{
 				Value = new CustomObject {Value = "TesT"},
 				Str = (string)null
-			}.Tokenize(options).ToString().Should().Be("");
+			}.Tokenize(options).ToString().Should().Be("Str: null\r\nValue: custom - TesT");
 		}
 
 		[Test]
 		public void Mapper_Set_Formatters_DefaultOptions()
 		{
-			SnapshotOptions.Default.AddFormatter(typeof(CustomObjectFormatter), new CustomObjectFormatter());
+			SnapshotOptions.Default.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
 
 			new
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("");
+			}.Tokenize().ToString().Should().Be("Str: null\r\nValue: custom - TesT");
 		}
 
 		[Test]
@@ -67,14 +73,14 @@ namespace Polaroider.Tests.Mapper
 		{
 			SnapshotOptions.Setup(o =>
 			{
-				o.AddFormatter(typeof(CustomObjectFormatter), new CustomObjectFormatter());
+				o.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
 			});
 
 			new
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("");
+			}.Tokenize().ToString().Should().Be("Str: null\r\nValue: custom - TesT");
 
 			// reset
 			SnapshotOptions.Setup(o => { });
@@ -89,7 +95,7 @@ namespace Polaroider.Tests.Mapper
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("");
+			}.Tokenize().ToString().Should().Be("Str: \r\nValue:\r\n  Id: 0\r\n  Value: TesT");
 
 			// reset
 			SnapshotOptions.Setup(o => { });
@@ -104,7 +110,7 @@ namespace Polaroider.Tests.Mapper
 		{
 			var options = SnapshotOptions.Create(o =>
 			{
-				o.AddFormatter(typeof(CustomObjectFormatter), new CustomObjectFormatter());
+				o.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
 			});
 
 			new
@@ -120,7 +126,7 @@ namespace Polaroider.Tests.Mapper
 		{
 			SnapshotOptions.Setup(o =>
 			{
-				o.AddFormatter(typeof(CustomObjectFormatter), new CustomObjectFormatter());
+				o.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
 			});
 
 			new
@@ -148,7 +154,7 @@ namespace Polaroider.Tests.Mapper
 			SnapshotOptions.Setup(o => { });
 		}
 
-		public struct CustomObject
+		public class CustomObject
 		{
 			public string Value { get; set; }
 

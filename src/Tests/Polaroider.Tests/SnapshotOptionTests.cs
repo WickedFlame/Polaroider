@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
+using Polaroider.Mapping.Formatters;
 
 namespace Polaroider.Tests
 {
@@ -176,6 +178,57 @@ namespace Polaroider.Tests
 			SnapshotOptions.Setup(o => { });
 
 			Assert.AreNotSame(SnapshotOptions.Default.Parser, parser);
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_Count()
+		{
+			// reset
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			SnapshotOptions.Default.Formatters.Count().Should().Be(2);
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_Types()
+		{
+			// reset
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			var keys = SnapshotOptions.Default.Formatters.Keys.ToArray();
+
+			keys[0].Should().Be(typeof(Type));
+			keys[1].Should().Be(typeof(string));
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_Formatter_Type()
+		{
+			// reset
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			SnapshotOptions.Default.Formatters[typeof(Type)].Should().BeOfType<TypeFormatter>();
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_Formatter_SimpleString()
+		{
+			// reset
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			SnapshotOptions.Default.Formatters[typeof(string)].Should().BeOfType<SimpleStringFormatter>();
 		}
 	}
 }

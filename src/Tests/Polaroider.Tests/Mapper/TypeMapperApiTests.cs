@@ -11,7 +11,7 @@ namespace Polaroider.Tests.Mapper
 		[Test]
 		public void TypeMapper_ObjectMapper()
 		{
-			ObjectMapper.Configure<CustomData>((ctx, o) =>
+			SnapshotOptions.Default.AddMapper<CustomData>((ctx, o) =>
 			{
 				//only add Value and Dbl but ignore Id
 				ctx.AddLine("Dbl", o.Dbl);
@@ -41,10 +41,45 @@ namespace Polaroider.Tests.Mapper
 
 			snapshot.ToString().Should().Be(expected.ToString());
 
-			ObjectMapper.Remove<CustomData>();
+			SnapshotOptions.Setup(o => { });
 		}
 
-		
+		[Test]
+		public void TypeMapper_Options_ObjectMapper()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddMapper<CustomData>((ctx, itm) =>
+				{
+					//only add Value and Dbl but ignore Id
+					ctx.AddLine("Dbl", itm.Dbl);
+					ctx.AddLine("Value", itm.Value);
+				});
+			});
+
+			var snapshot = new
+			{
+				Item = "item",
+				Data = new CustomData
+				{
+					Id = 1,
+					Dbl = 2.2,
+					Value = "value"
+				}
+			}.Tokenize(options);
+
+			var expected = new
+			{
+				Data = new
+				{
+					Dbl = 2.2,
+					Value = "value"
+				},
+				Item = "item",
+			}.Tokenize();
+
+			snapshot.ToString().Should().Be(expected.ToString());
+		}
 
 		public class CustomData
 		{

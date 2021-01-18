@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using System.Reflection;
-using Polaroider.Mapping.Formatters;
 
 namespace Polaroider.Mapping
 {
@@ -17,24 +14,17 @@ namespace Polaroider.Mapping
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="item"></param>
+		/// <param name="options"></param>
 		/// <returns></returns>
-		public Snapshot Map<T>(T item)
+		public Snapshot Map<T>(T item, SnapshotOptions options)
 		{
 			var snapshot = new Snapshot();
-			MapProperies(item, snapshot, 0);
+			MapProperies(item, snapshot, 0, options);
 
 			return snapshot;
 		}
 
-		public static Dictionary<Type, IValueFormatter> _formatters = new Dictionary<Type, IValueFormatter>
-		{
-			{typeof(Type), new TypeFormatter()},
-			{typeof(string), new StringFormatter()},
-			{typeof(DateTime), new DateTimeFormatter()},
-			{typeof(DateTime?), new DateTimeFormatter()}
-		};
-
-		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation)
+		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation, SnapshotOptions options)
 		{
 			if (item == null)
 			{
@@ -45,7 +35,7 @@ namespace Polaroider.Mapping
 			{
 				foreach (var lstItem in list)
 				{
-					MapProperies(lstItem, sb, indentation);
+					MapProperies(lstItem, sb, indentation, options);
 				}
 
 				return;
@@ -62,9 +52,9 @@ namespace Polaroider.Mapping
 			{
 				var line = $"{property.Name}:".Indent(indentation);
 
-				if (_formatters.ContainsKey(property.PropertyType))
+				var formatter = options.Formatters[property.PropertyType];
+				if (formatter != null)
 				{
-					var formatter = _formatters[property.PropertyType];
 					sb.Add(new Line($"{line} {formatter.Format(property.GetValue(item))}"));
 					continue;
 				}
@@ -77,7 +67,7 @@ namespace Polaroider.Mapping
 
 				sb.Add(new Line(line));
 
-				var typeMapper = ObjectMapper.Mapper.GetTypeMapper(property.PropertyType);
+				var typeMapper = options.TypeMappers[property.PropertyType];
 				if (typeMapper != null)
 				{
 					var ctx = new MapperContext(sb, indentation + 2);
@@ -85,7 +75,7 @@ namespace Polaroider.Mapping
 					continue;
 				}
 
-				MapProperies(property.GetValue(item), sb, indentation + 2);
+				MapProperies(property.GetValue(item), sb, indentation + 2, options);
 			}
 		}
 	}

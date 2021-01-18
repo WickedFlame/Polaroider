@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Polaroider.Mapping;
+using Polaroider.Mapping.Formatters;
 
 namespace Polaroider
 {
@@ -13,9 +14,17 @@ namespace Polaroider
 		private ILineParser _parser;
 
 		/// <summary>
+		/// setup the default options
+		/// </summary>
+		static SnapshotOptions()
+		{
+			Setup(o =>{ });
+		}
+
+		/// <summary>
 		/// gets the default configuration
 		/// </summary>
-		public static SnapshotOptions Default { get; private set; } = new SnapshotOptions();
+		public static SnapshotOptions Default { get; private set; }
 
 		/// <summary>
 		/// the configured comparer
@@ -37,12 +46,32 @@ namespace Polaroider
 		public bool UpdateSnapshot { get; set; }
 
 		/// <summary>
+		/// gets a set of type mappers
+		/// </summary>
+		public MapperCollection<Type, ITypeMapper> TypeMappers { get; } = new MapperCollection<Type, ITypeMapper>();
+
+		/// <summary>
+		/// gets a set of value formatters
+		/// </summary>
+		public MapperCollection<Type, IValueFormatter> Formatters { get; set; } = new MapperCollection<Type, IValueFormatter>();
+
+		/// <summary>
 		/// setup the default options
 		/// </summary>
 		/// <param name="setup"></param>
 		public static void Setup(Action<SnapshotOptions> setup)
 		{
-			var options = new SnapshotOptions();
+			var options = new SnapshotOptions
+			{
+				Formatters = new MapperCollection<Type, IValueFormatter>
+				{
+					{typeof(Type), new TypeFormatter()},
+					{typeof(string), new StringFormatter()},
+					{typeof(DateTime), new DateTimeFormatter()},
+					{typeof(DateTime?), new DateTimeFormatter()}
+				}
+			};
+
 			setup(options);
 
 			Default = options;
@@ -77,7 +106,38 @@ namespace Polaroider
 			options.UpdateSnapshot = options.UpdateSnapshot ? options.UpdateSnapshot : SnapshotOptions.Default.UpdateSnapshot;
 			options.Parser = options.Parser ?? SnapshotOptions.Default.Parser;
 
+			foreach (var formatter in SnapshotOptions.Default.Formatters.Keys)
+			{
+				if (options.Formatters.ContainsKey(formatter))
+				{
+					continue;
+				}
+
+				options.Formatters.Add(formatter, SnapshotOptions.Default.Formatters[formatter]);
+			}
+
+			foreach (var mapper in SnapshotOptions.Default.TypeMappers.Keys)
+			{
+				if (options.TypeMappers.ContainsKey(mapper))
+				{
+					continue;
+				}
+
+				options.TypeMappers.Add(mapper, SnapshotOptions.Default.TypeMappers[mapper]);
+			}
+
 			return options;
+		}
+
+		/// <summary>
+		/// add a type mapper to the options
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="options"></param>
+		/// <param name="map"></param>
+		public static void AddMapper<T>(this SnapshotOptions options, Action<MapperContext, T> map) where T : class
+		{
+			options.TypeMappers.Add(typeof(T), new TypeMapper<T>(map));
 		}
 
 		/// <summary>
@@ -122,12 +182,19 @@ namespace Polaroider
 
 		public static SnapshotOptions AddFormatter(this SnapshotOptions options, Type key, IValueFormatter formatter)
 		{
-			throw new NotImplementedException();
+			options.Formatters.Add(key, formatter);
+			return options;
 		}
 
 		public static SnapshotOptions UseBasicFormatters(this SnapshotOptions options)
 		{
-			throw new NotImplementedException();
+			options.Formatters = new MapperCollection<Type, IValueFormatter>
+			{
+				{typeof(Type), new TypeFormatter()},
+				{typeof(string), new SimpleStringFormatter()}
+			};
+
+			return options;
 		}
 	}
 }

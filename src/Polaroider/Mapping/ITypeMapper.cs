@@ -1,6 +1,6 @@
 ﻿namespace Polaroider.Mapping
 {
-	public interface ITypeMapper
+	public interface ITypeMapper : IMapper
 	{
 		void Map(MapperContext ctx, object item);
 	}

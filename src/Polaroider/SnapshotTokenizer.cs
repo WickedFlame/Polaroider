@@ -84,7 +84,7 @@ namespace Polaroider
 			options = options.MergeDefault();
 
 			var mapper = ObjectMapper.Mapper.GetMapper(typeof(T));
-			var token = mapper.Map(snapshot);
+			var token = mapper.Map(snapshot, options);
 
 			var parser = options.Parser;
 			if (parser == null)

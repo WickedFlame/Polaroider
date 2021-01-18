@@ -21,4 +21,17 @@
 			return str;
 		}
 	}
+
+	public class SimpleStringFormatter : IValueFormatter
+	{
+		/// <summary>
+		/// format a plain string
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public string Format(object value)
+		{
+			return value as string ?? "";
+		}
+	}
 }

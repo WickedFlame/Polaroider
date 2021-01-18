@@ -10,6 +10,12 @@ namespace Polaroider.Tests.Internals.Mappers
 {
     public class DefaultObjectMapperTests
     {
+	    [SetUp]
+	    public void Setup()
+	    {
+		    SnapshotOptions.Setup(o => { });
+	    }
+
         [Test]
         public void Map_ComplexObject()
         {
@@ -43,7 +49,7 @@ namespace Polaroider.Tests.Internals.Mappers
             };
 
             var mapper = new DefaultObjectMapper();
-            var snapshot = mapper.Map(item);
+            var snapshot = mapper.Map(item, SnapshotOptions.Default);
 
             var sb = string.Join(Environment.NewLine, new[]
             {
@@ -74,7 +80,7 @@ namespace Polaroider.Tests.Internals.Mappers
 	        };
 
 	        var mapper = new DefaultObjectMapper();
-	        var snapshot = mapper.Map(list);
+	        var snapshot = mapper.Map(list, SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
 	        {
@@ -97,7 +103,7 @@ namespace Polaroider.Tests.Internals.Mappers
 	        };
 
 	        var mapper = new DefaultObjectMapper();
-	        var snapshot = mapper.Map(list.Select(i => new { i.Value }));
+	        var snapshot = mapper.Map(list.Select(i => new { i.Value }), SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
 	        {
@@ -120,7 +126,7 @@ namespace Polaroider.Tests.Internals.Mappers
 	        };
 
 	        var mapper = new DefaultObjectMapper();
-	        var snapshot = mapper.Map(list.ToArray());
+	        var snapshot = mapper.Map(list.ToArray(), SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
 	        {
