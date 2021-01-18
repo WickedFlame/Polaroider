@@ -49,7 +49,7 @@ namespace Polaroider.Mapping
             }
 
             var type = item.GetType();
-            if (type.IsValueType || type == typeof(string))
+            if ((type.IsValueType || type == typeof(string)) && !type.IsGenericType)
             {
                 sb.Add(new Line($"{item}".Indent(indentation)));
                 return;
