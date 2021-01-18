@@ -41,12 +41,12 @@ namespace Polaroider.Mapping
 				return;
 			}
 
-			var type = item.GetType();
-			if (type.IsValueType || type == typeof(string))
-			{
-				sb.Add(new Line($"{item}".Indent(indentation)));
-				return;
-			}
+            var type = item.GetType();
+            if ((type.IsValueType || type == typeof(string)) && !type.IsGenericType)
+            {
+                sb.Add(new Line($"{item}".Indent(indentation)));
+                return;
+            }
 
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.Name))
 			{
