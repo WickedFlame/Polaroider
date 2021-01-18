@@ -39,3 +39,14 @@ sn.MatchSnapshot(options);
 Global options are merged when using a custom option object. 
 
 If the Parser is altered or a directive is added in the custom options, the parsersettings of the default options will be ignored.
+
+
+### Configure Valutype Matching
+Valuetypes are automatically mapped with ToString(). In the Options it is possible override the behaviour for matching valuetypes.
+```charp
+var options = SnapshotOptions.Create(o =>
+{
+    // exclude generics from the ValueTypes matching
+    o.EvaluateValueType((type, obj) => type.IsValueType && !type.IsGenericType);
+});
+```

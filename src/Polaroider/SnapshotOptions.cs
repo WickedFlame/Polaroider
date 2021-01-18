@@ -21,6 +21,11 @@ namespace Polaroider
 			Setup(o =>{ });
 		}
 
+		public SnapshotOptions()
+		{
+			Initialize(this);
+		}
+
 		/// <summary>
 		/// gets the default configuration
 		/// </summary>
@@ -56,6 +61,11 @@ namespace Polaroider
 		public MapperCollection<Type, IValueFormatter> Formatters { get; set; } = new MapperCollection<Type, IValueFormatter>();
 
 		/// <summary>
+		/// Gets the Evaluator used by the Mapper for value types. Value types are simply added to the match with ToString()
+		/// </summary>
+		public Func<Type, object, bool> IsValueType{ get; internal set; }
+
+		/// <summary>
 		/// setup the default options
 		/// </summary>
 		/// <param name="setup"></param>
@@ -65,12 +75,14 @@ namespace Polaroider
 			{
 				Formatters = new MapperCollection<Type, IValueFormatter>
 				{
-					{typeof(Type), new TypeFormatter()},
-					{typeof(string), new StringFormatter()},
-					{typeof(DateTime), new DateTimeFormatter()},
+					{typeof(Type), new TypeFormatter()}, 
+					{typeof(string), new StringFormatter()}, 
+					{typeof(DateTime), new DateTimeFormatter()}, 
 					{typeof(DateTime?), new DateTimeFormatter()}
-				}
+				}, 
+				IsValueType = (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
 			};
+
 
 			setup(options);
 
@@ -84,9 +96,30 @@ namespace Polaroider
 		public static SnapshotOptions Create(Action<SnapshotOptions> setup)
 		{
 			var options = new SnapshotOptions();
+			Initialize(options);
+
 			setup(options);
 
 			return options;
+		}
+
+		private static void Initialize(SnapshotOptions options)
+		{
+			if (SnapshotOptions.Default == null)
+			{
+				return;
+			}
+
+			foreach (var formatter in SnapshotOptions.Default.Formatters.Keys)
+			{
+				if (options.Formatters.ContainsKey(formatter))
+				{
+					continue;
+				}
+
+				options.Formatters.Add(formatter, SnapshotOptions.Default.Formatters[formatter]);
+			}
+			options.IsValueType = SnapshotOptions.Default.IsValueType;
 		}
 	}
 
@@ -194,6 +227,12 @@ namespace Polaroider
 				{typeof(string), new SimpleStringFormatter()}
 			};
 
+			return options;
+		}
+
+		public static SnapshotOptions EvaluateValueType(this SnapshotOptions options, Func<Type, object, bool> evaluator)
+		{
+			options.IsValueType = evaluator;
 			return options;
 		}
 	}

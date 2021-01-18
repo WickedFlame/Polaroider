@@ -220,6 +220,45 @@ namespace Polaroider.Tests
 		}
 
 		[Test]
+		public void Snapshot_Options_UseBasicFormatters_CustomOptions()
+		{
+			// reset
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			options.Formatters.Count().Should().Be(2);
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_CustomOptions_DefaultSet()
+		{
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			var options = SnapshotOptions.Create(o => { });
+
+			options.Formatters.Count().Should().Be(2);
+		}
+
+		[Test]
+		public void Snapshot_Options_UseBasicFormatters_CustomOptions_DefaultSet_Merge()
+		{
+			SnapshotOptions.Setup(o =>
+			{
+				o.UseBasicFormatters();
+			});
+
+			var options = SnapshotOptions.Create(o => { });
+			options.MergeDefault();
+
+			options.Formatters.Count().Should().Be(2);
+		}
+
+		[Test]
 		public void Snapshot_Options_UseBasicFormatters_Formatter_SimpleString()
 		{
 			// reset

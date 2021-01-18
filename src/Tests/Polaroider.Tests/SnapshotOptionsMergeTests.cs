@@ -21,13 +21,13 @@ namespace Polaroider.Tests
 		public void SnapshotOptions_Merge_Formatters()
 		{
 			var options = new SnapshotOptions();
-			options.Formatters.Count().Should().Be(0);
+			options.Formatters.Count().Should().Be(4);
 
 			options.MergeDefault();
 
 			foreach (var key in options.Formatters.Keys)
 			{
-				options.Formatters[key].Should().BeSameAs(SnapshotOptions.Default.Formatters[key]);
+				options.Formatters[key].GetType().Should().BeSameAs(SnapshotOptions.Default.Formatters[key].GetType());
 			}
 		}
 

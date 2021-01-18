@@ -26,16 +26,9 @@ namespace Polaroider
 		/// <param name="options">the options to use</param>
 		public static void MatchSnapshot(this Snapshot snapshot, SnapshotOptions options)
 		{
-			if(options != null)
-			{
-				options.MergeDefault();
-			}
-			else
-			{
-				options = SnapshotOptions.Default;
-			}
+			options = options.MergeDefault();
 
-            var resolver = new SnapshotSetupResolver();
+			var resolver = new SnapshotSetupResolver();
             var setup = resolver.ResloveSnapshotSetup();
 
             var client = GetClient();

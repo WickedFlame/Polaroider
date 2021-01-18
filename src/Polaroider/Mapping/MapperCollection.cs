@@ -24,6 +24,11 @@ namespace Polaroider.Mapping
 
 		public void Add(TKey key, TVal value)
 		{
+			if (ContainsKey(key))
+			{
+				Remove(key);
+			}
+
 			_items.Add(key, value);
 		}
 
