@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Polaroider.Mapping;
 using Polaroider.Mapping.Formatters;
 
@@ -21,6 +19,9 @@ namespace Polaroider
 			Setup(o =>{ });
 		}
 
+		/// <summary>
+		/// create a instance of the snapshotoptions
+		/// </summary>
 		public SnapshotOptions()
 		{
 			Initialize(this);
@@ -128,6 +129,11 @@ namespace Polaroider
 	/// </summary>
 	public static class SnapshotOptionsExtensions
 	{
+		/// <summary>
+		/// merge the default options to the custom instance
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
 		public static SnapshotOptions MergeDefault(this SnapshotOptions options)
 		{
 			if (options == null)
@@ -213,12 +219,24 @@ namespace Polaroider
 			return options;
 		}
 
+		/// <summary>
+		/// add a formatter for the type to the options
+		/// </summary>
+		/// <param name="options"></param>
+		/// <param name="key"></param>
+		/// <param name="formatter"></param>
+		/// <returns></returns>
 		public static SnapshotOptions AddFormatter(this SnapshotOptions options, Type key, IValueFormatter formatter)
 		{
 			options.Formatters.Add(key, formatter);
 			return options;
 		}
 
+		/// <summary>
+		/// us the basic formatters to revert the breaking changes from v1 to v2
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
 		public static SnapshotOptions UseBasicFormatters(this SnapshotOptions options)
 		{
 			options.Formatters = new MapperCollection<Type, IValueFormatter>
@@ -230,6 +248,12 @@ namespace Polaroider
 			return options;
 		}
 
+		/// <summary>
+		/// set an expression to evaluate valuetypes. defaults to (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
+		/// </summary>
+		/// <param name="options"></param>
+		/// <param name="evaluator"></param>
+		/// <returns></returns>
 		public static SnapshotOptions EvaluateValueType(this SnapshotOptions options, Func<Type, object, bool> evaluator)
 		{
 			options.IsValueType = evaluator;
