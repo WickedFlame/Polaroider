@@ -7,7 +7,7 @@ namespace Polaroider.Mapping
 	/// <summary>
 	/// default object mapper
 	/// </summary>
-	public class DefaultObjectMapper : IObjectMapper
+	public class DefaultObjectMapper : IObjectMapper, ITypeMapper
 	{
 		/// <summary>
 		/// map an object to a snapshot
@@ -19,12 +19,19 @@ namespace Polaroider.Mapping
 		public Snapshot Map<T>(T item, SnapshotOptions options)
 		{
 			var snapshot = new Snapshot();
-			MapProperies(item, snapshot, 0, options);
+			var ctx = new MapperContext(snapshot, options, 0);
+
+			Map(ctx, item);
 
 			return snapshot;
 		}
 
-		private void MapProperies<TObj>(TObj item, Snapshot sb, int indentation, SnapshotOptions options)
+		/// <summary>
+		/// map the object to the context
+		/// </summary>
+		/// <param name="ctx"></param>
+		/// <param name="item"></param>
+		public void Map(MapperContext ctx, object item)
 		{
 			if (item == null)
 			{
@@ -35,47 +42,46 @@ namespace Polaroider.Mapping
 			{
 				foreach (var lstItem in list)
 				{
-					MapProperies(lstItem, sb, indentation, options);
+					Map(ctx, lstItem);
 				}
 
 				return;
 			}
 
             var type = item.GetType();
-            if (options.IsValueType(type, item))
+            if (ctx.Options.IsValueType(type, item))
             {
-                sb.Add(new Line($"{item}".Indent(indentation)));
+	            ctx.AddLine(new Line($"{item}".Indent(ctx.Indentation)));
                 return;
             }
 
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.Name))
 			{
-				var line = $"{property.Name}:".Indent(indentation);
+				var line = $"{property.Name}:".Indent(ctx.Indentation);
 
-				var formatter = options.Formatters[property.PropertyType];
+				var formatter = ctx.Options.Formatters[property.PropertyType];
 				if (formatter != null)
 				{
-					sb.Add(new Line($"{line} {formatter.Format(property.GetValue(item))}"));
+					ctx.AddLine(new Line($"{line} {formatter.Format(property.GetValue(item))}"));
 					continue;
 				}
 
 				if (property.PropertyType.IsValueType)
 				{
-					sb.Add(new Line($"{line} {property.GetValue(item)}"));
+					ctx.AddLine(new Line($"{line} {property.GetValue(item)}"));
 					continue;
 				}
 
-				sb.Add(new Line(line));
+				ctx.AddLine(new Line(line));
 
-				var typeMapper = options.TypeMappers[property.PropertyType];
+				var typeMapper = ctx.Options.TypeMappers[property.PropertyType];
 				if (typeMapper != null)
 				{
-					var ctx = new MapperContext(sb, indentation + 2);
-					typeMapper.Map(ctx, property.GetValue(item));
+					typeMapper.Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), property.GetValue(item));
 					continue;
 				}
 
-				MapProperies(property.GetValue(item), sb, indentation + 2, options);
+				Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), property.GetValue(item));
 			}
 		}
 	}
