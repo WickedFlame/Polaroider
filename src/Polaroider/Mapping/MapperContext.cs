@@ -1,10 +1,13 @@
-﻿namespace Polaroider.Mapping
+﻿using System.Diagnostics;
+
+namespace Polaroider.Mapping
 {
 	/// <summary>
 	/// the mappercontext used for the mapper
 	/// </summary>
 	public class MapperContext
 	{
+		[DebuggerStepThrough]
 		public MapperContext(Snapshot snapshot, SnapshotOptions options, int indentation)
 		{
 			Indentation = indentation;

@@ -57,6 +57,21 @@ namespace Polaroider.Tests.Mapper
 		}
 
 		[Test]
+		public void Mapper_Set_Formatters_TopLevel()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());
+			});
+
+			new CustomObject { Value = "TesT" }
+				.Tokenize(options)
+				.ToString()
+				.Should()
+				.Be("custom - TesT");
+		}
+
+		[Test]
 		public void Mapper_Set_Formatters_DefaultOptions()
 		{
 			SnapshotOptions.Default.AddFormatter(typeof(CustomObject), new CustomObjectFormatter());

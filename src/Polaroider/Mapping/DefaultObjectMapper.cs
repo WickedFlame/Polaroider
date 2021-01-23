@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 
@@ -49,40 +50,63 @@ namespace Polaroider.Mapping
 			}
 
             var type = item.GetType();
-            if (ctx.Options.IsValueType(type, item))
+
+            if (MapValueType(ctx, type, item, string.Empty.Indent(ctx.Indentation)))
             {
-	            ctx.AddLine(new Line($"{item}".Indent(ctx.Indentation)));
-                return;
+	            return;
             }
 
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.Name))
 			{
-				var line = $"{property.Name}:".Indent(ctx.Indentation);
+				var header = $"{property.Name}:".Indent(ctx.Indentation);
 
-				var formatter = ctx.Options.Formatters[property.PropertyType];
-				if (formatter != null)
+				//formatter = ctx.Options.Formatters[property.PropertyType];
+				//if (formatter != null)
+				//{
+				//	ctx.AddLine(new Line($"{header} {formatter.Format(property.GetValue(item))}"));
+				//	continue;
+				//}
+
+				//if (ctx.Options.IsValueType(property.PropertyType, item))
+				//{
+				//	ctx.AddLine(new Line($"{header} {property.GetValue(item)}"));
+				//	continue;
+				//}
+				var value = property.GetValue(item);
+				if (MapValueType(ctx, property.PropertyType, value, $"{header} "))
 				{
-					ctx.AddLine(new Line($"{line} {formatter.Format(property.GetValue(item))}"));
 					continue;
 				}
 
-				if (property.PropertyType.IsValueType)
-				{
-					ctx.AddLine(new Line($"{line} {property.GetValue(item)}"));
-					continue;
-				}
-
-				ctx.AddLine(new Line(line));
+				ctx.AddLine(new Line(header));
 
 				var typeMapper = ctx.Options.TypeMappers[property.PropertyType];
 				if (typeMapper != null)
 				{
-					typeMapper.Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), property.GetValue(item));
+					typeMapper.Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), value);
 					continue;
 				}
 
-				Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), property.GetValue(item));
+				Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), value);
 			}
+		}
+
+		private bool MapValueType(MapperContext ctx, Type type, object item, string prefix)
+		{
+			var formatter = ctx.Options.Formatters[type];
+			if (formatter != null)
+			{
+				ctx.AddLine(new Line($"{prefix}{formatter.Format(item)}"));
+				return true;
+			}
+
+			if (ctx.Options.IsValueType(type, item))
+			{
+				ctx.AddLine(new Line($"{prefix}{item}"));
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
