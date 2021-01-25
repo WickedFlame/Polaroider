@@ -59,20 +59,8 @@ namespace Polaroider.Mapping
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.Name))
 			{
 				var header = $"{property.Name}:".Indent(ctx.Indentation);
-
-				//formatter = ctx.Options.Formatters[property.PropertyType];
-				//if (formatter != null)
-				//{
-				//	ctx.AddLine(new Line($"{header} {formatter.Format(property.GetValue(item))}"));
-				//	continue;
-				//}
-
-				//if (ctx.Options.IsValueType(property.PropertyType, item))
-				//{
-				//	ctx.AddLine(new Line($"{header} {property.GetValue(item)}"));
-				//	continue;
-				//}
 				var value = property.GetValue(item);
+
 				if (MapValueType(ctx, property.PropertyType, value, $"{header} "))
 				{
 					continue;
