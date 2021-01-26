@@ -23,7 +23,11 @@ namespace Polaroider
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Line this[int index] => index < _lines.Count ? _lines[index] : new Line(string.Empty);
+        public Line this[int index]
+        {
+	        get => index < _lines.Count ? _lines[index] : new Line(string.Empty);
+	        internal set => _lines[index] = value;
+        }
 
         /// <summary>
         /// add a line to the snapshot
