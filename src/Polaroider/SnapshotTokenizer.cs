@@ -92,12 +92,9 @@ namespace Polaroider
 				return token;
 			}
 
-			var lines = token.ToList();
-
-			token = new Snapshot();
-			foreach (var line in lines)
+			for (var i = 0; i < token.Count(); i++)
 			{
-				token.Add(parser.Parse(line));
+				token[i] = parser.Parse(token[i]);
 			}
 
 			return token;
