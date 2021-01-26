@@ -72,9 +72,9 @@ build:
 #       tests configuration       #
 #---------------------------------#
 
-test:
-  assemblies:
-    only:
+#test:
+#  assemblies:
+#    only:
 #      - Polaroider.Test.dll
 #    - '**\Polaroider.Configuration.Test.dll'
 
