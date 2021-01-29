@@ -40,6 +40,26 @@ namespace Polaroider.Tests.Mapper
 			new {ValueType = this.GetType()}.MatchSnapshot();
 		}
 
+		[Test]
+		public void Mapper_Properties_DateTime()
+		{
+			new { Value = new DateTime(2000, 1, 1, 1, 1, 1) }.MatchSnapshot();
+		}
+
+		[Test]
+		public void Mapper_Properties_DateTime_Nullable()
+		{
+			DateTime? value = new DateTime(2000, 1, 1, 1, 1, 1);
+			new { Value = value }.MatchSnapshot();
+		}
+
+		[Test]
+		public void Mapper_Properties_DateTime_Null()
+		{
+			DateTime? value = null;
+			new { Value = value }.MatchSnapshot();
+		}
+
 
 		[Test]
 		public void Mapper_Set_Formatters_Options()
