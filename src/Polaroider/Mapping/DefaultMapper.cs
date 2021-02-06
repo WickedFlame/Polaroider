@@ -8,7 +8,7 @@ namespace Polaroider.Mapping
 	/// <summary>
 	/// default object mapper
 	/// </summary>
-	public class DefaultObjectMapper : IObjectMapper, ITypeMapper
+	public class DefaultMapper : IObjectMapper, ITypeMapper
 	{
 		/// <summary>
 		/// map an object to a snapshot

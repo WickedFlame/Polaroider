@@ -8,7 +8,7 @@ using Polaroider.Mapping;
 
 namespace Polaroider.Tests.Internals.Mappers
 {
-    public class DefaultObjectMapperTests
+    public class DefaultMapperTests
     {
 	    [SetUp]
 	    public void Setup()
@@ -48,7 +48,7 @@ namespace Polaroider.Tests.Internals.Mappers
                 }
             };
 
-            var mapper = new DefaultObjectMapper();
+            var mapper = new DefaultMapper();
             var snapshot = mapper.Map(item, SnapshotOptions.Default);
 
             var sb = string.Join(Environment.NewLine, new[]
@@ -79,7 +79,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        new MapItem {Value = "three"}
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(list, SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
@@ -102,7 +102,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        new MapItem {Value = "three"}
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(list.Select(i => new { i.Value }), SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
@@ -125,7 +125,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        new MapItem {Value = "three"}
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(list.ToArray(), SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
@@ -148,7 +148,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        Dbl = 2.2
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(item, SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
@@ -175,7 +175,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        }
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(item, SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]
@@ -207,7 +207,7 @@ namespace Polaroider.Tests.Internals.Mappers
 		        }
 	        };
 
-	        var mapper = new DefaultObjectMapper();
+	        var mapper = new DefaultMapper();
 	        var snapshot = mapper.Map(item, SnapshotOptions.Default);
 
 	        var sb = string.Join(Environment.NewLine, new[]

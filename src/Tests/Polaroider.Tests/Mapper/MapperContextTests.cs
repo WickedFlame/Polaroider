@@ -91,7 +91,7 @@ namespace Polaroider.Tests.Mapper
 		[Test]
 		public void MapperContext_BuildLine_Clone_Mapper()
 		{
-			var ctx = new MapperContext(new DefaultObjectMapper(), new Snapshot(), new SnapshotOptions(), 2);
+			var ctx = new MapperContext(new DefaultMapper(), new Snapshot(), new SnapshotOptions(), 2);
 			var clone = ctx.Clone(2);
 
 			ctx.Mapper.Should().BeSameAs(clone.Mapper);

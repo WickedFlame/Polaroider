@@ -42,7 +42,7 @@ namespace Polaroider
                 return _mappers[type];
             }
 
-            return new DefaultObjectMapper();
+            return new DefaultMapper();
         }
     }
 }
