@@ -7,9 +7,17 @@ namespace Polaroider.Mapping
 	/// </summary>
 	public class MapperContext
 	{
+		/// <summary>
+		/// Creates a new instance of the mapper context
+		/// </summary>
+		/// <param name="mapper"></param>
+		/// <param name="snapshot"></param>
+		/// <param name="options"></param>
+		/// <param name="indentation"></param>
 		[DebuggerStepThrough]
-		public MapperContext(Snapshot snapshot, SnapshotOptions options, int indentation)
+		public MapperContext(ITypeMapper mapper, Snapshot snapshot, SnapshotOptions options, int indentation)
 		{
+			Mapper = mapper;
 			Indentation = indentation;
 			Options = options;
 			Snapshot = snapshot;
@@ -29,6 +37,11 @@ namespace Polaroider.Mapping
 		/// the snapshot
 		/// </summary>
 		public Snapshot Snapshot { get; }
+
+		/// <summary>
+		/// The default instance of the TypeMapper to be able to map objects to
+		/// </summary>
+		public ITypeMapper Mapper { get; }
 
 		/// <summary>
 		/// add a line to the snapshot

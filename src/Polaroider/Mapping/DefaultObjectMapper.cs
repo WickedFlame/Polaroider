@@ -20,7 +20,7 @@ namespace Polaroider.Mapping
 		public Snapshot Map<T>(T item, SnapshotOptions options)
 		{
 			var snapshot = new Snapshot();
-			var ctx = new MapperContext(snapshot, options, 0);
+			var ctx = new MapperContext(this, snapshot, options, 0);
 
 			Map(ctx, item);
 
@@ -71,11 +71,11 @@ namespace Polaroider.Mapping
 				var typeMapper = ctx.Options.TypeMappers[property.PropertyType];
 				if (typeMapper != null)
 				{
-					typeMapper.Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), value);
+					typeMapper.Map(ctx.Clone(ctx.Indentation + 2), value);
 					continue;
 				}
 
-				Map(new MapperContext(ctx.Snapshot, ctx.Options, ctx.Indentation + 2), value);
+				Map(ctx.Clone(ctx.Indentation + 2), value);
 			}
 		}
 
