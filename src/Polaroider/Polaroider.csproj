@@ -12,15 +12,16 @@
     <Copyright>@WickedFlame 2020</Copyright>
     <PackageTags>Snapshot, Snapshottesting, Test</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.1.4.2</Version>
-    <AssemblyVersion>1.1.4</AssemblyVersion>
-    <FileVersion>1.1.4.2</FileVersion>
-    <PackageVersion>1.1.4-RC02</PackageVersion>
+    <Version>2.0.0.95</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.95</FileVersion>
+    <PackageVersion>2.0.0-RC95</PackageVersion>
     <Title>Polaroider</Title>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>http://wickedflame.github.io/Polaroider</PackageProjectUrl>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Polaroider.snk</AssemblyOriginatorKeyFile>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
