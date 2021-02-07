@@ -141,7 +141,7 @@ namespace Polaroider.Tests.Mapper
 				o.AddMapper<CustomData>((ctx, itm) =>
 				{
 					//only add Value and Dbl but ignore Id
-					ctx.MapObject("Inner", itm.Inner);
+					ctx.Map("Inner", itm.Inner);
 					ctx.AddLine("OuterValue", itm.Value);
 				});
 			});
@@ -172,6 +172,99 @@ namespace Polaroider.Tests.Mapper
 						Id = 2,
 						Value = "inner"
 					}
+				},
+				Item = "item",
+			}.Tokenize();
+
+			snapshot.ToString().Should().Be(expected.ToString());
+		}
+
+		[Test]
+		public void TypeMapper_Options_ObjectMapper_MapAnonymousObject()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddMapper<CustomData>((ctx, itm) =>
+				{
+					//only add Value and Dbl but ignore Id
+					ctx.Map("Inner", new
+					{
+						InnerValue = itm.Inner.Value,
+						OuterValue = itm.Value
+					});
+				});
+			});
+
+			var snapshot = new
+			{
+				Item = "item",
+				Data = new CustomData
+				{
+					Id = 1,
+					Dbl = 2.2,
+					Value = "value",
+					Inner = new InnerData
+					{
+						Id = 2,
+						Value = "inner"
+					}
+				}
+			}.Tokenize(options);
+
+			var expected = new
+			{
+				Data = new
+				{
+					Inner = new
+					{
+						OuterValue = "value",
+						InnerValue = "inner"
+					}
+				},
+				Item = "item",
+			}.Tokenize();
+
+			snapshot.ToString().Should().Be(expected.ToString());
+		}
+
+		[Test]
+		public void TypeMapper_Options_ObjectMapper_MapWithoutProperty()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddMapper<CustomData>((ctx, itm) =>
+				{
+					//only add Value and Dbl but ignore Id
+					ctx.Map(new
+					{
+						InnerValue = itm.Inner.Value,
+						OuterValue = itm.Value
+					});
+				});
+			});
+
+			var snapshot = new
+			{
+				Item = "item",
+				Data = new CustomData
+				{
+					Id = 1,
+					Dbl = 2.2,
+					Value = "value",
+					Inner = new InnerData
+					{
+						Id = 2,
+						Value = "inner"
+					}
+				}
+			}.Tokenize(options);
+
+			var expected = new
+			{
+				Data = new
+				{
+					OuterValue = "value",
+					InnerValue = "inner"
 				},
 				Item = "item",
 			}.Tokenize();

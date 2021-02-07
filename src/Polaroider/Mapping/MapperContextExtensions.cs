@@ -11,10 +11,15 @@ namespace Polaroider
 		/// <param name="context"></param>
 		/// <param name="property">The propertyname that the item is mapped to</param>
 		/// <param name="item">The object to be mapped</param>
-		public static void MapObject<T>(this MapperContext context, string property, T item)
+		public static void Map<T>(this MapperContext context, string property, T item)
 		{
 			context.AddLine(new Line($"{property}:".Indent(context.Indentation)));
 			context.Mapper.Map(context.Clone(context.Indentation + 2), item);
+		}
+
+		public static void Map<T>(this MapperContext context, T item)
+		{
+			context.Mapper.Map(context.Clone(context.Indentation), item);
 		}
 
 		/// <summary>
