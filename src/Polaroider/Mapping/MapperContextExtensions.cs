@@ -17,6 +17,12 @@ namespace Polaroider
 			context.Mapper.Map(context.Clone(context.Indentation + 2), item);
 		}
 
+		/// <summary>
+		/// Map the parent object to the Snapshot
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="context"></param>
+		/// <param name="item"></param>
 		public static void Map<T>(this MapperContext context, T item)
 		{
 			context.Mapper.Map(context.Clone(context.Indentation), item);
