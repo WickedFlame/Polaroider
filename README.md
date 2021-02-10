@@ -14,6 +14,9 @@ Polaroider is a Approval Testing Framework that creates and compares snapshots o
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
 
 ## Update from v1 to v2
+v1 was focused on simplicity. 
+v2 is focused on flexibility while maintaining simplicity.
+
 There are some breaking changes when updating to v2.
 ### Mapping of simple types
 - DateTimes are mapped in the ISO 8601 format to be Culture-Independent
