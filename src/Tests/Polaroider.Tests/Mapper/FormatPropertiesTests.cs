@@ -189,6 +189,20 @@ namespace Polaroider.Tests.Mapper
 			SnapshotOptions.Setup(o => { });
 		}
 
+		[Test]
+		public void Mapper_Set_Formatters_Generic()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddFormatter<double>(value => ((int) value).ToString());
+			});
+
+			new
+			{
+				Value = 2.2
+			}.Tokenize(options).ToString().Should().Be("Value: 2");
+		}
+
 		public class CustomObject
 		{
 			public string Value { get; set; }

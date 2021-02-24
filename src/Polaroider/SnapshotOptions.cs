@@ -192,7 +192,7 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// add a parser directive to the tokenizer to alter the input value that used for the compare
+		/// Add a parser directive to the tokenizer to alter the input value that used for the compare
 		/// </summary>
 		/// <param name="options"></param>
 		/// <param name="directive"></param>
@@ -220,7 +220,7 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// add a formatter for the type to the options
+		/// Add a formatter to the options to define how the type is converted to a string
 		/// </summary>
 		/// <param name="options"></param>
 		/// <param name="key"></param>
@@ -229,6 +229,19 @@ namespace Polaroider
 		public static SnapshotOptions AddFormatter(this SnapshotOptions options, Type key, IValueFormatter formatter)
 		{
 			options.Formatters.Add(key, formatter);
+			return options;
+		}
+
+		/// <summary>
+		/// Add a formatter to the options to define how the type is converted to a string
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="options"></param>
+		/// <param name="formatter"></param>
+		/// <returns></returns>
+		public static SnapshotOptions AddFormatter<T>(this SnapshotOptions options, Func<T, string> formatter)
+		{
+			options.Formatters.Add(typeof(T), new ValueFormatter<T>(formatter));
 			return options;
 		}
 

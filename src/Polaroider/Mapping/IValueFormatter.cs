@@ -6,7 +6,7 @@
 	public interface IValueFormatter : IMapper
 	{
 		/// <summary>
-		/// format the object to a string
+		/// Format the object to a string
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
