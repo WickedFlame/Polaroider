@@ -5,6 +5,18 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 2.0.0
+- DateTimes are compared in ISO 8601 format to be Culture independent
+- Null strings are displayed as null
+- Empty strings are displayed as ''
+- Internal refactorings for better usability
+- Add custom formatters to the options
+
+### 1.1.5
+- Don't map generics as Valuetypes
+- Nullable DateTimes are mapped as mull
+- Map DateTimes to string with different culture
+
 ### 1.1.4
 - Directives work for Snapshotting objecs
 - Snapshotting properties of Type caused a StackOverflow
