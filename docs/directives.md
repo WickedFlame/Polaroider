@@ -1,12 +1,116 @@
 ---
-title: Customizing snapshot creation
+title: Customizing snapshot
 layout: "default"
 nav_order: 2
 ---
 ## Customizing Snapshot creation
-To customize the creation of snapshots, a Directive can be added to the Parser used in Polaroider.  
-Directives are added through the SnapshotOptions.
+There are several way to influence the value of a snapshot.
+- Mappers
+- ValueFormatters
+- Directives
+  
+### Mappers
+Mappers are used to define how a complete object is transformed to a snapshot.  
+Mappers are added to the Options that are used for the snapshotcreation.  
+All output is added to the snaphsot through the context.
 
+```csharp
+var options = SnapshotOptions.Create(o =>
+{
+    o.AddMapper<CustomData>((ctx, itm) =>
+    {
+        // Map the Id to the snaphsot
+        ctx.AddLine("Id", itm.Value);
+        // Map the Value to the property OuterValue
+        ctx.AddLine("OuterValue", itm.Value);
+        // Let the default mapper map the inner object
+        ctx.Map("InnerObject", itm.Inner);
+
+        // All other properties are ignored
+    });
+});
+
+
+var item = new
+{
+    Item = "item",
+    Data = new CustomData
+    {
+        Id = 1,
+        Dbl = 2.2,
+        Value = "value",
+        Inner = new InnerData
+        {
+            Id = 2,
+            Value = "inner"
+        }
+    }
+}.MatchSnapshot(options);
+```
+
+This results in a snapshot that should look as following
+```
+Item: item
+Data: 
+  Id: 1
+  OuterValue: value
+  InnerObject:
+    Id: 2
+    Value: inner
+```
+
+### ValueFormatters
+Value formatters are used similarly but output a direct string instead of writing to the context.  
+Formatters can be added as an expression or as a implementation of IValueFormatter.
+#### Expression
+```csharp
+var options = SnapshotOptions.Create(o =>
+{
+    o.AddFormatter<double>(value => ((int) value).ToString());
+});
+
+new
+{
+    Value = 2.2
+}.MatchSnapshot(options);
+```
+This results in the following snapshotvalue
+```
+Value: 2
+```
+#### Implementation of IValueFormatter
+```csharp
+public class DateTimeFormatter : IValueFormatter
+{
+    public string Format(object value)
+    {
+        if (value is DateTime dte)
+        {
+            return dte.ToString("o");
+        }
+
+        return value?.ToString();
+    }
+}
+```
+  
+```csharp
+var options = SnapshotOptions.Create(o =>
+{
+    o.AddFormatter(typeof(DateTime), new DateTimeFormatter());
+});
+new
+{
+    Value = new DateTime(2012, 12, 21, 12, 21, 21)
+}.MatchSnapshot(options);
+```
+This results in the following snapshotvalue
+```
+Value: 2012-12-21T12:21:21.0000000
+```
+
+### Directives
+Directives are used to customize the value of an already tokenized snapshot per line.  
 The simmplest directive has an inputstring and returns the altered string.
 ```csharp
 SnapshotOptions AddDirective(Func<string, string> directive)
@@ -26,7 +130,7 @@ SnapshotOptions.Default.AddDirective(line => line.Replace(" ", string.Empty, Str
 SnapshotOptions.Default.AddDirective(line => line.ToUpper());
 ```
 
-### Extensions
+#### Extensions
 There are some Stringextensions that can be applied to the directive
 
 | Method | Description |
@@ -34,9 +138,7 @@ There are some Stringextensions that can be applied to the directive
 | ReplaceRegex | Replaces all parts of the string that apply to the regex |
 | ReplaceGuid | Replaces all Guids with the provided alternative. Defaults to 00000000-0000-0000-0000-000000000000 |
 
-## Examples
-
-### Add a directive to alter the value that is compared
+#### Examples
 ```csharp
 var options = SnapshotOptions.Create(o =>
 {
