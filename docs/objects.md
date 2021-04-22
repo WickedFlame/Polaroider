@@ -35,7 +35,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 });
 ```
 
-Customizing the snapshot is explained in more detail in [Snapshot creation](/directives.html)
+Customizing the snapshot is explained in more detail in [Snapshot creation](/directives)
 
 #### Using Tokenizer to create a Snapshot object
 SnapshotTokenizer uses already configured mappers to create snapshottokens of objects or creates tokens based on strings
