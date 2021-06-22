@@ -9,7 +9,9 @@ Simplify UnitTesting with snapshots.
 Polaroider is a Approval Testing Framework that creates and compares snapshots of almost anything  
 
 ### Common, timeconsuming assertion testing
-Conventional assertion testing needs multiple assertion checks to test and verify all properties of an object
+Conventional assertion testing needs multiple assertion checks to test and verify all properties of an object.  
+The tests have to be updated every time a new property is added.  
+  
 ```csharp
 // arrange
 var repository = new PersonRepository();
@@ -24,10 +26,11 @@ Assert.IsEqual(person.Company, "WickedFlame");
 Assert.IsEqual(person.Address.Street, "Teststreet");
 Assert.IsEqual(person.Address.Streetnumber, 3);
 ```
-
+  
 ### Fast and easy approval testing with Polaroider
-Polaroider reduces all assertions to just one call. 
-Snapshottesting keeps the code simple, clean and readable.
+**Polaroider reduces all assertions to just one call.**  
+**Snapshottesting keeps the code simple, clean and readable.**  
+  
 ```csharp
 // arrange
 var repository = new PersonRepository();
@@ -38,7 +41,7 @@ var person = repository.LoadTestPerson(...);
 // assert
 person.MatchSnapshot();
 ```
-
+  
 - [GitHub](https://github.com/WickedFlame/Polaroider)
 - [Changelog](changelog)
 
