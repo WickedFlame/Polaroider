@@ -10,9 +10,9 @@ There are several way to influence the value of a snapshot.
 - [SnapshotTokenizer](#SnapshotTokenizer)
 - [ValueFormatters](#ValueFormatters)
 - [Directives](#Directives)
-- [Valutype-Matching](#Valutype-Matching)
+- [Valutype-Matching](#valutype-matching)
   
-### Mappers
+### <a name="Mappers"></a>Mappers
 Mappers are used to define how a complete object is transformed to a snapshot.  
 Mappers are added to the Options that are used for the snapshotcreation.  
 All output is added to the snaphsot through the context.
@@ -62,7 +62,7 @@ Data:
     Value: inner
 ```
 
-### ObjectMapper
+### <a name="ObjectMapper"></a>ObjectMapper
 The default ObjectMapper can be replaced per object.  
 Use ObjectMapper.Configure to define a custom mapping of objects to snapshots
 ```csharp
@@ -75,7 +75,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 });
 ```
 
-### SnapshotTokenizer
+### <a name="SnapshotTokenizer"></a>SnapshotTokenizer
 The SnapshotTokenizer uses already configured mappers to create snapshottokens of objects or creates tokens based on strings.
 ```csharp
 ObjectMapper.Configure<CustomClass>(m =>
@@ -85,7 +85,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 });
 ```
 
-### ValueFormatters
+### <a name="ValueFormatters"></a>ValueFormatters
 Value formatters are used similarly but output a direct string instead of writing to the context.  
 Formatters can be added as an expression or as a implementation of IValueFormatter.
 #### Expression
@@ -135,7 +135,7 @@ This results in the following snapshotvalue
 Value: 2012-12-21T12:21:21.0000000
 ```
 
-### Directives
+### <a name="Directives"></a>Directives
 Directives are used to customize the value of an already tokenized snapshot per line.  
 The simmplest directive has an inputstring and returns the altered string.
 ```csharp
@@ -183,7 +183,7 @@ sn = new StringBuilder()
 sn.MatchSnapshot(options);
 ```
 
-### Valutype-Matching
+### <a name="valutype-matching"></a> Valutype matching
 Valuetypes are automatically mapped with ToString(). In the Options it is possible override the behaviour for matching valuetypes.
 ```charp
 var options = SnapshotOptions.Create(o =>
