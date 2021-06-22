@@ -5,9 +5,12 @@ nav_order: 2
 ---
 ## Customizing Snapshot creation
 There are several way to influence the value of a snapshot.
-- Mappers
-- ValueFormatters
-- Directives
+- [Mappers](#Mappers)
+- [ObjectMapper](#ObjectMapper)
+- [SnapshotTokenizer](#SnapshotTokenizer)
+- [ValueFormatters](#ValueFormatters)
+- [Directives](#Directives)
+- [Valutype-Matching](#Valutype-Matching)
   
 ### Mappers
 Mappers are used to define how a complete object is transformed to a snapshot.  
@@ -57,6 +60,29 @@ Data:
   InnerObject:
     Id: 2
     Value: inner
+```
+
+### ObjectMapper
+The default ObjectMapper can be replaced per object.  
+Use ObjectMapper.Configure to define a custom mapping of objects to snapshots
+```csharp
+ObjectMapper.Configure<CustomClass>(m =>
+{
+    // create snapshot object and add the lines
+    var token = new Snapshot()
+        .Add(m.Value);
+    return token;
+});
+```
+
+### SnapshotTokenizer
+The SnapshotTokenizer uses already configured mappers to create snapshottokens of objects or creates tokens based on strings.
+```csharp
+ObjectMapper.Configure<CustomClass>(m =>
+{
+    var token = SnapshotTokenizer.Tokenize(m.Value);
+    return token;
+});
 ```
 
 ### ValueFormatters
@@ -155,4 +181,14 @@ sn = new StringBuilder()
     .ToString();
 
 sn.MatchSnapshot(options);
+```
+
+### Valutype-Matching
+Valuetypes are automatically mapped with ToString(). In the Options it is possible override the behaviour for matching valuetypes.
+```charp
+var options = SnapshotOptions.Create(o =>
+{
+    // exclude generics from the ValueTypes matching
+    o.EvaluateValueType((type, obj) => type.IsValueType && !type.IsGenericType);
+});
 ```

@@ -4,8 +4,10 @@ layout: "default"
 nav_order: 2
 ---
 ## Snapshot Options
+The SnapshotOptions are used to configure the way Polaroider takes snapshots of objects.  
+The SnapshotOptions can be configured on a global scope or per snapshot.
 
-### Setup SnapshotOptions for global scope
+### SnapshotOptions for global scope
 ```csharp
 SnapshotOptions.Setup(o =>
 {
@@ -16,7 +18,7 @@ SnapshotOptions.Setup(o =>
 sn.MatchSnapshot();
 ```
 
-### Custom SnapshotOptions per Match
+### SnapshotOptions per Snapshot
 ```csharp
 var options = new SnapshotOptions();
 // read lines without whitespaces
@@ -39,14 +41,3 @@ sn.MatchSnapshot(options);
 Global options are merged when using a custom option object. 
 
 If the Parser is altered or a directive is added in the custom options, the parsersettings of the default options will be ignored.
-
-
-### Configure Valutype Matching
-Valuetypes are automatically mapped with ToString(). In the Options it is possible override the behaviour for matching valuetypes.
-```charp
-var options = SnapshotOptions.Create(o =>
-{
-    // exclude generics from the ValueTypes matching
-    o.EvaluateValueType((type, obj) => type.IsValueType && !type.IsGenericType);
-});
-```
