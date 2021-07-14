@@ -246,7 +246,7 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// us the basic formatters to revert the breaking changes from v1 to v2
+		/// Use the basic formatters to revert the breaking changes from v1 to v2
 		/// </summary>
 		/// <param name="options"></param>
 		/// <returns></returns>
@@ -257,6 +257,15 @@ namespace Polaroider
 				{typeof(Type), new TypeFormatter()},
 				{typeof(string), new SimpleStringFormatter()}
 			};
+
+			return options;
+		}
+
+		public static SnapshotOptions MockDateTimes(this SnapshotOptions options)
+		{
+			var formatter = new MockDateTimeFormatter();
+			options.AddFormatter(typeof(DateTime), formatter);
+			options.AddFormatter(typeof(DateTime?), formatter);
 
 			return options;
 		}

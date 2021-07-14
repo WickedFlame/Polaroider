@@ -33,5 +33,20 @@ namespace Polaroider.Tests.Mapper.Formatters
 			var formatter = new DateTimeFormatter();
 			formatter.Format(new DateTime(2000, 1, 1, 1, 1, 1, 1)).Should().Be("2000-01-01T01:01:01.0010000");
 		}
+
+		[Test]
+		public void Mapper_NullableDateTime_Format()
+		{
+			var formatter = new DateTimeFormatter();
+			DateTime? date = new DateTime(2000, 1, 1, 1, 1, 1, 1);
+			formatter.Format(date).Should().Be("2000-01-01T01:01:01.0010000");
+		}
+
+		[Test]
+		public void Mapper_NullableDateTime_Null_Format()
+		{
+			var formatter = new DateTimeFormatter();
+			formatter.Format((DateTime?)null).Should().BeNull();
+		}
 	}
 }

@@ -3,12 +3,12 @@
 namespace Polaroider.Mapping.Formatters
 {
 	/// <summary>
-	/// Defautl formatter for datetimes
+	/// Defautl formatter for datetimes. Formats all DateTimes to a ISO 8601 string
 	/// </summary>
 	public class DateTimeFormatter : IValueFormatter
 	{
 		/// <summary>
-		/// format a datetime to a string
+		/// Format a datetime to a ISO 8601 string
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
