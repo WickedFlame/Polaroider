@@ -19,6 +19,8 @@ sn.MatchSnapshot();
 ```
 
 ### SnapshotOptions per Snapshot
+To use the options per Snapshot, simply pass an instance of the desired options to the MatchSnapshot method.  
+
 ```csharp
 var options = new SnapshotOptions();
 // read lines without whitespaces
