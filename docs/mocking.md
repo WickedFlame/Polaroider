@@ -12,7 +12,7 @@ If the changing data is based on a fixed type, it is possible to create a format
 var options = SnapshotOptions.Create(o => o.AddFormatter<DateTime>(obj => "0000-00-00T00:00:00.0000"));
 sn.MatchSnapshot(options);
 ```
-For more complex structures create a formatter that derives IValueFormatter  
+For more complex structures create a formatter that derives IValueFormatter and add this to the SnapshotOptions.  
 ```csharp
 public class MockDateTimeFormatter : IValueFormatter
 {
@@ -21,9 +21,8 @@ public class MockDateTimeFormatter : IValueFormatter
 		if (value is DateTime)
 		{
             // return a constant value instead of the changing datetime
-			return "0000-00-00T00:00:00.0000";
+            return "0000-00-00T00:00:00.0000";
 		}
-
 		return value?.ToString();
 	}
 }
@@ -32,7 +31,9 @@ public class MockDateTimeFormatter : IValueFormatter
 The directives help find a part of the replace string that would match the changing data and convert this to a constant value  
 ```csharp
 // change all occurrences of ISO 8601 DateTimes to a constant value
-var options = SnapshotOptions.Create(o => o.AddDirective(line => line.ReplaceRegex("[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,7}\\+[0-9]{1,2}:[0-9]{1,2}", "0000-00-00T00:00:00.0000")));
+var options = SnapshotOptions.Create(o => 
+  o.AddDirective(line => 
+    line.ReplaceRegex("[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,7}\\+[0-9]{1,2}:[0-9]{1,2}", "0000-00-00T00:00:00.0000")));
 sn.MatchSnapshot(options);
 ```
 ## Extensions

@@ -10,7 +10,7 @@ There are several way to influence the value of a snapshot.
 - [SnapshotTokenizer](#SnapshotTokenizer)
 - [ValueFormatters](#ValueFormatters)
 - [Directives](#Directives)
-- [Valutype-Matching](#valutype-matching)
+- [Valuetype-Matching](#valuetype-matching)
   
 ### <a name="Mappers"></a>Mappers
 Mappers are used to define how a complete object is transformed to a snapshot.  
@@ -86,7 +86,7 @@ ObjectMapper.Configure<CustomClass>(m =>
 ```
 
 ### <a name="ValueFormatters"></a>ValueFormatters
-Value formatters are used similarly but output a direct string instead of writing to the context.  
+Value formatters are used similarly to Mappers output a direct string instead of writing to the context. The default objectmapper uses formatters to convert a given type to a string. 
 Formatters can be added as an expression or as a implementation of IValueFormatter.
 #### Expression
 ```csharp
@@ -136,7 +136,8 @@ Value: 2012-12-21T12:21:21.0000000
 ```
 
 ### <a name="Directives"></a>Directives
-Directives are used to customize the value of an already tokenized snapshot per line.  
+Directives are used to customize the resulting string of an already tokenized snapshot.  
+Each line of the tokenized snapshot is passed to the dirvective.  
 The simmplest directive has an inputstring and returns the altered string.
 ```csharp
 SnapshotOptions AddDirective(Func<string, string> directive)
@@ -183,8 +184,9 @@ sn = new StringBuilder()
 sn.MatchSnapshot(options);
 ```
 
-### <a name="valutype-matching"></a> Valutype matching
-Valuetypes are automatically mapped with ToString(). In the Options it is possible override the behaviour for matching valuetypes.
+### <a name="valuetype-matching"></a> Valuetype matching
+Polaroider uses the ToString() method on ValueTypes to create the snapshot.  
+The default definition of a ValueType can be altered in the SnapshotOptions. In the Options use the EvaluateValueType method to override the behaviour for matching valuetypes.
 ```charp
 var options = SnapshotOptions.Create(o =>
 {
