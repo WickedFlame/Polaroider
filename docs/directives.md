@@ -29,10 +29,11 @@ SnapshotOptions.Default.AddDirective(line => line.ToUpper());
 ### Extensions
 There are some Stringextensions that can be applied to the directive
 
-| Method | Description |
-|----|----|
-| ReplaceRegex | Replaces all parts of the string that apply to the regex |
-| ReplaceGuid | Replaces all Guids with the provided alternative. Defaults to 00000000-0000-0000-0000-000000000000 |
+| Method | Description | 
+|----|----| 
+| ReplaceRegex | Replaces all parts of the string that apply to the regex | 
+| ReplaceGuid | Replaces all Guids with the provided alternative. Defaults to 00000000-0000-0000-0000-000000000000 | 
+
 #### ReplaceRegex
 Use a regex to replace a string 
 ```csharp
