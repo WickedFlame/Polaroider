@@ -3,6 +3,7 @@ title: Snapshoting dynamic data
 layout: "default"
 nav_order: 2
 ---
+## Mocking dynamic data
 Sometimes objects contain properties that have data like timestamps or hashes that change with each run. That would mean the snapshot would imediately be invalid after generation.  
 Polaroider provides several possibilities to handle the parts of data that changes but still test the rest of the object.
   
