@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Polaroider.Mapping;
 using Polaroider.Mapping.Formatters;
 
@@ -80,8 +79,7 @@ namespace Polaroider
 					{typeof(Type), new TypeFormatter()}, 
 					{typeof(string), new StringFormatter()}, 
 					{typeof(DateTime), new DateTimeFormatter()}, 
-					{typeof(DateTime?), new DateTimeFormatter()},
-					{typeof(MethodInfo), new MethodInfoFormatter()}
+					{typeof(DateTime?), new DateTimeFormatter()}
 				}, 
 				IsValueType = (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
 			};
