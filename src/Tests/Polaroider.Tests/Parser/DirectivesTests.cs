@@ -52,5 +52,41 @@ namespace Polaroider.Tests.Parser
 
 			new { Value = Guid.NewGuid() }.MatchSnapshot(options);
 		}
+
+		[Test]
+		public void Directive_Extension_ReplaceGuid_CustomFormat()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceGuid("guid replacement"));
+			});
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Directive_Extension_ReplaceDateTime()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceDateTime());
+			});
+
+			new { Value = DateTime.Now }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Directive_Extension_ReplaceDateTime_CustomFormat()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceDateTime("datetime replacement"));
+			});
+
+			new { Value = DateTime.Now }.MatchSnapshot(options);
+		}
 	}
 }

@@ -162,6 +162,42 @@ namespace Polaroider.Tests
 		}
 
 		[Test]
+		public void Options_Directives_ReplaceGuid_CustomFormat()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceGuid("guid replacement"));
+			});
+
+			new { Value = Guid.NewGuid() }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Options_Directives_ReplaceDateTime()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore DateTime when comparing
+				o.AddDirective(s => s.ReplaceDateTime());
+			});
+
+			new { Value = DateTime.Now }.MatchSnapshot(options);
+		}
+
+		[Test]
+		public void Options_Directives_ReplaceDateTime_CustomFormat()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				// ignore Guids when comparing
+				o.AddDirective(s => s.ReplaceDateTime("datetime replacement"));
+			});
+
+			new { Value = DateTime.Now }.MatchSnapshot(options);
+		}
+
+		[Test]
 		public void Snapshot_Options_DefaultOptions_Parser_NotNull()
 		{
 			// ignore Guids when comparing

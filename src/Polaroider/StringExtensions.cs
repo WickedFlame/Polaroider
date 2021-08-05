@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Polaroider
 {
@@ -31,5 +32,16 @@ namespace Polaroider
         {
 	        return value.ReplaceRegex("(?im)[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?", replacement);
         }
-    }
+
+		/// <summary>
+		/// Replace a ISO 8601 <see cref="DateTime"/> value with a common default
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="replacement"></param>
+		/// <returns></returns>
+		public static string ReplaceDateTime(this string value, string replacement = "0000-00-00T00:00:00.0000")
+		{
+			return value.ReplaceRegex("[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,7}\\+[0-9]{1,2}:[0-9]{1,2}", replacement);
+		}
+	}
 }
