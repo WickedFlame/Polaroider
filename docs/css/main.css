@@ -59,6 +59,10 @@ nav .nav-header {
     border-bottom: solid 1px #f0f0f0;
 }
 
+.nav > li > a{
+    padding: 5px 25px;
+}
+
 nav > ul.nav > li > a {
     padding: 5px 10px;
 }

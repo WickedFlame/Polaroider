@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### 2.0.x
+- Mocking dynamic data
+
 ### 2.0.0
 - Added Formatters to be able to influence the way a type is parsed
 - DateTimes are compared in ISO 8601 format to be Culture independent

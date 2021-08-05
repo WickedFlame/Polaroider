@@ -22,27 +22,3 @@ id: 1
 value:
   name: test
 ```
-
-### Configure mapping for objects
-Use ObjectMapper.Configure to define a custom mapping of objects to snapshots
-```csharp
-ObjectMapper.Configure<CustomClass>(m =>
-{
-    // create snapshot object and add the lines
-    var token = new Snapshot()
-        .Add(m.Value);
-    return token;
-});
-```
-
-Customizing the snapshot is explained in more detail in [Snapshot creation](/directives)
-
-#### Using Tokenizer to create a Snapshot object
-SnapshotTokenizer uses already configured mappers to create snapshottokens of objects or creates tokens based on strings
-```csharp
-ObjectMapper.Configure<CustomClass>(m =>
-{
-    var token = SnapshotTokenizer.Tokenize(m.Value);
-    return token;
-});
-```
