@@ -49,14 +49,19 @@ namespace Polaroider.Mapping
 				return;
 			}
 
-            var type = item.GetType();
+			var type = item.GetType();
 
-            if (MapValueType(ctx, type, item, string.Empty.Indent(ctx.Indentation)))
-            {
-	            return;
-            }
+			if (MapValueType(ctx, type, item, string.Empty.Indent(ctx.Indentation)))
+			{
+				return;
+			}
 
-			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.Name))
+			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+				// indexers can't be mapped so ignore all properties with index parameters
+				.Where(p => p.GetIndexParameters().Length == 0)
+				// only properties that have public getters
+				.Where(p => p.GetGetMethod() != null)
+				.OrderBy(p => p.Name))
 			{
 				var header = $"{property.Name}:".Indent(ctx.Indentation);
 				var value = property.GetValue(item);
