@@ -7,6 +7,11 @@ nav_order: 99
 ## Polaroider Changelog
 ### 2.0.x
 - Mocking dynamic data
+- Indexers are ignored when mapping properties
+- Map only properties that have getters
+- Added Defaultformatter for MethodInfo and NullableDateTime
+- Simplified mocking DateTimes in the Options
+- Added directive for replacing DateTimes in the ISO 8601 format
 
 ### 2.0.0
 - Added Formatters to be able to influence the way a type is parsed
