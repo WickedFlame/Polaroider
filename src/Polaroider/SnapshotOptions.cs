@@ -248,7 +248,8 @@ namespace Polaroider
 		}
 
 		/// <summary>
-		/// Use the basic formatters to revert the breaking changes from v1 to v2
+		/// Use the basic formatters to revert the breaking changes from v1 to v2.
+		/// This removes all <see cref="IValueFormatter"/> from the options and adds a basic <see cref="TypeFormatter"/> and <see cref="SimpleStringFormatter"/>
 		/// </summary>
 		/// <param name="options"></param>
 		/// <returns></returns>
@@ -263,6 +264,12 @@ namespace Polaroider
 			return options;
 		}
 
+		/// <summary>
+		/// Mocks changing <see cref="DateTime"/> values to a compareable format "0000-00-00T00:00:00.0000". Else the Snapshot would always fail due to changes in the time.
+		/// This simply adds a <see cref="MockDateTimeFormatter"/> to the options.
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
 		public static SnapshotOptions MockDateTimes(this SnapshotOptions options)
 		{
 			var formatter = new MockDateTimeFormatter();
