@@ -57,6 +57,8 @@ nav {
 nav .nav-header {
     padding: 5px 0;
     border-bottom: solid 1px #f0f0f0;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .nav > li > a{
