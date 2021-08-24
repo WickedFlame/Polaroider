@@ -279,6 +279,15 @@ namespace Polaroider
 			return options;
 		}
 
+		public static SnapshotOptions MockGuids(this SnapshotOptions options)
+		{
+			var formatter = new MockGuidFormatter();
+			options.AddFormatter(typeof(Guid), formatter);
+			options.AddFormatter(typeof(Guid?), formatter);
+
+			return options;
+		}
+
 		/// <summary>
 		/// set an expression to evaluate valuetypes. defaults to (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
 		/// </summary>

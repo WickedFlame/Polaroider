@@ -38,8 +38,13 @@ var options = SnapshotOptions.Create(o =>
 sn.MatchSnapshot(options);
 ```
 ## Extensions
-Currently there is a Builtin formatter for mocking DateTimes.  
-This is configured in the SnapshotOptions.
+There are some builtin formatters for mocking objects.  
+| Method | Description | Result |
+| --- | --- | --- |
+| MockDateTimes | Format all DateTimes to a value that always matches | 0000-00-00T00:00:00.0000 |
+| MockGuids | Format all Guids to a value that always matches | 00000000-0000-0000-0000-000000000000 |
+  
+Mocking objects is configured in the SnapshotOptions.
 ```csharp
 // mock all occurrences of DateTimes to a constant value
 var options = SnapshotOptions.Create(o => o.MockDateTimes());

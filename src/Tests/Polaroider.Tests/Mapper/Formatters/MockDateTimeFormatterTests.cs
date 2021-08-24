@@ -53,5 +53,28 @@ namespace Polaroider.Tests.Mapper.Formatters
 			var options = SnapshotOptions.Create(o => o.MockDateTimes());
 			new { Value = (DateTime?)null }.Tokenize(options).ToString().Should().Be("Value: ");
 		}
+
+		[Test]
+		public void Mapper_MockGuids_SnapshotOptions_Tokenize()
+		{
+			var options = SnapshotOptions.Create(o => o.MockGuids());
+			new { Value = Guid.NewGuid() }.Tokenize(options).ToString().Should().Be("Value: 00000000-0000-0000-0000-000000000000");
+		}
+
+		[Test]
+		public void Mapper_MockGuid_SnapshotOptions_Tokenize_Nullable()
+		{
+			Guid? guid = Guid.NewGuid();
+
+			var options = SnapshotOptions.Create(o => o.MockGuids());
+			new { Value = guid }.Tokenize(options).ToString().Should().Be("Value: 00000000-0000-0000-0000-000000000000");
+		}
+
+		[Test]
+		public void Mapper_MockGuid_Tokenize_Nullable_Nullable_Null()
+		{
+			var options = SnapshotOptions.Create(o => o.MockGuids());
+			new { Value = (Guid?)null }.Tokenize(options).ToString().Should().Be("Value: ");
+		}
 	}
 }
