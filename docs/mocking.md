@@ -39,8 +39,9 @@ sn.MatchSnapshot(options);
 ```
 ## Extensions
 There are some builtin formatters for mocking objects.  
+  
 | Method | Description | Result | 
-| --- | --- | --- | 
+|----|----|----| 
 | MockDateTimes | Format all DateTimes to a value that always matches | 0000-00-00T00:00:00.0000 | 
 | MockGuids | Format all Guids to a value that always matches | 00000000-0000-0000-0000-000000000000 | 
   
