@@ -1,14 +1,12 @@
 ---
-title: Snapshoting dynamic data
+title: Creating formatters
 layout: "default"
 nav_order: 2
 ---
-## Mocking dynamic data
-Sometimes objects contain properties that have data like timestamps or hashes that change with each run. That would mean the snapshot would imediately be invalid after generation.  
-Polaroider provides several possibilities to handle the parts of data that changes but still test the rest of the object.
+## Using formatters to mock objects
+If a object being snapshotted has some properties with data that changes with each snapshot, it is possible to create a formatter that returns a constant value that represents the data of the type.  
+This can be the case with DateTimes or Guids that are timebased or generated with each object creation.  
   
-## Formatter
-If the changing data is based on a fixed type, it is possible to create a formatter that returns a constant string that represents the data of the type.
 ```csharp
 var options = SnapshotOptions.Create(o => o.AddFormatter<DateTime>(obj => "0000-00-00T00:00:00.0000"));
 sn.MatchSnapshot(options);
@@ -27,9 +25,11 @@ public class MockDateTimeFormatter : IValueFormatter
 		return value?.ToString();
 	}
 }
-```
+```  
+  
 ## Directive
 The directives help find a part of the replace string that would match the changing data and convert this to a constant value  
+  
 ```csharp
 // change all occurrences of ISO 8601 DateTimes to a constant value
 var options = SnapshotOptions.Create(o => 
@@ -39,10 +39,10 @@ sn.MatchSnapshot(options);
 ```
 ## Extensions
 There are some builtin formatters for mocking objects.  
-| Method | Description | Result |
-| --- | --- | --- |
-| MockDateTimes | Format all DateTimes to a value that always matches | 0000-00-00T00:00:00.0000 |
-| MockGuids | Format all Guids to a value that always matches | 00000000-0000-0000-0000-000000000000 |
+| Method | Description | Result | 
+| --- | --- | --- | 
+| MockDateTimes | Format all DateTimes to a value that always matches | 0000-00-00T00:00:00.0000 | 
+| MockGuids | Format all Guids to a value that always matches | 00000000-0000-0000-0000-000000000000 | 
   
 Mocking objects is configured in the SnapshotOptions.
 ```csharp
