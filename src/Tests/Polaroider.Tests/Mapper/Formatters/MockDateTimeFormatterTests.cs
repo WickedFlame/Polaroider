@@ -55,6 +55,13 @@ namespace Polaroider.Tests.Mapper.Formatters
 		}
 
 		[Test]
+		public void Mapper_MockDateTime_ISOStringDate()
+		{
+			var options = SnapshotOptions.Create(o => o.MockDateTimes());
+			new { Value = DateTime.Now.ToString("o") }.Tokenize(options).ToString().Should().Be("Value: 0000-00-00T00:00:00.0000");
+		}
+
+		[Test]
 		public void Mapper_MockGuids_SnapshotOptions_Tokenize()
 		{
 			var options = SnapshotOptions.Create(o => o.MockGuids());
@@ -75,6 +82,13 @@ namespace Polaroider.Tests.Mapper.Formatters
 		{
 			var options = SnapshotOptions.Create(o => o.MockGuids());
 			new { Value = (Guid?)null }.Tokenize(options).ToString().Should().Be("Value: ");
+		}
+
+		[Test]
+		public void Mapper_MockGuids_StringFuid()
+		{
+			var options = SnapshotOptions.Create(o => o.MockGuids());
+			new { Value = Guid.NewGuid().ToString() }.Tokenize(options).ToString().Should().Be("Value: 00000000-0000-0000-0000-000000000000");
 		}
 	}
 }
