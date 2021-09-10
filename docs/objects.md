@@ -4,7 +4,7 @@ layout: "default"
 nav_order: 3
 ---
 ## Snapshotting objects
-Objects are mapped by property and value. 
+Objects are mapped by property and value.  
 Inside the snapshot hirarchie is displayed by indentation
 ```csharp
 var obj = new {
@@ -16,6 +16,7 @@ var obj = new {
 
 obj.MatchSnapshot();
 ```
+  
 The generated snapshot looks the following:
 ```csharp
 id: 1
