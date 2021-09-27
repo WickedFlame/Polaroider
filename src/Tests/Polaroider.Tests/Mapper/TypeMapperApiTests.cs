@@ -272,6 +272,44 @@ namespace Polaroider.Tests.Mapper
 			snapshot.ToString().Should().Be(expected.ToString());
 		}
 
+
+		[Test]
+		public void TypeMapper_Options_ObjectMapper_RootObject()
+		{
+			var options = SnapshotOptions.Create(o =>
+			{
+				o.AddMapper<CustomData>((ctx, itm) =>
+				{
+					//only add Value and Dbl but ignore Id
+					ctx.Map(new
+					{
+						InnerValue = itm.Inner.Value,
+						OuterValue = itm.Value
+					});
+				});
+			});
+
+			var snapshot = new CustomData
+			{
+				Id = 1,
+				Dbl = 2.2,
+				Value = "value",
+				Inner = new InnerData
+				{
+					Id = 2,
+					Value = "inner"
+				}
+			}.Tokenize(options);
+
+			var expected = new
+			{
+				OuterValue = "value",
+				InnerValue = "inner"
+			}.Tokenize();
+
+			snapshot.ToString().Should().Be(expected.ToString());
+		}
+
 		public class CustomData
 		{
 			public int Id { get; set; }
