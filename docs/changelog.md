@@ -5,6 +5,9 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### vNext
+- Mapping now checks if the root object is contained in the registered Mappers
+
 ### 2.0.2
 - Mocking Guids also adds a directive to replace string Guids
 - Mocking DateTimes also adds a directive to replace ISO 8601 string DateTimes

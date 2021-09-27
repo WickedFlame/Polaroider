@@ -20,15 +20,15 @@ var repository = new PersonRepository();
 var person = repository.LoadTestPerson(...);
 
 // assert
-Assert.IsEqual(person.Firstname, "Chris");
-Assert.IsEqual(person.Lastname, "Walpen");
-Assert.IsEqual(person.Company, "WickedFlame");
+Assert.IsEqual(person.Firstname, "John");
+Assert.IsEqual(person.Lastname, "Doe");
+Assert.IsEqual(person.Company, "Polaroider");
 Assert.IsEqual(person.Address.Street, "Teststreet");
 Assert.IsEqual(person.Address.Streetnumber, 3);
 ```
   
 ### Fast and easy approval testing with Polaroider
-**Polaroider reduces all assertions to just one call.**  
+**Polaroider reduces all assertions to just one single call.**  
 **Snapshottesting keeps the code simple, clean and readable.**  
   
 ```csharp

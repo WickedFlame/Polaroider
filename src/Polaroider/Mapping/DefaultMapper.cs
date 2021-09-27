@@ -56,6 +56,12 @@ namespace Polaroider.Mapping
 				return;
 			}
 
+			// check if the root object is registered as a typed map
+			if (MapRegisteredType(type, ctx.Clone(ctx.Indentation), item))
+			{
+				return;
+			}
+
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
 				// indexers can't be mapped so ignore all properties with index parameters
 				.Where(p => p.GetIndexParameters().Length == 0)
@@ -73,15 +79,25 @@ namespace Polaroider.Mapping
 
 				ctx.AddLine(new Line(header));
 
-				var typeMapper = ctx.Options.TypeMappers[property.PropertyType];
-				if (typeMapper != null)
+				if (MapRegisteredType(property.PropertyType, ctx.Clone(ctx.Indentation + 2), value))
 				{
-					typeMapper.Map(ctx.Clone(ctx.Indentation + 2), value);
 					continue;
 				}
 
 				Map(ctx.Clone(ctx.Indentation + 2), value);
 			}
+		}
+
+		private bool MapRegisteredType(Type type, MapperContext ctx, object item)
+		{
+			var typeMapper = ctx.Options.TypeMappers[type];
+			if (typeMapper != null)
+			{
+				typeMapper.Map(ctx, item);
+				return true;
+			}
+
+			return false;
 		}
 
 		private bool MapValueType(MapperContext ctx, Type type, object item, string prefix)
