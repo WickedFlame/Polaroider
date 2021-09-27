@@ -43,6 +43,15 @@ namespace Polaroider.Tests.Mapper
 		}
 
 		[Test]
+		public void MapperContext_AddLine_Value()
+		{
+			var ctx = new MapperContext(null, new Snapshot(), new SnapshotOptions(), 2);
+			ctx.AddLine("the value");
+
+			ctx.Snapshot.Single().Value.Should().Be("  the value");
+		}
+
+		[Test]
 		public void MapperContext_AddLine_KeyValue()
 		{
 			var ctx = new MapperContext(null, new Snapshot(), new SnapshotOptions(), 2);

@@ -7,6 +7,7 @@ nav_order: 99
 ## Polaroider Changelog
 ### vNext
 - Mapping now checks if the root object is contained in the registered Mappers
+- Add a simple string as line in the mapper
 
 ### 2.0.2
 - Mocking Guids also adds a directive to replace string Guids

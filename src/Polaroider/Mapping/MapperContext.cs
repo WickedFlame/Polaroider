@@ -44,6 +44,15 @@ namespace Polaroider.Mapping
 		public ITypeMapper Mapper { get; }
 
 		/// <summary>
+		/// Add a string line to the snapshot
+		/// </summary>
+		/// <param name="value"></param>
+		public void AddLine(string value)
+		{
+			AddLine(new Line(value.Indent(Indentation)));
+		}
+
+		/// <summary>
 		/// add a line to the snapshot
 		/// </summary>
 		/// <param name="name"></param>
@@ -62,7 +71,7 @@ namespace Polaroider.Mapping
 		{
 			Snapshot.Add(line);
 		}
-
+		
 		/// <summary>
 		/// create a line that can be added to the snapshot
 		/// </summary>
