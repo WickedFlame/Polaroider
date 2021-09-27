@@ -1,16 +1,28 @@
 # Polaroider
 Automated Snapshottesting for .NET
 
-| Environment | Branch | State |
-|---|---|---|
-| Travis-ci | master | [![Build Status](https://travis-ci.org/WickedFlame/Polaroider.svg?branch=master)](https://travis-ci.org/WickedFlame/Polaroider) |
-| Appveyor | master | [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/master?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider) |
-| Appveyor | dev | [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/dev?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider) |
-| Nuget | release | [![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?style=flat)](https://www.nuget.org/packages/polaroider/) |
-| Nuget | rc | [![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?style=flat)](https://www.nuget.org/packages/polaroider/) |
+[![Build Status](https://img.shields.io/travis/chriswalpen/polaroider/master?label=Travis-CI&style=for-the-badge)](https://travis-ci.org/WickedFlame/Polaroider)
+[![Build status](https://img.shields.io/appveyor/build/chriswalpen/polaroider/master?label=Master&logo=appveyor&style=for-the-badge)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/master)
+[![Build status](https://img.shields.io/appveyor/build/chriswalpen/polaroider/dev?label=Dev&logo=appveyor&style=for-the-badge)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/dev)
+[![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?style=for-the-badge&label=Latest)](https://www.nuget.org/packages/polaroider/)
+[![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?style=for-the-badge&label=RC)](https://www.nuget.org/packages/polaroider/)
 
 Simplify UnitTesting with snapshots.
-Polaroider is a Approval Testing Framework that creates and compares snapshots of objects
+Polaroider is a Approval Testing Framework that creates and compares snapshots of objects.  
+  
+Fast and easy testing of objects
+
+```
+// arrange
+var repository = new PersonRepository();
+
+// act
+var person = repository.LoadTestPerson(...);
+
+// assert
+person.MatchSnapshot();
+```
+
 
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
 
