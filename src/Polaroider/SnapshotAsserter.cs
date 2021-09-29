@@ -40,9 +40,15 @@ namespace Polaroider
             message.AppendLine(string.Empty);
             message.AppendLine("Line:");
             message.AppendLine($"Expected - {result.OldSnapshot[result.Index]}");
-            message.Append($"Actual   - {result.NewSnapshot[result.Index]}");
+            message.AppendLine($"Actual   - {result.NewSnapshot[result.Index]}");
+			message.AppendLine(string.Empty); 
+			message.AppendLine("Original:");
+            message.AppendLine(result.OldSnapshot.ToString());
+            message.AppendLine(string.Empty);
+            message.AppendLine("New snapshot:");
+            message.Append(result.NewSnapshot.ToString());
 
-            throw exception(message.ToString());
+			throw exception(message.ToString());
         }
 
         private static (string, string, int) Difference(string savedLine, string newLine)

@@ -26,13 +26,65 @@ namespace Polaroider.Tests
                     "",
                     "Line:",
                     "Expected - a valid string",
-                    "Actual   - a invalid string"
-                    ));
+                    "Actual   - a invalid string",
+					"",
+                    "Original:",
+                    "this",
+                    "is",
+                    "a valid string",
+                    "",
+                    "New snapshot:",
+                    "this",
+                    "is",
+                    "a invalid string"
+                ));
 
                 return;
             }
 
             Assert.Fail("this should not be reached");
         }
-    }
+
+        [Test]
+        public void MismatchException_OldSnapshot()
+        {
+	        try
+	        {
+		        "this\r\nis\r\na invalid string".MatchSnapshot();
+	        }
+	        catch (SnapshotMatchException e)
+	        {
+		        e.OldSnapshot.Should().Be(string.Join(Environment.NewLine,
+			        "this",
+			        "is",
+			        "a valid string"
+		        ));
+
+		        return;
+	        }
+
+	        Assert.Fail("this should not be reached");
+        }
+
+        [Test]
+        public void MismatchException_NewSnapshot()
+        {
+	        try
+	        {
+		        "this\r\nis\r\na invalid string".MatchSnapshot();
+	        }
+	        catch (SnapshotMatchException e)
+	        {
+		        e.NewSnapshot.Should().Be(string.Join(Environment.NewLine,
+			        "this",
+			        "is",
+			        "a invalid string"
+		        ));
+
+		        return;
+	        }
+
+	        Assert.Fail("this should not be reached");
+        }
+	}
 }
