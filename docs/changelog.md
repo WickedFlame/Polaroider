@@ -6,6 +6,8 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+
+### v2.0.3
 - Mapping now checks if the root object is contained in the registered Mappers
 - The Mapper now accepts a simple string without a key as line
 - MismatchException now shows more information about the original snapshot and the new snapshot
