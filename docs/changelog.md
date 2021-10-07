@@ -7,8 +7,8 @@ nav_order: 99
 ## Polaroider Changelog
 ### vNext
 - Mapping now checks if the root object is contained in the registered Mappers
-- Add a simple string as line in the mapper
-- Show more information about the missmatch in the exception
+- The Mapper now accepts a simple string without a key as line
+- MismatchException now shows more information about the original snapshot and the new snapshot
 
 ### 2.0.2
 - Mocking Guids also adds a directive to replace string Guids

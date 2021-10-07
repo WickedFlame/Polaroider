@@ -28,7 +28,7 @@ namespace Polaroider.Tests
                     "Expected - a valid string",
                     "Actual   - a invalid string",
 					"",
-                    "Original:",
+                    "Original snapshot:",
                     "this",
                     "is",
                     "a valid string",

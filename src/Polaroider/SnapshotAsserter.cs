@@ -42,7 +42,7 @@ namespace Polaroider
             message.AppendLine($"Expected - {result.OldSnapshot[result.Index]}");
             message.AppendLine($"Actual   - {result.NewSnapshot[result.Index]}");
 			message.AppendLine(string.Empty); 
-			message.AppendLine("Original:");
+			message.AppendLine("Original snapshot:");
             message.AppendLine(result.OldSnapshot.ToString());
             message.AppendLine(string.Empty);
             message.AppendLine("New snapshot:");
