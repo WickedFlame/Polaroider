@@ -19,7 +19,7 @@ namespace Polaroider.Tests
         public void SnapshotReader_Read()
         {
             var reader = new SnapshotReader();
-            var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
+            var snapshot = reader.Read(_snapshotResolver.ResolveSnapshotSetup());
 
             snapshot.Should().NotBeNull();
 
@@ -34,7 +34,7 @@ namespace Polaroider.Tests
         public void SnapshotReader_Metadata()
         {
             var reader = new SnapshotReader();
-            var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
+            var snapshot = reader.Read(_snapshotResolver.ResolveSnapshotSetup());
 
             snapshot.Should().NotBeNull();
             snapshot.Single().Metadata.Count.Should().Be(2);
@@ -52,7 +52,7 @@ namespace Polaroider.Tests
         public void SnapshotReader_WithSettings()
         {
             var reader = new SnapshotReader();
-            var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
+            var snapshot = reader.Read(_snapshotResolver.ResolveSnapshotSetup());
 
             snapshot.Should().NotBeNull();
             
@@ -67,7 +67,7 @@ namespace Polaroider.Tests
         public void SnapshotReader_Multifile()
         {
             var reader = new SnapshotReader();
-            var snapshot = reader.Read(_snapshotResolver.ResloveSnapshotSetup());
+            var snapshot = reader.Read(_snapshotResolver.ResolveSnapshotSetup());
 
             snapshot.Count().Should().Be(3);
 

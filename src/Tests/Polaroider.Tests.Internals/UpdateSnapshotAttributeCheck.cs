@@ -10,7 +10,7 @@ namespace Polaroider.Tests.Internals
         public void CheckAttributeInSetup()
         {
             var resolver = new SnapshotSetupResolver();
-            var setup = resolver.ResloveSnapshotSetup();
+            var setup = resolver.ResolveSnapshotSetup();
 
             // attribute on 
             setup.UpdateSnapshot.Should().BeTrue();
@@ -20,7 +20,7 @@ namespace Polaroider.Tests.Internals
         public void CheckAttributeInSetupIsNotSet()
         {
             var resolver = new SnapshotSetupResolver();
-            var setup = resolver.ResloveSnapshotSetup();
+            var setup = resolver.ResolveSnapshotSetup();
 
             // no attribute set
             setup.UpdateSnapshot.Should().BeFalse();
@@ -34,7 +34,7 @@ namespace Polaroider.Tests.Internals
         public void CheckAttributeInSetup()
         {
             var resolver = new SnapshotSetupResolver();
-            var setup = resolver.ResloveSnapshotSetup();
+            var setup = resolver.ResolveSnapshotSetup();
 
             // attribute on class
             setup.UpdateSnapshot.Should().BeTrue();
@@ -47,7 +47,7 @@ namespace Polaroider.Tests.Internals
         public void CheckAttributeInSetup()
         {
             var resolver = new SnapshotSetupResolver();
-            var setup = resolver.ResloveSnapshotSetup();
+            var setup = resolver.ResolveSnapshotSetup();
 
             // no attribute set
             setup.UpdateSnapshot.Should().BeFalse();
