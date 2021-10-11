@@ -29,7 +29,7 @@ namespace Polaroider
 			options = options.MergeDefault();
 
 			var resolver = new SnapshotSetupResolver();
-            var setup = resolver.ResloveSnapshotSetup();
+            var setup = resolver.ResolveSnapshotSetup();
 
             var client = GetClient();
             var result = client.Validate(snapshot, setup, options);

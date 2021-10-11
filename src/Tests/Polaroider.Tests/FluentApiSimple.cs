@@ -30,7 +30,7 @@ namespace Polaroider.Tests
             match.Should().NotThrow();
 
             var resolver = new SnapshotSetupResolver();
-            var file = resolver.ResloveSnapshotSetup().GetFilePath();
+            var file = resolver.ResolveSnapshotSetup().GetFilePath();
 
             // Assert
             System.IO.File.Exists(file).Should().BeTrue();
@@ -74,7 +74,7 @@ namespace Polaroider.Tests
 
             var snapshotResolver = new SnapshotSetupResolver();
             var reader = new SnapshotReader();
-            var snapshots = reader.Read(snapshotResolver.ResloveSnapshotSetup());
+            var snapshots = reader.Read(snapshotResolver.ResolveSnapshotSetup());
 
             snapshots.Count().Should().Be(2);
             snapshots.Any(s => s.Metadata["id"] == "one").Should().BeTrue();

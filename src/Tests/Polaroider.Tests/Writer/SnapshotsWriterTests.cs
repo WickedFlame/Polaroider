@@ -20,14 +20,14 @@ namespace Polaroider.Tests.Writer
         [OneTimeTearDown]
         public void Teardown()
         {
-            var id = _snapshotResolver.ResloveSnapshotSetup();
+            var id = _snapshotResolver.ResolveSnapshotSetup();
             System.IO.Directory.Delete(System.IO.Path.GetDirectoryName(id.GetFilePath()));
         }
 
         [Test]
         public void SaveSnapshots()
         {
-            var snapshotId = _snapshotResolver.ResloveSnapshotSetup();
+            var snapshotId = _snapshotResolver.ResolveSnapshotSetup();
 
             var writer = new SnapshotWriter();
 
@@ -60,7 +60,7 @@ namespace Polaroider.Tests.Writer
         [Test]
         public void UpdateSnapshots()
         {
-            var snapshotId = _snapshotResolver.ResloveSnapshotSetup();
+            var snapshotId = _snapshotResolver.ResolveSnapshotSetup();
 
             // ensure testdata
             System.IO.File.Delete(snapshotId.GetFilePath());

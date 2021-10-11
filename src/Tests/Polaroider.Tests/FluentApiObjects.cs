@@ -67,7 +67,7 @@ namespace Polaroider.Tests
 
             var snapshotResolver = new SnapshotSetupResolver();
             var reader = new SnapshotReader();
-            var snapshots = reader.Read(snapshotResolver.ResloveSnapshotSetup());
+            var snapshots = reader.Read(snapshotResolver.ResolveSnapshotSetup());
 
             snapshots.Count().Should().Be(1);
             snapshots.Single(s => s.Metadata["id"] == "1").Should().NotBeNull();

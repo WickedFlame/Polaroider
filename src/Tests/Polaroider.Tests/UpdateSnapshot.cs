@@ -12,14 +12,14 @@ namespace Polaroider.Tests
         {
             var resolver = new SnapshotSetupResolver();
             var reader = new SnapshotReader();
-            var snapshots = reader.Read(resolver.ResloveSnapshotSetup());
+            var snapshots = reader.Read(resolver.ResolveSnapshotSetup());
 
             snapshots.Count().Should().Be(1);
             snapshots.Single().ToString().Should().Be("original string");
 
             "updated string".MatchSnapshot();
 
-            snapshots = reader.Read(resolver.ResloveSnapshotSetup());
+            snapshots = reader.Read(resolver.ResolveSnapshotSetup());
 
             snapshots.Count().Should().Be(1);
             snapshots.Single().ToString().Should().Be("updated string");

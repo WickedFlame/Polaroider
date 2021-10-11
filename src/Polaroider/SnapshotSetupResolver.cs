@@ -15,7 +15,7 @@ namespace Polaroider
         /// Resolves the snapshot setup based on the stacktrace
         /// </summary>
         /// <returns></returns>
-        public SnapshotSetup ResloveSnapshotSetup()
+        public SnapshotSetup ResolveSnapshotSetup()
         {
             var stackTrace = new StackTrace(1, true);
             foreach (var stackFrame in stackTrace.GetFrames() ?? new StackFrame[0])
