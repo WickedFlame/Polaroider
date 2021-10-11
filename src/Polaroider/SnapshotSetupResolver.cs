@@ -12,7 +12,7 @@ namespace Polaroider
     public class SnapshotSetupResolver
     {
         /// <summary>
-        /// Resoves the snapshot setup based on the stacktrace
+        /// Resolves the snapshot setup based on the stacktrace
         /// </summary>
         /// <returns></returns>
         public SnapshotSetup ResloveSnapshotSetup()
