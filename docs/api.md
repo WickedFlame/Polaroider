@@ -19,6 +19,30 @@ public class MyClass
 }
 ```
 Polaroider automaticaly saves the Snapshots to the folder _Snapshots. Snapshotfiles are named after the class and the method that the snapshot was taken in.
+  
+  
+Snapshots can be created of any object.  
+The objects internals are mapped to the snapshot by property and value.  
+Inside the snapshot, hirarchie is displayed by indentation  
+```csharp
+var obj = new {
+    id = 1,
+    value = new {
+        name = "test"
+    }
+}
+
+obj.MatchSnapshot();
+```
+  
+The generated snapshot looks the following:
+```csharp
+id: 1
+value:
+  name: test
+```
+
+
 
 ## Update Snapshot
 The simplest way to update a Snapshot is to delete the Sanpshot file from the folder _Snapshots. Run the test again and the Snapshot is recreated.
