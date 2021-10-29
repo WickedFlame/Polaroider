@@ -5,7 +5,8 @@ nav_order: 2
 ---
 ## Snapshot creation
 When creating a snapshot, Polaroider uses the DefaultMapper to map objects.  
-The DefaultMapper uses the [SnapshotTokenizer](#SnapshotTokenizer) to tokenize objects. When tokenizing the DefaultMapper checks for registered [Mappers](mappers) or uses the default Mappingstrategy to create a snapshot.  
+The DefaultMapper uses the [SnapshotTokenizer](#SnapshotTokenizer) to tokenize objects.  
+When tokenizing, the DefaultMapper checks for registered [Mappers](mappers) or uses the default Mappingstrategy to create a snapshot.  
 The default Mappinstrategy casts all [ValueTypes](#valuetype-matching) to string and maps the value to the snapshot.  
   
 ### <a name="SnapshotTokenizer"></a>SnapshotTokenizer
@@ -18,7 +19,10 @@ ObjectMapper.Configure<CustomClass>(m =>
 });
 ```
   
-### <a name="valuetype-matching"></a> Valuetype matching
+### Mappingstrategy
+The default Mappingstrategy loops over all properties on a object. If a Propertytype corresponds to the definition of a [ValueType](#valuetype-matching), the property is cast to string.  
+  
+### <a name="valuetype-matching"></a> ValueType matching
 Polaroider uses the ToString() method on ValueTypes to create the snapshot.  
 The default definition of a ValueType can be altered in the SnapshotOptions. In the Options use the EvaluateValueType method to override the behaviour for matching valuetypes.
 ```charp
