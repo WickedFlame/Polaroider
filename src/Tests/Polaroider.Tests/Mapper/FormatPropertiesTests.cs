@@ -73,7 +73,7 @@ namespace Polaroider.Tests.Mapper
 			{
 				Value = new CustomObject {Value = "TesT"},
 				Str = (string)null
-			}.Tokenize(options).ToString().Should().Be("Str: null\r\nValue: custom - TesT");
+			}.Tokenize(options).ToString().Should().Be($"Str: null{Environment.NewLine}Value: custom - TesT");
 		}
 
 		[Test]
@@ -100,7 +100,7 @@ namespace Polaroider.Tests.Mapper
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("Str: null\r\nValue: custom - TesT");
+			}.Tokenize().ToString().Should().Be($"Str: null{Environment.NewLine}Value: custom - TesT");
 		}
 
 		[Test]
@@ -115,7 +115,7 @@ namespace Polaroider.Tests.Mapper
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("Str: null\r\nValue: custom - TesT");
+			}.Tokenize().ToString().Should().Be($"Str: null{Environment.NewLine}Value: custom - TesT");
 
 			// reset
 			SnapshotOptions.Setup(o => { });
@@ -130,7 +130,7 @@ namespace Polaroider.Tests.Mapper
 			{
 				Value = new CustomObject { Value = "TesT" },
 				Str = (string)null
-			}.Tokenize().ToString().Should().Be("Str: \r\nValue:\r\n  Id: 0\r\n  Value: TesT");
+			}.Tokenize().ToString().Should().Be($"Str: {Environment.NewLine}Value:{Environment.NewLine}  Id: 0{Environment.NewLine}  Value: TesT");
 
 			// reset
 			SnapshotOptions.Setup(o => { });

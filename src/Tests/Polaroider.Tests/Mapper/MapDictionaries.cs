@@ -20,7 +20,7 @@ namespace Polaroider.Tests.Mapper
 				}
 			};
 				
-			SnapshotTokenizer.Tokenize(item).ToString().Should().Be("Dict:\r\n  Key: 1\r\n  Value:\r\n    Id: 1\r\n    Value: one\r\n  Key: 2\r\n  Value:\r\n    Id: 2\r\n    Value: two");
+			SnapshotTokenizer.Tokenize(item).ToString().Should().Be($"Dict:{Environment.NewLine}  Key: 1{Environment.NewLine}  Value:{Environment.NewLine}    Id: 1{Environment.NewLine}    Value: one{Environment.NewLine}  Key: 2{Environment.NewLine}  Value:{Environment.NewLine}    Id: 2{Environment.NewLine}    Value: two");
 		}
 
 		[Test]
@@ -35,7 +35,7 @@ namespace Polaroider.Tests.Mapper
 				}
 			};
 
-			SnapshotTokenizer.Tokenize(item).ToString().Should().Be("Dict:\r\n  Key: 1\r\n  Value: one\r\n  Key: 2\r\n  Value: two");
+			SnapshotTokenizer.Tokenize(item).ToString().Should().Be($"Dict:{Environment.NewLine}  Key: 1{Environment.NewLine}  Value: one{Environment.NewLine}  Key: 2{Environment.NewLine}  Value: two");
 		}
 
 		public class DictionaryItem
