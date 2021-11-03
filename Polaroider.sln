@@ -18,9 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		LICENSE = LICENSE
 		README.md = README.md
+		sonar-project.properties = sonar-project.properties
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polaroider.TestFramework.Tests", "src\Tests\Polaroider.TestFramework.Tests\Polaroider.TestFramework.Tests.csproj", "{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polaroider.TestFramework.Tests", "src\Tests\Polaroider.TestFramework.Tests\Polaroider.TestFramework.Tests.csproj", "{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

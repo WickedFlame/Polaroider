@@ -20,3 +20,13 @@ install:
 script:
   - dotnet build Polaroider.sln
   - dotnet test Polaroider.sln
+
+addons:
+  sonarcloud:
+    organization: "wickedflame"
+#    token:
+#      secure: "**************************" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
