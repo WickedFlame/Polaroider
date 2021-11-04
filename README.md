@@ -6,7 +6,10 @@ Automated Snapshottesting for .NET
 [![Build status](https://img.shields.io/appveyor/build/chriswalpen/polaroider/dev?label=Dev&logo=appveyor&style=for-the-badge)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/dev)
 [![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?style=for-the-badge&label=Latest)](https://www.nuget.org/packages/polaroider/)
 [![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?style=for-the-badge&label=RC)](https://www.nuget.org/packages/polaroider/)
-
+  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)
+  
 Simplify UnitTesting with snapshots.
 Polaroider is a Approval Testing Framework that creates and compares snapshots of objects.  
   
