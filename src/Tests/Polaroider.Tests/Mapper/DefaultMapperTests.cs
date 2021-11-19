@@ -61,7 +61,7 @@ namespace Polaroider.Tests.Mapper
 
 		public class WithIndexer
 		{
-			private List<string> _list = new List<string>
+			private readonly List<string> _list = new List<string>
 			{
 				"one", "two"
 			};

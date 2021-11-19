@@ -51,8 +51,8 @@ namespace Polaroider.Tests.Internals.Mappers
 
             public int Index
             {
-                get { throw new Exception("this should not be valled"); }
-                set { throw new Exception("this should not be valled"); }
+                get { throw new InvalidOperationException("this should not be called"); }
+                set { throw new InvalidOperationException("this should not be called"); }
             }
         }
     }

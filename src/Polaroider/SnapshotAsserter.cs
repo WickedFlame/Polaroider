@@ -3,8 +3,16 @@ using System.Text;
 
 namespace Polaroider
 {
+    /// <summary>
+    /// Asserter for throwing Exceptions
+    /// </summary>
     internal class SnapshotAsserter
     {
+        /// <summary>
+        /// Singleton connstructor
+        /// </summary>
+        protected SnapshotAsserter() { }
+
         /// <summary>
         /// assert invalid snapshots
         /// </summary>
@@ -18,8 +26,6 @@ namespace Polaroider
                     break;
 
                 case SnapshotStatus.SnapshotDoesNotExist:
-                    //save snapshot if it does not exist! simplest way of updating snapshots!
-                    //throw new SnapshotDoesNotExistException(snapResult);
                 case SnapshotStatus.SnapshotUpdated:
                 case SnapshotStatus.SnapshotsMatch:
                 default:

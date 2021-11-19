@@ -9,6 +9,11 @@ namespace Polaroider
     /// </summary>
     public class SnapshotTokenizer
     {
+		/// <summary>
+		/// Singleton constructor
+		/// </summary>
+		protected SnapshotTokenizer() { }
+
 	    /// <summary>
 	    /// create a snapshot token of the string
 	    /// </summary>

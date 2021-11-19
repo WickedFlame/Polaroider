@@ -70,8 +70,8 @@ namespace Polaroider
 		/// <summary>
 		/// setup the default options
 		/// </summary>
-		/// <param name="setup"></param>
-		public static void Setup(Action<SnapshotOptions> setup)
+		/// <param name="expression"></param>
+		public static void Setup(Action<SnapshotOptions> expression)
 		{
 			var options = new SnapshotOptions
 			{
@@ -83,11 +83,11 @@ namespace Polaroider
 					{typeof(DateTime?), new DateTimeFormatter()},
 					{typeof(MethodInfo), new MethodInfoFormatter()}
 				}, 
-				IsValueType = (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
+				IsValueType = (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType && obj != null
 			};
 
 
-			setup(options);
+			expression(options);
 
 			Default = options;
 		}
@@ -95,13 +95,13 @@ namespace Polaroider
 		/// <summary>
 		/// create a set of options
 		/// </summary>
-		/// <param name="setup"></param>
-		public static SnapshotOptions Create(Action<SnapshotOptions> setup)
+		/// <param name="expression"></param>
+		public static SnapshotOptions Create(Action<SnapshotOptions> expression)
 		{
 			var options = new SnapshotOptions();
 			Initialize(options);
 
-			setup(options);
+			expression(options);
 
 			return options;
 		}
