@@ -2,7 +2,6 @@
 Automated Snapshottesting for .NET
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WickedFlame/Polaroider/Build?label=Build&logo=Github&style=for-the-badge)](https://github.com/WickedFlame/Polaroider/actions/workflows/build.yml)
-  
 [![Build status](https://img.shields.io/appveyor/build/chriswalpen/polaroider/master?label=Master&logo=appveyor&style=for-the-badge)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/master)
 [![Build status](https://img.shields.io/appveyor/build/chriswalpen/polaroider/dev?label=Dev&logo=appveyor&style=for-the-badge)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/dev)
   
