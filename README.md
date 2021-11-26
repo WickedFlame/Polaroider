@@ -14,6 +14,9 @@ Automated Snapshottesting for .NET
   
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/34983ecbd3dc41bea645f6e255505016)](https://www.codacy.com/gh/WickedFlame/Polaroider/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WickedFlame/Polaroider&amp;utm_campaign=Badge_Grade)
   
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/34983ecbd3dc41bea645f6e255505016)](https://www.codacy.com/gh/WickedFlame/Polaroider/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WickedFlame/Polaroider&amp;utm_campaign=Badge_Grade)
+  
+  
 Simplify UnitTesting with snapshots.
 Polaroider is a Approval Testing Framework that creates and compares snapshots of objects.  
   
