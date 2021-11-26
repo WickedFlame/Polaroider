@@ -6,6 +6,7 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+- Mark MatchSnapshot methods as AssertionMethods to disable "Add at least one assertion to this test case." on Sonar
 
 ### v2.0.3
 - Mapping now checks if the root object is contained in the registered Mappers
