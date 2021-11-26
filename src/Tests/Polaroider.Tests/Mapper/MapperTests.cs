@@ -32,7 +32,7 @@ namespace Polaroider.Tests.Mapper
 
             public int Index
             {
-                get { throw new Exception("this should not be valled"); }
+                get { throw new InvalidOperationException("this should not be called"); }
                 set { //donothing
                 }
             }

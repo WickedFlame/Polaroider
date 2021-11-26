@@ -11,7 +11,7 @@ namespace Polaroider
         /// <summary>
         /// gets the metatdata associated with the snapshot
         /// </summary>
-        public SnapshotMetadata Metadata = new SnapshotMetadata();
+        public SnapshotMetadata Metadata { get; } = new SnapshotMetadata();
 
         /// <summary>
         /// gets the count of lines

@@ -16,15 +16,17 @@ namespace Polaroider
         /// compares the provided snapshot with the saved snapshot
         /// </summary>
         /// <param name="snapshot">the snapshot to compare</param>
+        [AssertionMethod]
         public static void MatchSnapshot(this Snapshot snapshot)
 	        => MatchSnapshot(snapshot, (SnapshotOptions)null);
 
-		/// <summary>
-		/// compares the provided snapshot with the saved snapshot
-		/// </summary>
-		/// <param name="snapshot">the snapshot to compare</param>
-		/// <param name="options">the options to use</param>
-		public static void MatchSnapshot(this Snapshot snapshot, SnapshotOptions options)
+        /// <summary>
+        /// compares the provided snapshot with the saved snapshot
+        /// </summary>
+        /// <param name="snapshot">the snapshot to compare</param>
+        /// <param name="options">the options to use</param>
+        [AssertionMethod]
+        public static void MatchSnapshot(this Snapshot snapshot, SnapshotOptions options)
 		{
 			options = options.MergeDefault();
 
@@ -46,78 +48,86 @@ namespace Polaroider
 		/// compares the provided string with the saved snapshot
 		/// </summary>
 		/// <param name="snapshot">the string to comapre</param>
-		public static void MatchSnapshot(this string snapshot)
+		[AssertionMethod]
+        public static void MatchSnapshot(this string snapshot)
 			=> MatchSnapshot(snapshot, (SnapshotOptions)null);
 
-		/// <summary>
-		/// compares the provided string with the saved snapshot
-		/// </summary>
-		/// <param name="snapshot">the string to comapre</param>
-		/// <param name="options">the configuration</param>
-		public static void MatchSnapshot(this string snapshot, SnapshotOptions options)
+        /// <summary>
+        /// compares the provided string with the saved snapshot
+        /// </summary>
+        /// <param name="snapshot">the string to comapre</param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot(this string snapshot, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot, options)
                 .MatchSnapshot(options);
         }
 
-		/// <summary>
-		/// compares the provided string with the saved snapshot that has the corresponding metadata
-		/// </summary>
-		/// <param name="snapshot">the string to comapre</param>
-		/// <param name="meta">the Id of the stored snapshot</param>
-		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta) 
+        /// <summary>
+        /// compares the provided string with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <param name="snapshot">the string to comapre</param>
+        /// <param name="meta">the Id of the stored snapshot</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta) 
 			=> MatchSnapshot(snapshot, meta, (SnapshotOptions)null);
 
-		/// <summary>
-		/// compares the provided string with the saved snapshot that has the corresponding metadata
-		/// </summary>
-		/// <param name="snapshot">the string to comapre</param>
-		/// <param name="meta">the Id of the stored snapshot</param>
-		/// <param name="options">the configuration</param>
-		public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, SnapshotOptions options)
+        /// <summary>
+        /// compares the provided string with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <param name="snapshot">the string to comapre</param>
+        /// <param name="meta">the Id of the stored snapshot</param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this string snapshot, Func<T> meta, SnapshotOptions options)
         {
             SnapshotTokenizer.Tokenize(snapshot, options)
                 .SetMetadata(meta)
                 .MatchSnapshot(options);
         }
 
-		/// <summary>
-		/// compares the provided object with the saved snapshot
-		/// </summary>
-		/// <typeparam name="T">the objecttype</typeparam>
-		/// <param name="snapshot">the object to comapre</param>
-		public static void MatchSnapshot<T>(this T snapshot)
+        /// <summary>
+        /// compares the provided object with the saved snapshot
+        /// </summary>
+        /// <typeparam name="T">the objecttype</typeparam>
+        /// <param name="snapshot">the object to comapre</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot)
 			=> MatchSnapshot(snapshot, (SnapshotOptions)null);
 
-		/// <summary>
-		/// compares the provided object with the saved snapshot
-		/// </summary>
-		/// <typeparam name="T">the objecttype</typeparam>
-		/// <param name="snapshot">the object to comapre</param>
-		/// <param name="options">the configuration</param>
-		public static void MatchSnapshot<T>(this T snapshot, SnapshotOptions options)
+        /// <summary>
+        /// compares the provided object with the saved snapshot
+        /// </summary>
+        /// <typeparam name="T">the objecttype</typeparam>
+        /// <param name="snapshot">the object to comapre</param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot, SnapshotOptions options)
         {
             SnapshotTokenizer.MapToToken(snapshot, options)
                 .MatchSnapshot(options);
         }
 
-		/// <summary>
-		/// compares the provided object with the saved snapshot that has the corresponding metadata
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="snapshot"></param>
-		/// <param name="meta"></param>
-		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
+        /// <summary>
+        /// compares the provided object with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <param name="meta"></param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
 			=> MatchSnapshot(snapshot, meta, (SnapshotOptions)null);
 
-		/// <summary>
-		/// compares the provided object with the saved snapshot that has the corresponding metadata
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="snapshot"></param>
-		/// <param name="meta"></param>
-		/// <param name="options">the configuration</param>
-		public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, SnapshotOptions options)
+        /// <summary>
+        /// compares the provided object with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <param name="meta"></param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, SnapshotOptions options)
         {
             SnapshotTokenizer.MapToToken(snapshot, options)
                 .SetMetadata(meta)
