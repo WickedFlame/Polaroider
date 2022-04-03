@@ -2,11 +2,11 @@
 
 
 # version format
-version: 2.0.5.{build}
+version: 2.0.6.{build}
 
 environment:
-  rc_version: 2.0.5-RC{build}
-  base_version: 2.0.5
+  rc_version: 2.0.6-RC{build}
+  base_version: 2.0.6
 
 # you can use {branch} name in version format too
 # version: 1.0.{build}-{branch}
