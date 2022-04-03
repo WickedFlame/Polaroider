@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -71,6 +72,52 @@ namespace Polaroider.Tests
 
             snapshots.Count().Should().Be(1);
             snapshots.Single(s => s.Metadata["id"] == "1").Should().NotBeNull();
+        }
+
+        [Test]
+        public void FluentApi_MatchInExpression()
+        {
+            var item = new { data = "this is a test", value = 1 };
+            ExpressionTest(() => ExpressionTest(() => MatchInExpression(item)));
+        }
+
+        [Test]
+        public void FluentApi_MatchInExternalThread()
+        {
+            var item = new { data = "this is a test", value = 1 };
+            var task = System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                ExpressionTest(() => MatchInExpression(item));
+            });
+
+            task.Wait();
+        }
+
+        [Test]
+        public void FluentApi_MatchInExternalThread_ExternalMethod()
+        {
+            var item = new { data = "this is a test", value = 1 };
+            var task = StartTask(item);
+
+            task.Wait();
+        }
+
+        public Task StartTask(object item)
+        {
+            return System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                ExpressionTest(() => MatchInExpression(item));
+            });
+        }
+
+        public void ExpressionTest(Action action)
+        {
+            action();
+        }
+
+        public void MatchInExpression(object data)
+        {
+            data.MatchSnapshot();
         }
     }
 }

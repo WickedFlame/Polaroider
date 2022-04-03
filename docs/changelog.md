@@ -6,6 +6,11 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+
+### v2.0.5
+- Creating snapshots in a separate thread caused errors
+
+### v2.0.4
 - Mark MatchSnapshot methods as AssertionMethods to disable "Add at least one assertion to this test case." on Sonar
 
 ### v2.0.3

@@ -18,6 +18,8 @@ namespace Polaroider
         public SnapshotSetup ResolveSnapshotSetup()
         {
             var stackTrace = new StackTrace(1, true);
+            StackFrame lastFrame = null;
+
             foreach (var stackFrame in stackTrace.GetFrames() ?? new StackFrame[0])
             {
                 var method = stackFrame.GetMethod();
@@ -27,12 +29,26 @@ namespace Polaroider
                     continue;
                 }
 
+                var name = stackFrame.GetFileName();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    // if a snapshotcreation is done inside a thread
+                    // the stackframe is not really where it started of
+                    // so we try to get the last stackframe that was inside the testclass
+                    lastFrame = stackFrame;
+                }
+
                 if (!TestAttributeResolver.IsTestMethod(method))
                 {
                     continue;
                 }
 
-                return new SnapshotSetup(stackFrame.GetFileName(), method);
+                return new SnapshotSetup(name, method);
+            }
+
+            if (lastFrame != null)
+            {
+                return new SnapshotSetup(lastFrame.GetFileName(), lastFrame.GetMethod());
             }
 
             return null;
@@ -59,14 +75,17 @@ namespace Polaroider
             {
                 Func<string, bool> methodContainsAttribute = attributeName =>
                 {
-                    var attribute = method?.CustomAttributes.FirstOrDefault(a =>
+                    //var attribute = method?.CustomAttributes.FirstOrDefault(a =>
+                    //{
+                    //    var type = a.AttributeType;
+                    var attribute = method?.GetCustomAttributes()?.FirstOrDefault(a =>
                     {
-                        var type = a.AttributeType;
+                        var type = a.GetType();
                         do
                         {
                             if (type.FullName.ToLower().StartsWith(attributeName))
                             {
-	                            return true;
+                                return true;
                             }
 
                             type = type.BaseType;

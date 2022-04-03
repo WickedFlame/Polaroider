@@ -11,7 +11,15 @@ namespace Polaroider
         /// <returns></returns>
         public static string GetFilePath(this SnapshotSetup setup)
         {
-            return Path.Combine(setup.Directory, "_Snapshots", $"{setup.ClassName}_{setup.MethodName}.snapshot");
+            var className = setup.ClassName;
+            if (className.Contains("<"))
+            {
+                className = setup.FileName.Replace(".cs", string.Empty);
+            }
+
+            var method = setup.MethodName.Replace("<", string.Empty).Replace(">", string.Empty);
+
+            return Path.Combine(setup.Directory, "_Snapshots", $"{className}_{method}.snapshot");
         }
     }
 }
