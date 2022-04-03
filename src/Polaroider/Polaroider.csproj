@@ -12,10 +12,10 @@
     <Copyright>@WickedFlame 2020</Copyright>
     <PackageTags>Snapshot, Snapshottesting, Test</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>2.0.1.2</Version>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
-    <FileVersion>2.0.1.2</FileVersion>
-    <PackageVersion>2.0.1-RC02</PackageVersion>
+    <Version>2.0.5.8</Version>
+    <AssemblyVersion>2.0.5</AssemblyVersion>
+    <FileVersion>2.0.5.8</FileVersion>
+    <PackageVersion>2.0.5-RC08</PackageVersion>
     <Title>Polaroider</Title>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>http://wickedflame.github.io/Polaroider</PackageProjectUrl>
