@@ -27,7 +27,7 @@ for:
       - dotnet restore ./build/_build.csproj
 
     build_script:
-      - nuke Release --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+      - nuke Release --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%" --configuration Release
 
   - 
     # branches to build
@@ -46,12 +46,12 @@ for:
       - dotnet restore ./build/_build.csproj
 
     build_script:
-      - nuke Release --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+      - nuke Release --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%" --configuration Release
 
 artifacts:
-  - path: src\MeasureMap\bin\Release\netstandard2.1\MeasureMap.dll
+  - path: src\MeasureMap\bin\Release\netstandard2.0\MeasureMap.dll
     name: MeasureMap.dll
-  - path: src\MeasureMap\bin\Release\netstandard2.1\MeasureMap.xml
+  - path: src\MeasureMap\bin\Release\netstandard2.0\MeasureMap.xml
     name: MeasureMap.xml
   # pushing all *.nupkg files in directory
-  - path: 'src\MeasureMap\bin\Release\*.nupkg'
+  - path: 'src\**\*.nupkg'
