@@ -30,6 +30,7 @@ namespace Polaroider
                 }
 
                 var name = stackFrame.GetFileName();
+                
                 if (!string.IsNullOrEmpty(name))
                 {
                     // if a snapshotcreation is done inside a thread
@@ -41,6 +42,13 @@ namespace Polaroider
                 if (!TestAttributeResolver.IsTestMethod(method))
                 {
                     continue;
+                }
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    // stackFrame.GetFileName() only works when pdb files are provided
+                    // When using Live Unit Testing the checkbox for "Enable debug symbol..." has to be activated
+                    throw new InvalidOperationException($"Polaroider could not find file containing the Test {method.Name}.{Environment.NewLine}Polaroider relies on pdb to determine the path of the executing testclass.{Environment.NewLine}Please ensure that pdb files are generated when building the projects.{Environment.NewLine}When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
                 }
 
                 return new SnapshotSetup(name, method);

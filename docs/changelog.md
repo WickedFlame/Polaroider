@@ -6,6 +6,8 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+- Addd nuke for building
+- Troubleshooting when using Live Unit Testing
 
 ### v2.0.5
 - Creating snapshots in a separate thread caused errors
