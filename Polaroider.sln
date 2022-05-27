@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polaroider.TestFramework.Tests", "src\Tests\Polaroider.TestFramework.Tests\Polaroider.TestFramework.Tests.csproj", "{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{AA17F49A-53F5-46AF-8304-9C102D23170A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,8 @@ Global
 		{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{218AB8C6-0E57-4D6A-99AE-F58147D8C55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA17F49A-53F5-46AF-8304-9C102D23170A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA17F49A-53F5-46AF-8304-9C102D23170A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +57,7 @@ Global
 		{B1C89E88-4FEE-4743-8776-29944D4F470F} = {3726E9C8-5C0B-4B1F-BB10-2C47FCCC951E}
 		{B59A9CC5-EF0B-443C-9B45-5FB242925E24} = {3726E9C8-5C0B-4B1F-BB10-2C47FCCC951E}
 		{218AB8C6-0E57-4D6A-99AE-F58147D8C55B} = {3726E9C8-5C0B-4B1F-BB10-2C47FCCC951E}
+		{AA17F49A-53F5-46AF-8304-9C102D23170A} = {0B0FEA00-9A73-4DDA-94C0-4B7D50870109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F7D15CF-E492-4131-B28F-452A33F8D748}

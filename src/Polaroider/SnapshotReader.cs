@@ -29,10 +29,11 @@ namespace Polaroider
         /// The name of the type defines the name of the file containing the testdata.
         /// If the type ends with Test or Tests the name of the tesdata file will be used without the ending
         /// </summary>
+        /// <param name="setup"></param>
         /// <returns></returns>
-        public SnapshotCollection Read(SnapshotSetup snapshotId)
+        public SnapshotCollection Read(SnapshotSetup setup)
         {
-            var file = snapshotId.GetFilePath();
+            var file = setup.GetFilePath();
 
             if (!File.Exists(file))
             {

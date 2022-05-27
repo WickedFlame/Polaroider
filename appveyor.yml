@@ -1,134 +1,57 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
+environment:
+  base_version: 2.0.6
 
 # version format
-version: 2.0.5.{build}
+version: $(base_version).{build}
 
-environment:
-  rc_version: 2.0.5-RC{build}
-  base_version: 2.0.5
+image:
+  - Visual Studio 2022
 
-# you can use {branch} name in version format too
-# version: 1.0.{build}-{branch}
+for:
+  - 
+    # branches to build
+    branches:
+      # whitelist
+      only:
+        - dev
 
-# branches to build
-branches:
-  # whitelist
-  only:
-    - master
-    - dev
+    # Do not build on tags (GitHub only)
+    skip_tags: true
 
-# Do not build on tags (GitHub only)
-skip_tags: true
+    install:
+      - dotnet tool install Nuke.GlobalTool --global --version 6.0.1 --no-cache
 
-os: Visual Studio 2019
-install:
-  - set PATH=C:\Program Files (x86)\MSBuild\16.0\Bin;%PATH%
-#  - sudo apt-get install nunit-console
-#  - nuget restore Polaroider.sln
+    before_build:
+      - dotnet restore ./build/_build.csproj
 
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: '{version}'
-  package_version: '$(base_version)-RC{build}'
-  assembly_version: $(base_version)
-  file_version: '{version}'
-  informational_version: '{version}'
- 
-# to add several platforms to build matrix:
-#platform:
-#  - x86
-#  - Any CPU
+    build_script:
+      - nuke Release --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%" --configuration Release
 
-# build Configuration, i.e. Debug, Release, etc.
-configuration: Release
+  - 
+    # branches to build
+    branches:
+      # whitelist
+      only:
+        - master
 
-# to add several configurations to build matrix:
-#configuration:
-#  - Debug
-#  - Release
+    # Do not build on tags (GitHub only)
+    skip_tags: true
 
-before_build:
-  - nuget restore Polaroider.sln
+    install:
+      - dotnet tool install Nuke.GlobalTool --global --version 6.0.1 --no-cache
 
-build:
-  parallel: true                  # enable MSBuild parallel builds
-  project: Polaroider.sln             # path to Visual Studio solution or project
-  publish_wap: false              # package Web Application Projects (WAP) for Web Deploy
-  publish_wap_xcopy: false        # package Web Application Projects (WAP) for XCopy deployment
-  publish_azure: false            # package Azure Cloud Service projects and push to artifacts
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
-  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
-  include_nuget_references: true  # add -IncludeReferencedProjects option while packaging NuGet artifacts
+    before_build:
+      - dotnet restore ./build/_build.csproj
 
-# MSBuild verbosity level
-# verbosity: quiet|minimal|normal|detailed
-  
-  
-  
-  
-#---------------------------------#
-#       tests configuration       #
-#---------------------------------#
-
-#test:
-#  assemblies:
-#    only:
-#      - Polaroider.Test.dll
-#    - '**\Polaroider.Configuration.Test.dll'
-
-#  categories:
-#    - UI
-#    - E2E
-
-# to run tests from different categories as separate jobs in parallel
-#test:
-#  categories:
-#    - A            # A category common for all jobs
-#    - [UI]         # 1st job
-#    - [DAL, BL]    # 2nd job
-
-# scripts to run before tests
-#before_test:
-#  - echo script1
-#  - ps: Write-Host "script1"
-
-# scripts to run after tests
-#after_test:
-#  - ps: .\pack.ps1   # Run a script to create the nuget package
-
-# to run your custom scripts instead of automatic tests
-#test_script:
-#  - echo This is my custom test script
-
-# to disable automatic tests 
-#test: off
-
-#---------------------------------#
-#      artifacts configuration    #
-#---------------------------------#
+    build_script:
+      - nuke Release --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%" --configuration Release
 
 artifacts:
-  - path: src\Polaroider\bin\Release\netstandard2.0\Polaroider.dll
-    name: Polaroider.dll
-  - path: src\Polaroider\bin\Release\netstandard2.0\Polaroider.xml
-    name: Polaroider.xml
-
-#  - path: src\Polaroider.Configuration\bin\Release\Polaroider.Configuration.dll
-#    name: Polaroider.Configuration.dll
-
+  - path: src\MeasureMap\bin\Release\netstandard2.0\MeasureMap.dll
+    name: MeasureMap.dll
+  - path: src\MeasureMap\bin\Release\netstandard2.0\MeasureMap.xml
+    name: MeasureMap.xml
   # pushing all *.nupkg files in directory
-  - path: '.\*.nupkg'
-  
-# providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
-# provider names are case-sensitive!
-#deploy:
-    # Deploying to NuGet feed
-#  - provider: NuGet
-#    server: https://my.nuget.server/feed
-#    api_key:
-#      secure: FYWX6NfjZIVw==
-#    skip_symbols: false
-#    symbol_server: https://your.symbol.server/feed
-#    artifact: Polaroider.nupkg
+  - path: 'src\**\*.nupkg'
