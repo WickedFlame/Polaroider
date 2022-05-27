@@ -6,6 +6,8 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+
+### v2.0.6
 - Addd nuke for building
 - Troubleshooting when using Live Unit Testing
 
