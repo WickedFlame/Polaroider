@@ -9,11 +9,14 @@ namespace Polaroider
     public class SnapshotSetup
     {
         private readonly MethodBase _method;
-        private readonly string _fullPath;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="method"></param>
         public SnapshotSetup(string fileName, MethodBase method)
         {
-            _fullPath = fileName;
             _method = method;
 
             FileName = Path.GetFileName(fileName);
