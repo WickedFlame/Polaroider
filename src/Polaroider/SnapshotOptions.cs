@@ -299,6 +299,18 @@ namespace Polaroider
 		}
 
 		/// <summary>
+		/// Ignore whitespaces in the snapshot
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
+        public static SnapshotOptions IgnoreWhiteSpaces(this SnapshotOptions options)
+        {
+			options.AddDirective(line => line.Replace(" ", string.Empty));
+
+			return options;
+        }
+
+		/// <summary>
 		/// set an expression to evaluate valuetypes. defaults to (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
 		/// </summary>
 		/// <param name="options"></param>

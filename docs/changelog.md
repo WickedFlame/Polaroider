@@ -6,6 +6,7 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+- Added ExtensionMethod for IgnoreWhiteSaces
 
 ### v2.0.6
 - Addd nuke for building
