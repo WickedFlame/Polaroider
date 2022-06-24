@@ -1,0 +1,9 @@
+---data
+Comparer:
+Formatters:
+IsValueType:
+  Method: <Setup>b__29_0(System.Type,System.Object)
+  Target:
+Parser:
+TypeMappers:
+UpdateSnapshot: False

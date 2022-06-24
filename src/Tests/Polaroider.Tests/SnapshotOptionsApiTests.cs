@@ -30,7 +30,9 @@ namespace Polaroider.Tests
 				
 				o.SetComparer((line1, line2) => line1.Equals(line2));
 			});
-		}
+
+            options.MatchSnapshot();
+        }
 
 		public class NumberFormatter : IValueFormatter
 		{
