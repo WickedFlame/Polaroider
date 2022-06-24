@@ -311,7 +311,7 @@ namespace Polaroider
         }
 
 		/// <summary>
-		/// set an expression to evaluate valuetypes. defaults to (type, obj) => (type.IsValueType || type == typeof(string)) && !type.IsGenericType
+		/// set an expression to evaluate valuetypes. defaults to (type, obj) => (type.IsValueType || type == typeof(string)) &amp;&amp; !type.IsGenericType
 		/// </summary>
 		/// <param name="options"></param>
 		/// <param name="evaluator"></param>

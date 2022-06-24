@@ -11,8 +11,8 @@ namespace Polaroider
 		/// </summary>
 		/// <param name="newSnapshot"></param>
 		/// <param name="savedSnapshot"></param>
-		/// <param name="config"></param>
+		/// <param name="options"></param>
 		/// <returns></returns>
-        SnapshotResult Compare(Snapshot newSnapshot, Snapshot savedSnapshot, SnapshotOptions config);
+		SnapshotResult Compare(Snapshot newSnapshot, Snapshot savedSnapshot, SnapshotOptions options);
     }
 }
