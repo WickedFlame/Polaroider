@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Polaroider
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class LineCompare : ILineCompare
 	{
 		private readonly Func<Line, Line, bool> _compare;

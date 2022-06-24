@@ -2,6 +2,9 @@
 
 namespace Polaroider
 {
+	/// <summary>
+	/// Extensions for MapperContextTypeMapper
+	/// </summary>
 	public static class MapperContextExtensions
 	{
 		/// <summary>

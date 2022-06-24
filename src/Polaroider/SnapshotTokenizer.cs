@@ -97,7 +97,7 @@ namespace Polaroider
 				return token;
 			}
 
-			for (var i = 0; i < token.Count(); i++)
+			for (var i = 0; i < token.Count; i++)
 			{
 				token[i] = parser.Parse(token[i]);
 			}

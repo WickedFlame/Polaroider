@@ -83,9 +83,6 @@ namespace Polaroider
             {
                 Func<string, bool> methodContainsAttribute = attributeName =>
                 {
-                    //var attribute = method?.CustomAttributes.FirstOrDefault(a =>
-                    //{
-                    //    var type = a.AttributeType;
                     var attribute = method?.GetCustomAttributes()?.FirstOrDefault(a =>
                     {
                         var type = a.GetType();

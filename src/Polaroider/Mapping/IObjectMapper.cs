@@ -1,6 +1,9 @@
 ﻿
 namespace Polaroider.Mapping
 {
+    /// <summary>
+    /// Interface for mapping objects to a snapshot
+    /// </summary>
     public interface IObjectMapper : IMapper
     {
         /// <summary>
