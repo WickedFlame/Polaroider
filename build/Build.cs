@@ -35,7 +35,7 @@ class Build : NukeBuild
     public string Version { get; set; } = $"2.0.7";
 
     [Parameter("The Buildnumber provided by the CI")]
-    public string BuildNo = $"{DateTime.Today.Month * 31 + DateTime.Today.Day}0";
+    public int BuildNo = 5;
 
     [Parameter("Is RC Version")]
     public bool IsRc = false;
@@ -110,6 +110,6 @@ class Build : NukeBuild
         );
 
     string PackageVersion
-        => IsRc ? int.Parse(BuildNo) < 10 ? $"{Version}-RC0{BuildNo}" : $"{Version}-RC{BuildNo}" : Version;
+        => IsRc ? BuildNo < 10 ? $"{Version}-RC0{BuildNo}" : $"{Version}-RC{BuildNo}" : Version;
 
 }

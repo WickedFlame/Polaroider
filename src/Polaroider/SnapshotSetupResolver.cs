@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Polaroider
 {
@@ -46,9 +47,15 @@ namespace Polaroider
 
                 if (string.IsNullOrEmpty(name))
                 {
-                    // stackFrame.GetFileName() only works when pdb files are provided
+                    // stackFrame.GetFileName() only works when pdb files are provided and the code is not optimized
                     // When using Live Unit Testing the checkbox for "Enable debug symbol..." has to be activated
-                    throw new InvalidOperationException($"Polaroider could not find the file containing the Test {method.Name}.{Environment.NewLine}Polaroider relies on pdb to determine the path of the executing testclass.{Environment.NewLine}Please ensure that pdb files are generated when building the projects.{Environment.NewLine}When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
+                    var sb = new StringBuilder()
+                        .AppendLine($"Polaroider could not find the file containing the Test {method.Name}.")
+                        .AppendLine("Please ensure the following is configured in the testproject:")
+                        .AppendLine("- Enable the generation of *.pdb files")
+                        .AppendLine("- Disable codeoptimizatin for builds. This can be set through <Optimize>False</Optimize> in the *.csproj file of the testproject")
+                        .AppendLine("When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
+                    throw new InvalidOperationException(sb.ToString());
                 }
 
                 return new SnapshotSetup(name, method);
@@ -59,7 +66,14 @@ namespace Polaroider
                 return new SnapshotSetup(lastFrame.GetFileName(), lastFrame.GetMethod());
             }
 
-            return null;
+            // stackFrame.GetFileName() only works when pdb files are provided and the code is not optimized
+            var msg = new StringBuilder()
+                .AppendLine("Polaroider could not find the file containing the Test.")
+                .AppendLine("Please ensure the following is configured in the testproject:")
+                .AppendLine("- Enable the generation of *.pdb files")
+                .AppendLine("- Disable codeoptimizatin for builds. This can be set through <Optimize>False</Optimize> in the *.csproj file of the testproject")
+                .AppendLine("When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
+            throw new InvalidOperationException(msg.ToString());
         }
 
         private bool IsInternalMethod(MemberInfo method)
