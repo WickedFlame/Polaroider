@@ -30,15 +30,15 @@ person.MatchSnapshot();
 ```
   
 ## Testing with Snapshots
-Snashots help when testing objects
-- Ensure that objects don't change. When adding or removing properties insid objects, these are automatically captured and asserted in the tests
-- Ensure the state of objects. All data and property values of objects are validated and asserted
-- Simplify testing big strings to be same. Just create a snapshot of the string and compare them
+Snashots help when testing objects or large strings
+- **Snapshots ensure that objects don't change.** When adding or removing properties insid objects, these are automatically captured and asserted in the tests
+- **Sanpshots ensure the state of objects.** All data and property values of objects are validated and asserted
+- **Simplify testing that big strings are be same.** Just create a snapshot of the string and compare them in any further testrun
   
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
   
 ## Troubleshooting
-When having trouble generating Snapshots or the TestMethodNotFoundException is thrown, please make sure that Codeoptimization is disabled and *.pdb files are generated. 
+When having trouble generating Snapshots or the **TestMethodNotFoundException** is thrown, please make sure that the option for Optimize code is disabled and *.pdb files are generated. 
 For more information visit [https://wickedflame.github.io/Polaroider/troubleshooting](https://wickedflame.github.io/Polaroider/troubleshooting)
   
 ## Update from v1 to v2
