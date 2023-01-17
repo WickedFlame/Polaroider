@@ -1,5 +1,8 @@
 ﻿namespace Polaroider
 {
+	/// <summary>
+	/// Extensions for <see cref="SnapshotTokenizer"/>
+	/// </summary>
 	public static class SnapshotTokenizerExtensions
 	{
 		/// <summary>

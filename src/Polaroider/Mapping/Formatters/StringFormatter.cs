@@ -22,6 +22,9 @@
 		}
 	}
 
+	/// <summary>
+	/// Simple string formatter
+	/// </summary>
 	public class SimpleStringFormatter : IValueFormatter
 	{
 		/// <summary>

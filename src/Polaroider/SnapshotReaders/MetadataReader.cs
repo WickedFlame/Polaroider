@@ -1,11 +1,18 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 
 namespace Polaroider.SnapshotReaders
 {
+    /// <summary>
+    /// Metadatareader
+    /// </summary>
     internal class MetadataReader : ILineReader
     {
-        public void ReadLine(string line, Snapshot item)
+        /// <summary>
+        /// Read a line of a snapshot
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="snapshot"></param>
+        public void ReadLine(string line, Snapshot snapshot)
         {
             var index = line.IndexOf(':');
             if (index < 0)
@@ -15,9 +22,14 @@ namespace Polaroider.SnapshotReaders
 
             var key = line.Substring(0, index);
             var value = line.Substring(index + 1);
-            item.Metadata.Add(key, value.Trim());
+            snapshot.Metadata.Add(key, value.Trim());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="snapshot"></param>
+        /// <returns></returns>
         public bool NewSnapshot(Snapshot snapshot)
         {
             return snapshot != null && (snapshot.Any() || snapshot.Metadata.Any());

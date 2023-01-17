@@ -59,7 +59,6 @@ namespace Polaroider.Mapping
 		/// <param name="value"></param>
 		public void AddLine(string name, object value)
 		{
-			//TODO: type mapping of string....
 			AddLine(BuildLine(name, value?.ToString()));
 		}
 

@@ -30,7 +30,7 @@ namespace Polaroider.Tests.Mapper
 		public void MapperContext_Indentation()
 		{
 			var ctx = new MapperContext(null, new Snapshot(), new SnapshotOptions(), 2);
-			Assert.AreEqual(ctx.Indentation, 2);
+			Assert.AreEqual(2, ctx.Indentation);
 		}
 
 		[Test]

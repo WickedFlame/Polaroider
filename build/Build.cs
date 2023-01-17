@@ -15,8 +15,6 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[CheckBuildProjectConfigurations]
-[ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
     /// Support plugins are available for:
@@ -34,10 +32,10 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Parameter("Version to be injected in the Build")]
-    public string Version { get; set; } = $"2.0.6";
+    public string Version { get; set; } = $"2.0.7";
 
     [Parameter("The Buildnumber provided by the CI")]
-    public string BuildNo = $"{DateTime.Today.Month * 31 + DateTime.Today.Day}0";
+    public int BuildNo = 5;
 
     [Parameter("Is RC Version")]
     public bool IsRc = false;
@@ -112,6 +110,6 @@ class Build : NukeBuild
         );
 
     string PackageVersion
-        => IsRc ? int.Parse(BuildNo) < 10 ? $"{Version}-RC0{BuildNo}" : $"{Version}-RC{BuildNo}" : Version;
+        => IsRc ? BuildNo < 10 ? $"{Version}-RC0{BuildNo}" : $"{Version}-RC{BuildNo}" : Version;
 
 }

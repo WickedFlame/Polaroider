@@ -3,8 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace Polaroider
 {
+	/// <summary>
+	/// Extensions for string
+	/// </summary>
     public static class StringExtensions
     {
+		/// <summary>
+		/// Indent the string
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="indentation"></param>
+		/// <returns></returns>
         internal static string Indent(this string value, int indentation)
         {
             return "".PadLeft(indentation) + value;

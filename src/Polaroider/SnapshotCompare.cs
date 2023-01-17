@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 namespace Polaroider
 {
 	/// <summary>
@@ -8,37 +6,37 @@ namespace Polaroider
 	/// </summary>
     public class SnapshotCompare : ISnapshotCompare
     {
-		/// <summary>
-		/// compare two snapshots with each other
-		/// </summary>
-		/// <param name="newshot"></param>
-		/// <param name="savedshot"></param>
-		/// <param name="options">the options</param>
-		/// <returns></returns>
-		public SnapshotResult Compare(Snapshot newshot, Snapshot savedshot, SnapshotOptions options)
+        /// <summary>
+        /// compare two snapshots with each other
+        /// </summary>
+        /// <param name="newSnapshot"></param>
+        /// <param name="savedSnapshot"></param>
+        /// <param name="options">the options</param>
+        /// <returns></returns>
+        public SnapshotResult Compare(Snapshot newSnapshot, Snapshot savedSnapshot, SnapshotOptions options)
         {
-            if (newshot == null || savedshot == null)
+            if (newSnapshot == null || savedSnapshot == null)
             {
-                return SnapshotResult.SnapshotDoesNotExist(savedshot);
+                return SnapshotResult.SnapshotDoesNotExist(savedSnapshot);
             }
 
-            var count = newshot.Count;
-            if (count < savedshot.Count)
+            var count = newSnapshot.Count;
+            if (count < savedSnapshot.Count)
             {
-                count = savedshot.Count;
+                count = savedSnapshot.Count;
             }
 
             var comparer = options.Comparer ?? LineCompare.Default;
 
             for (var i = 0; i < count; i++)
             {
-				if (!comparer.Compare(newshot[i], savedshot[i]))
+				if (!comparer.Compare(newSnapshot[i], savedSnapshot[i]))
 				{
-                    return SnapshotResult.SnapshotsDoNotMatch(newshot, savedshot, i);
+                    return SnapshotResult.SnapshotsDoNotMatch(newSnapshot, savedSnapshot, i);
                 }
             }
 
-            return SnapshotResult.SnapshotsMatch(newshot, savedshot);
+            return SnapshotResult.SnapshotsMatch(newSnapshot, savedSnapshot);
         }
     }
 }

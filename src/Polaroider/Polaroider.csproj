@@ -1,31 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/WickedFlame/Polaroider</RepositoryUrl>
-    <Authors>Christian Walpen</Authors>
-    <Company>WickedFlame</Company>
-    <Description>Automated Snapshottesting for .NET</Description>
-    <Copyright>@WickedFlame 2020</Copyright>
-    <PackageTags>Snapshot, Snapshottesting, Test</PackageTags>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Version>2.0.5.8</Version>
-    <AssemblyVersion>2.0.5</AssemblyVersion>
-    <FileVersion>2.0.5.8</FileVersion>
-    <PackageVersion>2.0.5-RC08</PackageVersion>
-    <Title>Polaroider</Title>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageProjectUrl>http://wickedflame.github.io/Polaroider</PackageProjectUrl>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Polaroider.snk</AssemblyOriginatorKeyFile>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/WickedFlame/Polaroider</RepositoryUrl>
+        <Authors>Christian Walpen</Authors>
+        <Company>WickedFlame</Company>
+        <Description>Automated Snapshottesting for .NET</Description>
+        <Copyright>@WickedFlame 2020</Copyright>
+        <PackageTags>Snapshot, Snapshottesting, Test</PackageTags>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Version>2.0.5.8</Version>
+        <AssemblyVersion>2.0.5</AssemblyVersion>
+        <FileVersion>2.0.5.8</FileVersion>
+        <PackageVersion>2.0.5-RC08</PackageVersion>
+        <Title>Polaroider</Title>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <PackageProjectUrl>http://wickedflame.github.io/Polaroider</PackageProjectUrl>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Polaroider.snk</AssemblyOriginatorKeyFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Polaroider.xml</DocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>bin\Release\netstandard2.0\Polaroider.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
 </Project>

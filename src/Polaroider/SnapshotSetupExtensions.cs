@@ -2,6 +2,9 @@
 
 namespace Polaroider
 {
+    /// <summary>
+    /// Extensions for SnapshotSetup
+    /// </summary>
     public static class SnapshotSetupExtensions
     {
         /// <summary>

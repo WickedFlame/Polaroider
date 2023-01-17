@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Polaroider
 {
+    /// <summary>
+    /// The object representing a snapshot
+    /// </summary>
     public class Snapshot : IEnumerable<Line>
     {
         private readonly List<Line> _lines = new List<Line>();
@@ -66,6 +69,10 @@ namespace Polaroider
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// Convert the snapshot to a string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Join(Environment.NewLine, _lines);
