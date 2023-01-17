@@ -37,6 +37,10 @@ Snashots help when testing objects
   
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
   
+## Troubleshooting
+When having trouble generating Snapshots or the TestMethodNotFoundException is thrown, please make sure that Codeoptimization is disabled and *.pdb files are generated. 
+For more information visit [https://wickedflame.github.io/Polaroider/troubleshooting](https://wickedflame.github.io/Polaroider/troubleshooting)
+  
 ## Update from v1 to v2
 v1 was focused on simplicity. 
 v2 is focused on flexibility while maintaining simplicity.

@@ -49,13 +49,7 @@ namespace Polaroider
                 {
                     // stackFrame.GetFileName() only works when pdb files are provided and the code is not optimized
                     // When using Live Unit Testing the checkbox for "Enable debug symbol..." has to be activated
-                    var sb = new StringBuilder()
-                        .AppendLine($"Polaroider could not find the file containing the Test {method.Name}.")
-                        .AppendLine("Please ensure the following is configured in the testproject:")
-                        .AppendLine("- Enable the generation of *.pdb files")
-                        .AppendLine("- Disable codeoptimizatin for builds. This can be set through <Optimize>False</Optimize> in the *.csproj file of the testproject")
-                        .AppendLine("When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
-                    throw new InvalidOperationException(sb.ToString());
+                    throw new TestMethodNotFoundException();
                 }
 
                 return new SnapshotSetup(name, method);
@@ -67,13 +61,7 @@ namespace Polaroider
             }
 
             // stackFrame.GetFileName() only works when pdb files are provided and the code is not optimized
-            var msg = new StringBuilder()
-                .AppendLine("Polaroider could not find the file containing the Test.")
-                .AppendLine("Please ensure the following is configured in the testproject:")
-                .AppendLine("- Enable the generation of *.pdb files")
-                .AppendLine("- Disable codeoptimizatin for builds. This can be set through <Optimize>False</Optimize> in the *.csproj file of the testproject")
-                .AppendLine("When using Live Unit Testing make sure the checkbox for 'Enable debug symbol and xml documentation comment generation' is enabled in the Visual Studio Options.");
-            throw new InvalidOperationException(msg.ToString());
+            throw new TestMethodNotFoundException();
         }
 
         private bool IsInternalMethod(MemberInfo method)

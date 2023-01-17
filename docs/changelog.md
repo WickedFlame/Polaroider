@@ -6,8 +6,12 @@ nav_order: 99
 
 ## Polaroider Changelog
 ### vNext
+#### Added
 - Added ExtensionMethod for IgnoreWhiteSaces
-
+  
+#### Fixed
+- NullReferenceException when using optimized compiling
+  
 ### v2.0.6
 - Addd nuke for building
 - Troubleshooting when using Live Unit Testing
