@@ -31,9 +31,9 @@ person.MatchSnapshot();
   
 ## Testing with Snapshots
 Snashots help when testing objects or large strings
-- **Snapshots ensure that objects don't change.** When adding or removing properties insid objects, these are automatically captured and asserted in the tests
-- **Sanpshots ensure the state of objects.** All data and property values of objects are validated and asserted
-- **Simplify testing that big strings are be same.** Just create a snapshot of the string and compare them in any further testrun
+- **Snapshots ensure that object structure does not change unintendedly.** When adding or removing properties in objects, these are automatically captured and asserted.
+- **Sanpshots ensure the state of objects.** Allway ensure the atomic state of obejcts. Any changes to the data contained in the properties is automatically validated and asserted.
+- **Simplify comparing big strings.** Just create a snapshot of the string and ensure it does not change in any future testrun.
   
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
   
