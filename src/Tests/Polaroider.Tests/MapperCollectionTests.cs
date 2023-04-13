@@ -27,6 +27,14 @@ namespace Polaroider.Tests
             collection[typeof(Derived)].Should().BeSameAs(mapper.Object);
         }
 
+        [Test]
+        public void MapperCollection_Indexer_Unregistered()
+        {
+            var collection = new MapperCollection<IMapper>();
+
+            collection[typeof(Derived)].Should().BeNull();
+        }
+
         public class Derived : IMapper { }
     }
 }
