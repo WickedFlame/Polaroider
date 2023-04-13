@@ -21,7 +21,7 @@ namespace Polaroider.Tests
 		public void SnapshotOptions_Merge_Formatters()
 		{
 			var options = new SnapshotOptions();
-			options.Formatters.Count().Should().Be(5);
+			options.Formatters.Count().Should().Be(6);
 
 			options.MergeDefault();
 
@@ -43,7 +43,7 @@ namespace Polaroider.Tests
 
 			options.MergeDefault();
 
-			options.Formatters.Count().Should().Be(6);
+			options.Formatters.Count().Should().Be(7);
 			options.Formatters.Should().Contain(formatter);
 		}
 
@@ -52,7 +52,7 @@ namespace Polaroider.Tests
 		{
 			SnapshotOptions.Setup(o =>
 			{
-				o.Formatters = new MapperCollection<Type, IValueFormatter>
+				o.Formatters = new MapperCollection<IValueFormatter>
 				{
 					{typeof(int), new NumberFormatter()},
 					{typeof(double), new NumberFormatter()}

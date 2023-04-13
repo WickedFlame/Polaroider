@@ -5,9 +5,13 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
+### v2.0.8
+#### Fixed
+- MatchSnapshot of Exceptions caused a StackOverflow
+
 ### v2.0.7
 #### Added
-- Added ExtensionMethod for IgnoreWhiteSaces
+- Added ExtensionMethod for IgnoreWhiteSpaces
   
 #### Fixed
 - NullReferenceException when using optimized compiling

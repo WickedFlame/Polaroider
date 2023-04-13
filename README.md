@@ -7,7 +7,6 @@ Automated Snapshottesting for .NET
 [![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?style=for-the-badge&label=Latest)](https://www.nuget.org/packages/polaroider/)
 [![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?style=for-the-badge&label=RC)](https://www.nuget.org/packages/polaroider/)
   
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=coverage)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)
   
@@ -31,9 +30,9 @@ person.MatchSnapshot();
   
 ## Testing with Snapshots
 Snashots help when testing objects or large strings
-- **Snapshots ensure that objects don't change.** When adding or removing properties insid objects, these are automatically captured and asserted in the tests
-- **Sanpshots ensure the state of objects.** All data and property values of objects are validated and asserted
-- **Simplify testing that big strings are be same.** Just create a snapshot of the string and compare them in any further testrun
+- **Snapshots ensure that object structure does not change unintendedly.** When adding or removing properties in objects, these are automatically captured and asserted.
+- **Sanpshots ensure the state of objects.** Allways ensure the atomic state of obejcts. Any changes to the data contained in the properties of the matched object is automatically validated and asserted.
+- **Simplify comparing big strings.** Just create a snapshot of the string and ensure it does not change in any future testrun.
   
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
   

@@ -25,6 +25,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polaroider.TestFramework.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{AA17F49A-53F5-46AF-8304-9C102D23170A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{2FF03A10-3467-41B1-BACE-4FB416887EBF}"
+	ProjectSection(SolutionItems) = preProject
+		docs\api.md = docs\api.md
+		docs\changelog.md = docs\changelog.md
+		docs\comparer.md = docs\comparer.md
+		docs\customize.md = docs\customize.md
+		docs\directives.md = docs\directives.md
+		docs\formatters.md = docs\formatters.md
+		docs\frameworks.md = docs\frameworks.md
+		docs\index.md = docs\index.md
+		docs\mappers.md = docs\mappers.md
+		docs\mocking.md = docs\mocking.md
+		docs\options.md = docs\options.md
+		docs\roadmap.md = docs\roadmap.md
+		docs\snapshotcreation.md = docs\snapshotcreation.md
+		docs\troubleshooting.md = docs\troubleshooting.md
+		docs\_config.yml = docs\_config.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

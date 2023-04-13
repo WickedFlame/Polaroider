@@ -55,12 +55,12 @@ namespace Polaroider
 		/// <summary>
 		/// gets a set of type mappers
 		/// </summary>
-		public MapperCollection<Type, ITypeMapper> TypeMappers { get; } = new MapperCollection<Type, ITypeMapper>();
+		public MapperCollection<ITypeMapper> TypeMappers { get; } = new MapperCollection<ITypeMapper>();
 
 		/// <summary>
 		/// gets a set of value formatters
 		/// </summary>
-		public MapperCollection<Type, IValueFormatter> Formatters { get; set; } = new MapperCollection<Type, IValueFormatter>();
+		public MapperCollection<IValueFormatter> Formatters { get; set; } = new MapperCollection<IValueFormatter>();
 
 		/// <summary>
 		/// Gets the Evaluator used by the Mapper for value types. Value types are simply added to the match with ToString()
@@ -75,8 +75,9 @@ namespace Polaroider
 		{
 			var options = new SnapshotOptions
 			{
-				Formatters = new MapperCollection<Type, IValueFormatter>
+				Formatters = new MapperCollection<IValueFormatter>
 				{
+                    {typeof(Exception), new ExceptionFormatter()},
 					{typeof(Type), new TypeFormatter()}, 
 					{typeof(string), new StringFormatter()}, 
 					{typeof(DateTime), new DateTimeFormatter()}, 
@@ -255,7 +256,7 @@ namespace Polaroider
 		/// <returns></returns>
 		public static SnapshotOptions UseBasicFormatters(this SnapshotOptions options)
 		{
-			options.Formatters = new MapperCollection<Type, IValueFormatter>
+			options.Formatters = new MapperCollection<IValueFormatter>
 			{
 				{typeof(Type), new TypeFormatter()},
 				{typeof(string), new SimpleStringFormatter()}

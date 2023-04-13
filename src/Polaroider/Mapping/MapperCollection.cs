@@ -1,23 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Polaroider.Mapping
 {
 	/// <summary>
 	/// defines a key/value collection for imappers
 	/// </summary>
-	/// <typeparam name="TKey"></typeparam>
 	/// <typeparam name="TVal"></typeparam>
-	public class MapperCollection<TKey, TVal> : IEnumerable<TVal> where TVal :class, IMapper
+	public class MapperCollection<TVal> : IEnumerable<TVal> where TVal : class, IMapper
 	{
-		private readonly Dictionary<TKey, TVal> _items = new Dictionary<TKey, TVal>();
+		private readonly Dictionary<Type, TVal> _items = new Dictionary<Type, TVal>();
 
 		/// <summary>
 		/// gets the value stored behind the key
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public TVal this[TKey key]
+		public TVal this[Type key]
 		{
 			get
 			{
@@ -26,6 +27,12 @@ namespace Polaroider.Mapping
 					return _items[key];
 				}
 
+                if (Keys.Any(k => k.IsAssignableFrom(key)))
+                {
+                    var type = Keys.FirstOrDefault(k => k.IsAssignableFrom(key));
+                    return _items[type];
+                }
+
 				return null;
 			}
 		}
@@ -33,14 +40,14 @@ namespace Polaroider.Mapping
 		/// <summary>
 		/// gets a collection of keys in the mappercollection
 		/// </summary>
-		public IEnumerable<TKey> Keys => _items.Keys;
+		public IEnumerable<Type> Keys => _items.Keys;
 
 		/// <summary>
 		/// add a new entry to the collection
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="value"></param>
-		public void Add(TKey key, TVal value)
+		public void Add(Type key, TVal value)
 		{
 			if (ContainsKey(key))
 			{
@@ -55,7 +62,7 @@ namespace Polaroider.Mapping
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public bool ContainsKey(TKey key)
+		public bool ContainsKey(Type key)
 		{
 			return _items.ContainsKey(key);
 		}
@@ -64,7 +71,7 @@ namespace Polaroider.Mapping
 		/// remove the item from the collection
 		/// </summary>
 		/// <param name="key"></param>
-		public void Remove(TKey key)
+		public void Remove(Type key)
 		{
 			_items.Remove(key);
 		}
