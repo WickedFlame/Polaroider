@@ -5,7 +5,7 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
-### vNext
+### v2.0.8
 #### Fixed
 - MatchSnapshot of Exceptions caused a StackOverflow
 
