@@ -19,7 +19,7 @@ namespace Polaroider.Tests.Mapper.Formatters
                 SnapshotTokenizer.MapToToken(ex)
                     .ToString()
                     .Should()
-                    .StartWith($"this is a test{Environment.NewLine}   at Polaroider.Tests.Mapper.Formatters.ExceptionFormatterTests.ExceptionFormatter_MatchSnapshot() in C:\\Projects\\GitHub\\Polaroider\\src\\Tests\\Polaroider.Tests\\Mapper\\Formatters\\ExceptionFormatterTests.cs:line");
+                    .StartWith($"this is a test{Environment.NewLine}   at Polaroider.Tests.Mapper.Formatters.ExceptionFormatterTests.ExceptionFormatter_MatchSnapshot() in");
             }
         }
 
