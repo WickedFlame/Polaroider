@@ -32,10 +32,10 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Parameter("Version to be injected in the Build")]
-    public string Version { get; set; } = $"2.0.9";
+    public string Version { get; set; } = $"2.1.0";
 
     [Parameter("The Buildnumber provided by the CI")]
-    public int BuildNo = 5;
+    public int BuildNo = 3;
 
     [Parameter("Is RC Version")]
     public bool IsRc = false;
@@ -92,7 +92,7 @@ class Build : NukeBuild
         //.DependsOn(Compile)
         .DependsOn(Test);
 
-    Target DeployLocal => _ => _
+    Target Deploy => _ => _
         .DependsOn(Release)
         .Executes(() =>
             {
