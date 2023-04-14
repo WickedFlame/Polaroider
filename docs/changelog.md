@@ -5,9 +5,13 @@ nav_order: 99
 ---
 
 ## Polaroider Changelog
-### v2.0.8
+### v2.1.0
+#### Added
+- Formatter for Exceptions
+
 #### Fixed
 - MatchSnapshot of Exceptions caused a StackOverflow
+- Multiline strings could not be matched
 
 ### v2.0.7
 #### Added

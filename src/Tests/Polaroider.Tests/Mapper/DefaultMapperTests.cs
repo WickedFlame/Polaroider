@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentAssertions;
 using NUnit.Framework;
 using Polaroider.Mapping;
 
@@ -59,7 +60,20 @@ namespace Polaroider.Tests.Mapper
 			Assert.AreEqual(1, context.Snapshot.Count);
 		}
 
-		public class WithIndexer
+        [Test]
+        public void DefaultMapper_Map_Null()
+        {
+
+            var mapper = new DefaultMapper();
+
+            var context = new MapperContext(mapper, new Snapshot(), new SnapshotOptions(), 0);
+
+            mapper.Map(context, (OnlyGetter)null);
+
+            context.Snapshot.Should().BeEmpty();
+        }
+
+        public class WithIndexer
 		{
 			private readonly List<string> _list = new List<string>
 			{

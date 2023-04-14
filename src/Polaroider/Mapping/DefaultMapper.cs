@@ -104,8 +104,13 @@ namespace Polaroider.Mapping
 		{
 			var formatter = ctx.Options.Formatters[type];
 			if (formatter != null)
-			{
-				ctx.AddLine(new Line($"{prefix}{formatter.Format(item)}"));
+            {
+                var value = formatter.Format(item) ?? string.Empty;
+				foreach(var line in value.Split(new[]{Environment.NewLine}, StringSplitOptions.None))
+                {
+                    ctx.AddLine(new Line($"{prefix}{line}"));
+                }
+
 				return true;
 			}
 
