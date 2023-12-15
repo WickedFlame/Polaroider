@@ -73,6 +73,32 @@ namespace Polaroider.Tests.Mapper
             context.Snapshot.Should().BeEmpty();
         }
 
+        [Test]
+        public void DefaultMapper_Map_NewLine_Windows()
+        {
+
+            var mapper = new DefaultMapper();
+
+            var context = new MapperContext(mapper, new Snapshot(), new SnapshotOptions(), 0);
+
+            mapper.Map(context, new { Value = "this\r\nis\r\na\r\ntest" });
+
+            context.Snapshot.ToString().Should().Be($"Value: this{Environment.NewLine}Value: is{Environment.NewLine}Value: a{Environment.NewLine}Value: test");
+        }
+
+        [Test]
+        public void DefaultMapper_Map_NewLine_Unix()
+        {
+
+            var mapper = new DefaultMapper();
+
+            var context = new MapperContext(mapper, new Snapshot(), new SnapshotOptions(), 0);
+
+            mapper.Map(context, new { Value = "this\nis\na\ntest" });
+
+            context.Snapshot.ToString().Should().Be($"Value: this{Environment.NewLine}Value: is{Environment.NewLine}Value: a{Environment.NewLine}Value: test");
+        }
+
         public class WithIndexer
 		{
 			private readonly List<string> _list = new List<string>
