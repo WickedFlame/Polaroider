@@ -23,7 +23,7 @@ namespace Polaroider.Tests.Mapper.Formatters
 
 			var formatter = new MethodInfoFormatter();
 
-			Assert.AreEqual("WriteLine(System.String,System.Object,System.Object,System.Object)", formatter.Format(method));
+			Assert.That("WriteLine(System.String,System.Object,System.Object,System.Object)", Is.EqualTo(formatter.Format(method)));
 		}
 
 		[Test]
@@ -33,7 +33,7 @@ namespace Polaroider.Tests.Mapper.Formatters
 
 			var formatter = new MethodInfoFormatter();
 
-			Assert.AreEqual("WriteLine(System.String,System.Object,System.Object,System.Object)", formatter.Format(method));
+			Assert.That("WriteLine(System.String,System.Object,System.Object,System.Object)", Is.EqualTo(formatter.Format(method)));
 		}
 
 		[Test]
@@ -41,7 +41,7 @@ namespace Polaroider.Tests.Mapper.Formatters
 		{
 			var formatter = new MethodInfoFormatter();
 
-			Assert.AreEqual("test", formatter.Format("test"));
+			Assert.That("test", Is.EqualTo(formatter.Format("test")));
 		}
 
 		private static MethodInfo GetMethodInfo(Expression<Action> expression)

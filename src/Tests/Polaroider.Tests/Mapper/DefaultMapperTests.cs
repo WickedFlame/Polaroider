@@ -27,7 +27,7 @@ namespace Polaroider.Tests.Mapper
 
 			mapper.Map(context, item);
 
-			Assert.AreEqual(0, context.Snapshot.Count);
+			Assert.That(0, Is.EqualTo(context.Snapshot.Count));
 		}
 
 		[Test]
@@ -42,7 +42,7 @@ namespace Polaroider.Tests.Mapper
 
 			mapper.Map(context, item);
 
-			Assert.AreEqual(0, context.Snapshot.Count);
+			Assert.That(0, Is.EqualTo(context.Snapshot.Count));
 		}
 
 		[Test]
@@ -57,7 +57,7 @@ namespace Polaroider.Tests.Mapper
 
 			mapper.Map(context, item);
 
-			Assert.AreEqual(1, context.Snapshot.Count);
+			Assert.That(1, Is.EqualTo(context.Snapshot.Count));
 		}
 
         [Test]
