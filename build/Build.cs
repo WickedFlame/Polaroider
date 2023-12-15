@@ -32,10 +32,10 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Parameter("Version to be injected in the Build")]
-    public string Version { get; set; } = $"2.1.0";
+    public string Version { get; set; } = $"2.2.0";
 
     [Parameter("The Buildnumber provided by the CI")]
-    public int BuildNo = 3;
+    public int BuildNo = 1;
 
     [Parameter("Is RC Version")]
     public bool IsRc = false;
@@ -50,8 +50,8 @@ class Build : NukeBuild
         .Before(Restore)
         .Executes(() =>
         {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(f => f.DeleteDirectory());
+            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(f => f.DeleteDirectory());
         });
 
     Target Restore => _ => _

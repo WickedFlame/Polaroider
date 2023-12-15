@@ -17,6 +17,9 @@ namespace Polaroider.Tests.Mapper.Formatters
             }
             catch (Exception ex)
             {
+                var tmp = SnapshotTokenizer.MapToToken(ex)
+                    .ToString();
+
                 SnapshotTokenizer.MapToToken(ex)
                     .ToString()
                     .Should()

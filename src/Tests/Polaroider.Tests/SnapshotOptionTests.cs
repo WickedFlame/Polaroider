@@ -84,7 +84,7 @@ namespace Polaroider.Tests
 		[Test]
 		public void Snapshot_Options_Merge()
 		{
-			Assert.AreNotSame(new SnapshotOptions().MergeDefault(), SnapshotOptions.Default);
+			Assert.That(new SnapshotOptions().MergeDefault(), Is.Not.SameAs(SnapshotOptions.Default));
 		}
 
 		[Test]
@@ -97,7 +97,7 @@ namespace Polaroider.Tests
 			_ = SnapshotOptions.Default.Parser;
 			options = options.MergeDefault();
 			
-			Assert.AreSame(options.Parser, parser);
+			Assert.That(options.Parser, Is.EqualTo(parser));
 		}
 
 		[Test]
@@ -110,7 +110,7 @@ namespace Polaroider.Tests
 			_ = SnapshotOptions.Default.Parser;
 			options = options.MergeDefault();
 
-			Assert.AreNotSame(options.Parser, SnapshotOptions.Default.Parser);
+			Assert.That(options.Parser, Is.Not.SameAs(SnapshotOptions.Default.Parser));
 		}
 		
 		[Test]
@@ -201,7 +201,7 @@ namespace Polaroider.Tests
 		public void Snapshot_Options_DefaultOptions_Parser_NotNull()
 		{
 			// ignore Guids when comparing
-			Assert.IsNotNull(SnapshotOptions.Default.Parser);
+			Assert.That(SnapshotOptions.Default.Parser, Is.Not.Null);
 		}
 
 		[Test]
@@ -213,7 +213,7 @@ namespace Polaroider.Tests
 			// reset
 			SnapshotOptions.Setup(o => { });
 
-			Assert.AreNotSame(SnapshotOptions.Default.Parser, parser);
+			Assert.That(SnapshotOptions.Default.Parser, Is.Not.SameAs(parser));
 		}
 
 		[Test]

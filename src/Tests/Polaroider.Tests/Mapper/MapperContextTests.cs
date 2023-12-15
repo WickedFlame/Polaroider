@@ -15,7 +15,7 @@ namespace Polaroider.Tests.Mapper
 		{
 			var snapshot = new Snapshot();
 			var ctx = new MapperContext(null, snapshot, new SnapshotOptions(), 0);
-			Assert.AreSame(ctx.Snapshot, snapshot);
+			Assert.That(ctx.Snapshot, Is.SameAs(snapshot));
 		}
 
 		[Test]
@@ -23,14 +23,14 @@ namespace Polaroider.Tests.Mapper
 		{
 			var options = new SnapshotOptions();
 			var ctx = new MapperContext(null, new Snapshot(), options, 0);
-			Assert.AreSame(ctx.Options, options);
+			Assert.That(ctx.Options, Is.SameAs(options));
 		}
 
 		[Test]
 		public void MapperContext_Indentation()
 		{
 			var ctx = new MapperContext(null, new Snapshot(), new SnapshotOptions(), 2);
-			Assert.AreEqual(2, ctx.Indentation);
+			Assert.That(2, Is.EqualTo(ctx.Indentation));
 		}
 
 		[Test]

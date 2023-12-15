@@ -106,7 +106,8 @@ namespace Polaroider.Mapping
 			if (formatter != null)
             {
                 var value = formatter.Format(item) ?? string.Empty;
-				foreach(var line in value.Split(new[]{Environment.NewLine}, StringSplitOptions.None))
+                value = value.Replace("\r\n", "\n");
+                foreach (var line in value.Split(new[] { "\n" }, StringSplitOptions.None))
                 {
                     ctx.AddLine(new Line($"{prefix}{line}"));
                 }
