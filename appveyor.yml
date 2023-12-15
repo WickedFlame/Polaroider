@@ -27,7 +27,7 @@ for:
     skip_tags: true
 
     install:
-      - dotnet tool install Nuke.GlobalTool --global --version 6.3.0 --no-cache
+      - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
       - dotnet restore ./build/_build.csproj
@@ -46,7 +46,7 @@ for:
     skip_tags: true
 
     install:
-      - dotnet tool install Nuke.GlobalTool --global --version 6.3.0 --no-cache
+      - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
       - dotnet restore ./build/_build.csproj
