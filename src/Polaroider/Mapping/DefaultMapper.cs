@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Polaroider.Mapping
 {
@@ -69,22 +70,33 @@ namespace Polaroider.Mapping
 				.Where(p => p.GetGetMethod() != null)
 				.OrderBy(p => p.Name))
 			{
-				var header = $"{property.Name}:".Indent(ctx.Indentation);
-				var value = property.GetValue(item);
+                try
+                {
+                    var header = $"{property.Name}:".Indent(ctx.Indentation);
+                    var value = property.GetValue(item);
 
-				if (MapValueType(ctx, property.PropertyType, value, $"{header} "))
-				{
-					continue;
-				}
+                    if (MapValueType(ctx, property.PropertyType, value, $"{header} "))
+                    {
+                        continue;
+                    }
 
-				ctx.AddLine(new Line(header));
+                    ctx.AddLine(new Line(header));
 
-				if (MapRegisteredType(property.PropertyType, ctx.Clone(ctx.Indentation + 2), value))
-				{
-					continue;
-				}
+                    if (MapRegisteredType(property.PropertyType, ctx.Clone(ctx.Indentation + 2), value))
+                    {
+                        continue;
+                    }
 
-				Map(ctx.Clone(ctx.Indentation + 2), value);
+                    Map(ctx.Clone(ctx.Indentation + 2), value);
+                }
+                catch(NotSupportedException e)
+                {
+                    var msg = new StringBuilder()
+                        .AppendLine($"Could not map property {property.Name} to the Snapshot")
+                        .AppendLine(e.Message)
+                        .AppendLine(e.StackTrace);
+                    System.Diagnostics.Trace.WriteLine(msg.ToString());
+                }
 			}
 		}
 
