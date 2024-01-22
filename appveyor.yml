@@ -1,7 +1,7 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
 environment:
-  base_version: 2.2.1
+  base_version: 2.3.0
 
 # version format
 version: $(base_version).{build}
