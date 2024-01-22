@@ -1,0 +1,17 @@
+---data
+BodyName: utf-8
+CodePage: 65001
+DecoderFallback:
+  MaxCharCount: 0
+EncoderFallback:
+  MaxCharCount: 0
+EncodingName: Unicode (UTF-8)
+HeaderName: utf-8
+IsBrowserDisplay: True
+IsBrowserSave: True
+IsMailNewsDisplay: True
+IsMailNewsSave: True
+IsReadOnly: True
+IsSingleByte: False
+WebName: utf-8
+WindowsCodePage: 1200
