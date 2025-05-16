@@ -64,6 +64,22 @@ namespace Polaroider.Tests
         }
 
         [Test]
+        public void SnapshotReader_WithSettings_EmptyString()
+        {
+            var reader = new SnapshotReader();
+            var snapshot = reader.Read(_snapshotResolver.ResolveSnapshotSetup());
+
+            snapshot.Should().NotBeNull();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("test");
+            sb.AppendLine("''");
+            sb.Append("settings");
+
+            snapshot.Single().ToString().Should().Be(sb.ToString());
+        }
+
+        [Test]
         public void SnapshotReader_Multifile()
         {
             var reader = new SnapshotReader();

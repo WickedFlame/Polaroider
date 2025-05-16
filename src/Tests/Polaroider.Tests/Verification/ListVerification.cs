@@ -29,6 +29,17 @@ namespace Polaroider.Tests.Verification
             lst.MatchSnapshot();
         }
 
+        [Test]
+        public void TestStringList_EmptyString()
+        {
+            var lst = new List<string>
+            {
+                "one", "", "three"
+            };
+
+            lst.MatchSnapshot();
+        }
+
         public class ListObject
         {
             public string Value { get; set; }
