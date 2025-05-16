@@ -52,7 +52,7 @@ namespace Polaroider
                     return snapshots;
                 }
 
-                if (line.StartsWith("'"))
+                if (line.StartsWith("'") && !line.StartsWith("''"))
                 {
                     continue;
                 }

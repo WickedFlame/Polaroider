@@ -11,7 +11,6 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.EnvironmentInfo;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -32,7 +31,7 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Parameter("Version to be injected in the Build")]
-    public string Version { get; set; } = $"2.3.0";
+    public string Version { get; set; } = $"2.4.0";
 
     [Parameter("The Buildnumber provided by the CI")]
     public int BuildNo = 1;
@@ -99,12 +98,12 @@ class Build : NukeBuild
                 // copy to local store
                 foreach (var file in Directory.GetFiles(RootDirectory, $"*.{PackageVersion}.nupkg", SearchOption.AllDirectories))
                 {
-                    CopyFile(file, DeployPath / Path.GetFileName(file), FileExistsPolicy.Overwrite);
+                    ((AbsolutePath) file).CopyToDirectory(DeployPath, ExistsPolicy.FileOverwrite);
                 }
 
                 foreach (var file in Directory.GetFiles(RootDirectory, $"*.{PackageVersion}.snupkg", SearchOption.AllDirectories))
                 {
-                    CopyFile(file, DeployPath / Path.GetFileName(file), FileExistsPolicy.Overwrite);
+                    ((AbsolutePath) file).CopyToDirectory(DeployPath, ExistsPolicy.FileOverwrite);
                 }
             }
         );
