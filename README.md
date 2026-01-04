@@ -37,7 +37,7 @@ Snashots help when testing objects or large strings
 Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/Polaroider/) for the full documentation.
   
 ## Troubleshooting
-When having trouble generating Snapshots or the **TestMethodNotFoundException** is thrown, please make sure that the option for Optimize code is disabled and *.pdb files are generated. 
+When having trouble generating Snapshots or the **TestMethodNotFoundException** is thrown, please make sure that the option for Optimize code is disabled *.pdb files are generated and that the Test does not depend on async/await. 
 For more information visit [https://wickedflame.github.io/Polaroider/troubleshooting](https://wickedflame.github.io/Polaroider/troubleshooting)
   
 ## Update from v1 to v2

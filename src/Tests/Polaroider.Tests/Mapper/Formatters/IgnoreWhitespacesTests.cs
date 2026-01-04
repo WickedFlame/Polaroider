@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
-using NUnit.Framework;
-
-namespace Polaroider.Tests.Mapper.Formatters
+﻿namespace Polaroider.Tests.Mapper.Formatters
 {
     public class IgnoreWhitespacesTests
     {

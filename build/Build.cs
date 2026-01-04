@@ -31,10 +31,10 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Parameter("Version to be injected in the Build")]
-    public string Version { get; set; } = $"2.4.0";
+    public string Version { get; set; } = $"2.4.1";
 
     [Parameter("The Buildnumber provided by the CI")]
-    public int BuildNo = 1;
+    public int BuildNo = 3;
 
     [Parameter("Is RC Version")]
     public bool IsRc = false;
@@ -99,11 +99,13 @@ class Build : NukeBuild
                 foreach (var file in Directory.GetFiles(RootDirectory, $"*.{PackageVersion}.nupkg", SearchOption.AllDirectories))
                 {
                     ((AbsolutePath) file).CopyToDirectory(DeployPath, ExistsPolicy.FileOverwrite);
+                    Serilog.Log.Write(Serilog.Events.LogEventLevel.Information, "Deployed {0} to {1}", file, DeployPath);
                 }
 
                 foreach (var file in Directory.GetFiles(RootDirectory, $"*.{PackageVersion}.snupkg", SearchOption.AllDirectories))
                 {
                     ((AbsolutePath) file).CopyToDirectory(DeployPath, ExistsPolicy.FileOverwrite);
+                    Serilog.Log.Write(Serilog.Events.LogEventLevel.Information, "Deployed {0} to {1}", file, DeployPath);
                 }
             }
         );

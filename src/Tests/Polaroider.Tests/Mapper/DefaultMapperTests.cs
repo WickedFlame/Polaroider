@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Polaroider.Mapping;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
-using NUnit.Framework;
-using Polaroider.Mapping;
 
 namespace Polaroider.Tests.Mapper
 {
@@ -124,7 +121,7 @@ namespace Polaroider.Tests.Mapper
 
 		public class OnlyGetter
 		{
-			private string _value = "set";
+			private readonly string _value = "set";
 			public string GetterOnly => _value;
 		}
 	}

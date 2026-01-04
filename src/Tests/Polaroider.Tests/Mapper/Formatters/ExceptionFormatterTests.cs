@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Polaroider.Mapping.Formatters;
+using System;
 using System.Text;
-using FluentAssertions;
-using NUnit.Framework;
-using Polaroider.Mapping.Formatters;
 
 namespace Polaroider.Tests.Mapper.Formatters
 {
