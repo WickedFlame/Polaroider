@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FluentAssertions;
-using NUnit.Framework;
-using Polaroider.Mapping;
+﻿using Polaroider.Mapping;
+using System;
 
 namespace Polaroider.Tests.Mapper
 {

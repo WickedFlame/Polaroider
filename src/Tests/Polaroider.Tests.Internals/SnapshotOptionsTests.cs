@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 
 namespace Polaroider.Tests.Internals
 {

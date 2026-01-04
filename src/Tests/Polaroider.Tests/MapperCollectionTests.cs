@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using Moq;
-using NUnit.Framework;
-using Polaroider.Mapping;
+﻿using Polaroider.Mapping;
 
 namespace Polaroider.Tests
 {

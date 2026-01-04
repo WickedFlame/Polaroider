@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-
-namespace Polaroider.Tests.Internals
+﻿namespace Polaroider.Tests.Internals
 {
     public class UpdateSnapshotAttributeCheck
     {
