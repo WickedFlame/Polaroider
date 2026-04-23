@@ -66,13 +66,25 @@ namespace Polaroider
 			return MapToToken<T>(snapshot, options);
 		}
 
-		/// <summary>
-		/// create a snapshot token of the object
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="snapshot"></param>
-		/// <returns></returns>
-		public static Snapshot MapToToken<T>(T snapshot)
+        /// <summary>
+        /// create a snapshot token of the object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+		/// <param name="mapper"></param>
+        /// <returns></returns>
+        public static Snapshot Tokenize<T>(T snapshot, IObjectMapper mapper)
+        {
+            return MapToToken<T>(snapshot, (SnapshotOptions)null, mapper);
+        }
+
+        /// <summary>
+        /// create a snapshot token of the object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <returns></returns>
+        public static Snapshot MapToToken<T>(T snapshot)
 		{
 			return MapToToken<T>(snapshot, (SnapshotOptions)null);
 		}
@@ -86,23 +98,36 @@ namespace Polaroider
 		/// <returns></returns>
 		public static Snapshot MapToToken<T>(T snapshot, SnapshotOptions options)
 		{
-			options = options.MergeDefault();
-
 			var mapper = ObjectMapper.Mapper.GetMapper(typeof(T));
-			var token = mapper.Map(snapshot, options);
-
-			var parser = options.Parser;
-			if (parser == null)
-			{
-				return token;
-			}
-
-			for (var i = 0; i < token.Count; i++)
-			{
-				token[i] = parser.Parse(token[i]);
-			}
-
-			return token;
+			return MapToToken<T>(snapshot, options, mapper);
 		}
-	}
+
+        /// <summary>
+        /// create a snapshot token of the object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <param name="options"></param>
+		/// <param name="mapper"></param>
+        /// <returns></returns>
+        public static Snapshot MapToToken<T>(T snapshot, SnapshotOptions options, IObjectMapper mapper)
+        {
+            options = options.MergeDefault();
+
+            var token = mapper.Map(snapshot, options);
+
+            var parser = options.Parser;
+            if (parser == null)
+            {
+                return token;
+            }
+
+            for (var i = 0; i < token.Count; i++)
+            {
+                token[i] = parser.Parse(token[i]);
+            }
+
+            return token;
+        }
+    }
 }
