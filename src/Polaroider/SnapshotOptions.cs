@@ -123,7 +123,10 @@ namespace Polaroider
 
 				options.Formatters.Add(formatter, SnapshotOptions.Default.Formatters[formatter]);
 			}
-			options.IsValueType = SnapshotOptions.Default.IsValueType;
+
+			options.Parser = options.Parser ?? SnapshotOptions.Default.Parser;
+
+            options.IsValueType = SnapshotOptions.Default.IsValueType;
 		}
 	}
 
