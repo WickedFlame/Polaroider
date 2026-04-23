@@ -129,7 +129,7 @@ namespace Polaroider
         /// <param name="options">the configuration</param>
         [AssertionMethod]
         public static void MatchSnapshot<T>(this T snapshot, Action<SnapshotOptions> options)
-            => MatchSnapshot(snapshot, SnapshotOptions.Create(options));
+            => MatchSnapshot(snapshot, SnapshotOptions.Default.Clone(options));
 
 
 
@@ -157,7 +157,7 @@ namespace Polaroider
         /// <param name="options">the configuration</param>
         [AssertionMethod]
         public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, Action<SnapshotOptions> options)
-            => MatchSnapshot(snapshot, meta, SnapshotOptions.Create(options));
+            => MatchSnapshot(snapshot, meta, SnapshotOptions.Default.Clone(options));
 
         /// <summary>
         /// Add metatdata to the snapshot

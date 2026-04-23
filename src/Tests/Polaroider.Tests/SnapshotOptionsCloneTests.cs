@@ -19,11 +19,14 @@ namespace Polaroider.Tests
         [Test]
         public void SnapshotOptions_Clone_ShouldCopyParser()
         {
+            var directive = new Func<string, string>(s => s);
             var options = new SnapshotOptions { Parser = new LineParser() };
+            options.AddDirective(directive);
 
             var clone = options.Clone();
 
-            clone.Parser.Should().BeSameAs(options.Parser);
+            clone.Parser.Should().NotBeSameAs(options.Parser);
+            clone.Parser.Directives.Should().Contain(directive);
         }
 
         [Test]

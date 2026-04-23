@@ -5,5 +5,8 @@ IsValueType:
   Method: <Setup>b__29_0(System.Type,System.Object)
   Target:
 Parser:
+  Directives:
+    Method: <SnapshotOptions_Api_Full>b__0_1(System.String)
+    Target:
 TypeMappers:
 UpdateSnapshot: False

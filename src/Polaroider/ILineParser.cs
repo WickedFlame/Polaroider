@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Polaroider
 {
@@ -7,12 +8,17 @@ namespace Polaroider
 	/// </summary>
 	public interface ILineParser
 	{
-		/// <summary>
-		/// parse the line
-		/// </summary>
-		/// <param name="line"></param>
-		/// <returns></returns>
-		Line Parse(string line);
+        /// <summary>
+        /// Gets all directives of the parser
+        /// </summary>
+        IEnumerable<Func<string, string>> Directives { get; }
+
+        /// <summary>
+        /// parse the line
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        Line Parse(string line);
 
 		/// <summary>
 		/// parse the line

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Polaroider.Mapping;
+using System;
 using System.Globalization;
-using System.Text;
-using NUnit.Framework;
-using Polaroider.Mapping;
 
 namespace Polaroider.Tests
 {

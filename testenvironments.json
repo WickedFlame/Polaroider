@@ -1,0 +1,15 @@
+{
+    "version": "1",
+    "environments": [
+        {
+            "name": "Ubuntu-22.04.2",
+            "type": "wsl",
+            "wslDistribution": "Ubuntu-22.04"
+        },
+		{
+            "name": "docker",
+            "type": "docker",
+            "dockerImage": "mcr.microsoft.com/dotnet/sdk:10.0"
+        }
+    ]
+}
