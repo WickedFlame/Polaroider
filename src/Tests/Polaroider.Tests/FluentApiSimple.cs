@@ -76,5 +76,13 @@ namespace Polaroider.Tests
             snapshots.Any(s => s.Metadata["id"] == "one").Should().BeTrue();
             snapshots.Any(s => s.Metadata["id"] == "2").Should().BeTrue();
         }
+
+        [Test]
+        public void MatchSnapshot_Path()
+        {
+            "test\\snapshot\\test".MatchSnapshot(() => new { Directive = "Windows to Unix" }, o => o.AddDirective(s => s.Replace("\\", "/")));
+
+            "test/snapshot/test".MatchSnapshot(() => new { Directive = "Unix to Windows" }, o => o.AddDirective(s => s.Replace("/", "\\")));
+        }
     }
 }
