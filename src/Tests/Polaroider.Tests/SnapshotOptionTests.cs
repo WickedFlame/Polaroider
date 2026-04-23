@@ -194,7 +194,19 @@ namespace Polaroider.Tests
 			new { Value = DateTime.Now }.MatchSnapshot(options);
 		}
 
-		[Test]
+        [Test]
+        public void Options_AsExpression()
+        {
+            new { Value = Guid.NewGuid() }.MatchSnapshot(o => o.AddDirective(s => s.ReplaceGuid("guid replacement")));
+        }
+
+        [Test]
+        public void Options_AsExpression_Withmeta()
+        {
+            new { Value = Guid.NewGuid() }.MatchSnapshot(() => new { id = 1 }, o => o.AddDirective(s => s.ReplaceGuid("guid replacement")));
+        }
+
+        [Test]
 		public void Snapshot_Options_DefaultOptions_Parser_NotNull()
 		{
 			// ignore Guids when comparing
