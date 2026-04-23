@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - SnapshotOptions can be called as a Expression instead of passing the SnapshotOptions object directly
+- Clone for SnapshotOptions
 
 ## v2.5.0
 ### Added

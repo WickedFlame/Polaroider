@@ -133,11 +133,39 @@ namespace Polaroider
 	public static class SnapshotOptionsExtensions
 	{
 		/// <summary>
-		/// merge the default options to the custom instance
+		/// Creates a clone of the snapshot options
 		/// </summary>
-		/// <param name="options"></param>
-		/// <returns></returns>
-		public static SnapshotOptions MergeDefault(this SnapshotOptions options)
+		/// <param name="options">The snapshot options to clone</param>
+		/// <returns>A new instance with copied values from the original options</returns>
+		public static SnapshotOptions Clone(this SnapshotOptions options)
+		{
+			var clone = new SnapshotOptions
+			{
+				Comparer = options.Comparer,
+				Parser = options.Parser,
+				UpdateSnapshot = options.UpdateSnapshot,
+				IsValueType = options.IsValueType
+			};
+
+			foreach (var formatter in options.Formatters.Keys)
+			{
+				clone.Formatters.Add(formatter, options.Formatters[formatter]);
+			}
+
+			foreach (var mapper in options.TypeMappers.Keys)
+			{
+				clone.TypeMappers.Add(mapper, options.TypeMappers[mapper]);
+			}
+
+			return clone;
+        }
+
+        /// <summary>
+        /// merge the default options to the custom instance
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static SnapshotOptions MergeDefault(this SnapshotOptions options)
 		{
 			if (options == null)
 			{
