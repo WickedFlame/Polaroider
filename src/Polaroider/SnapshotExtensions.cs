@@ -119,6 +119,20 @@ namespace Polaroider
         public static void MatchSnapshot<T>(this T snapshot, Func<object> meta)
 			=> MatchSnapshot(snapshot, meta, (SnapshotOptions)null);
 
+
+
+        /// <summary>
+        /// compares the provided object with the saved snapshot
+        /// </summary>
+        /// <typeparam name="T">the objecttype</typeparam>
+        /// <param name="snapshot">the object to comapre</param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot, Action<SnapshotOptions> options)
+            => MatchSnapshot(snapshot, SnapshotOptions.Default.Clone(options));
+
+
+
         /// <summary>
         /// compares the provided object with the saved snapshot that has the corresponding metadata
         /// </summary>
@@ -133,6 +147,17 @@ namespace Polaroider
                 .SetMetadata(meta)
                 .MatchSnapshot(options);
         }
+
+        /// <summary>
+        /// compares the provided object with the saved snapshot that has the corresponding metadata
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="snapshot"></param>
+        /// <param name="meta"></param>
+        /// <param name="options">the configuration</param>
+        [AssertionMethod]
+        public static void MatchSnapshot<T>(this T snapshot, Func<object> meta, Action<SnapshotOptions> options)
+            => MatchSnapshot(snapshot, meta, SnapshotOptions.Default.Clone(options));
 
         /// <summary>
         /// Add metatdata to the snapshot

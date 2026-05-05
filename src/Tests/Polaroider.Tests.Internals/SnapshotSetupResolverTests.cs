@@ -1,4 +1,6 @@
-﻿namespace Polaroider.Tests
+﻿using Abstract.FileSystem;
+
+namespace Polaroider.Tests
 {
     public class SnapshotSetupResolverTests
     {
@@ -35,7 +37,7 @@
             var resolver = new SnapshotSetupResolver();
             var id = resolver.ResolveSnapshotSetup();
 
-            id.Directory.Should().EndWith("\\src\\Tests\\Polaroider.Tests.Internals");
+            id.Directory.Should().EndWith("\\src\\Tests\\Polaroider.Tests.Internals".ToSystemPath());
         }
 
         [Test]

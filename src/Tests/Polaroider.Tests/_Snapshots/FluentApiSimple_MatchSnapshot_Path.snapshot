@@ -1,0 +1,8 @@
+---metadata
+Directive: Unix to Windows
+---data
+test\snapshot\test
+---metadata
+Directive: Windows to Unix
+---data
+test/snapshot/test

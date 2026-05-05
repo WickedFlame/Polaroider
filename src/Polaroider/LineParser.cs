@@ -18,12 +18,17 @@ namespace Polaroider
 			_directives = new List<Func<string, string>>();
 		}
 
-		/// <summary>
-		/// parse the line
-		/// </summary>
-		/// <param name="line"></param>
-		/// <returns></returns>
-		public Line Parse(string line)
+        /// <summary>
+        /// Gets all directives of the parser
+        /// </summary>
+        public IEnumerable<Func<string, string>> Directives => _directives;
+
+        /// <summary>
+        /// parse the line
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public Line Parse(string line)
 		{
 			foreach (var direcive in _directives)
 			{

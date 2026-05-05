@@ -76,7 +76,7 @@ namespace Polaroider.Tests.Mapper
 
             var mapper = new DefaultMapper();
 
-            var context = new MapperContext(mapper, new Snapshot(), new SnapshotOptions(), 0);
+            var context = new MapperContext(mapper, new Snapshot(), SnapshotOptions.Default, 0);
 
             mapper.Map(context, new { Value = "this\r\nis\r\na\r\ntest" });
 
@@ -89,7 +89,7 @@ namespace Polaroider.Tests.Mapper
 
             var mapper = new DefaultMapper();
 
-            var context = new MapperContext(mapper, new Snapshot(), new SnapshotOptions(), 0);
+            var context = new MapperContext(mapper, new Snapshot(), SnapshotOptions.Default, 0);
 
             mapper.Map(context, new { Value = "this\nis\na\ntest" });
 
