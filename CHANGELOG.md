@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - SnapshotOptions can be called as a Expression instead of passing the SnapshotOptions object directly
 - Clone for SnapshotOptions
+- GitLab Pipeline
 
 ## v2.5.0
 ### Added

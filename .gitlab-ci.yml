@@ -1,0 +1,31 @@
+image: mcr.microsoft.com/dotnet/sdk:10.0
+
+stages:
+  - build
+
+.build:
+  stage: build
+  before_script:
+    - dotnet tool install Nuke.GlobalTool --global --version 10.1.0
+    - export PATH="$PATH:/root/.dotnet/tools"
+  script:
+    - dotnet restore ./build/_build.csproj
+    - nuke release -isrc ${ISRC} -buildno ${CI_PIPELINE_IID} -version ${Version}
+  artifacts:
+    paths:
+      - artifacts/*.nupkg
+      - artifacts/*.snupkg
+
+build-dev:
+  only:
+    - dev
+  variables:
+    ISRC: "true"
+  extends: .build
+
+build-master:
+  only:
+    - master
+  variables:
+    ISRC: "false"
+  extends: .build
