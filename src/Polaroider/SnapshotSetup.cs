@@ -24,6 +24,8 @@ namespace Polaroider
 
             UpdateSnapshot = _method.GetCustomAttribute<UpdateSnapshotAttribute>() != null || 
                              _method.DeclaringType.GetCustomAttribute<UpdateSnapshotAttribute>() != null;
+
+            SnapshotName = _method.GetCustomAttribute<SnapshotNameAttribute>()?.Name ?? string.Empty;
         }
 
         /// <summary>
@@ -50,5 +52,10 @@ namespace Polaroider
         /// indicates if the snapshot has to be updated
         /// </summary>
         public bool UpdateSnapshot { get; }
+
+        /// <summary>
+        /// Gets the name of the snapshot if it is defined with the SnapshotNameAttribute, otherwise returns an empty string.
+        /// </summary>
+        public string SnapshotName { get; }
     }
 }

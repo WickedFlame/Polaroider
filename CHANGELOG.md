@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- 
+### Added
+- SnapshotName attribute to specify the name of the snapshot for a test method
 
 ## 2.5.1
 ### Added

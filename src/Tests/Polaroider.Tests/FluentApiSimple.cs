@@ -84,5 +84,13 @@ namespace Polaroider.Tests
 
             "test/snapshot/test".MatchSnapshot(() => new { Directive = "Unix to Windows" }, o => o.AddDirective(s => s.Replace("/", "\\")));
         }
+
+        [Test]
+        [SnapshotName("CustomSnapshotName")]
+        public void MatchSnapshot_SnapshotName()
+        {
+            "testsnapshot".MatchSnapshot();
+            System.IO.File.Exists("../../../_Snapshots/CustomSnapshotName.snapshot").Should().BeTrue();
+        }
     }
 }

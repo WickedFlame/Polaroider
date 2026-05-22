@@ -21,8 +21,9 @@ namespace Polaroider
             }
 
             var method = setup.MethodName.Replace("<", string.Empty).Replace(">", string.Empty);
+            var name = string.IsNullOrEmpty(setup.SnapshotName) ? $"{className}_{method}.snapshot" : $"{setup.SnapshotName}.snapshot";
 
-            return Path.Combine(setup.Directory, "_Snapshots", $"{className}_{method}.snapshot");
+            return Path.Combine(setup.Directory, "_Snapshots", name);
         }
     }
 }

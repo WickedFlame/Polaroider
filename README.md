@@ -40,6 +40,48 @@ Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/
 When having trouble generating Snapshots or the **TestMethodNotFoundException** is thrown, please make sure that the option for Optimize code is disabled *.pdb files are generated and that the Test does not depend on async/await. 
 For more information visit [https://wickedflame.github.io/Polaroider/troubleshooting](https://wickedflame.github.io/Polaroider/troubleshooting)
   
+## Examples
+```csharp
+[Test]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+  
+### Update Snapshots
+Data changes and the snapshot has to be updated. This can be done by adding the UpdateSnapshot attribute to the test method or class.
+
+```csharp
+[Test]
+[UpdateSnapshot]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+It is important to remove the attribute after the snapshot is updated. Else the snapshot will be updated in every test run and the test will not fail when the data changes.
+  
+### Custom Snapshot Name
+Usig the SnapshotName attribute you can specify the name of the snapshot for a test method. This is useful to avoid long filenames of snapshots.
+```csharp
+[SnapshotName("CustomSnapshotName")]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+
+  
 ## Update from v1 to v2
 v1 was focused on simplicity. 
 v2 is focused on flexibility while maintaining simplicity.
