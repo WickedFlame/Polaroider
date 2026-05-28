@@ -27,6 +27,11 @@ for:
     skip_tags: true
 
     install:
+      - ps: |
+          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile "$env:TEMP\dotnet-install.ps1"
+          & "$env:TEMP\dotnet-install.ps1" -Channel 10.0 -Quality preview -InstallDir "$env:ProgramFiles\dotnet"
+          $env:Path = "$env:ProgramFiles\dotnet;$env:Path"
+          dotnet --info
       - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
@@ -46,6 +51,11 @@ for:
     skip_tags: true
 
     install:
+      - ps: |
+          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile "$env:TEMP\dotnet-install.ps1"
+          & "$env:TEMP\dotnet-install.ps1" -Channel 10.0 -Quality preview -InstallDir "$env:ProgramFiles\dotnet"
+          $env:Path = "$env:ProgramFiles\dotnet;$env:Path"
+          dotnet --info
       - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
