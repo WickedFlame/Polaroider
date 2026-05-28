@@ -27,11 +27,10 @@ for:
     skip_tags: true
 
     install:
+  # Install .NET 10 SDK
       - ps: |
-          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile "$env:TEMP\dotnet-install.ps1"
-          & "$env:TEMP\dotnet-install.ps1" -Channel 10.0 -Quality preview -InstallDir "$env:ProgramFiles\dotnet"
-          $env:Path = "$env:ProgramFiles\dotnet;$env:Path"
-          dotnet --info
+          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -UseBasicParsing -OutFile "$env:temp\dotnet-install.ps1"
+          & $env:temp\dotnet-install.ps1 -Architecture x64 -Version '10.0.105' -InstallDir "$env:ProgramFiles\dotnet"
       - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
@@ -52,10 +51,8 @@ for:
 
     install:
       - ps: |
-          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile "$env:TEMP\dotnet-install.ps1"
-          & "$env:TEMP\dotnet-install.ps1" -Channel 10.0 -Quality preview -InstallDir "$env:ProgramFiles\dotnet"
-          $env:Path = "$env:ProgramFiles\dotnet;$env:Path"
-          dotnet --info
+          Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -UseBasicParsing -OutFile "$env:temp\dotnet-install.ps1"
+          & $env:temp\dotnet-install.ps1 -Architecture x64 -Version '10.0.105' -InstallDir "$env:ProgramFiles\dotnet"
       - dotnet tool install Nuke.GlobalTool --global --no-cache
 
     before_build:
