@@ -2,10 +2,8 @@
 Automated Snapshottesting for .NET
 | What | Badge |
 | --- | --- |
-| master Build | [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/master?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/master) |
-| dev Build | [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/dev?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/dev) |
-| Latest Package | [![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?svg=true&label=Latest)](https://www.nuget.org/packages/polaroider/) |
-| RC Package | [![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?svg=true&label=RC)](https://www.nuget.org/packages/polaroider/) |
+| Build | [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/master?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/master) [![Build status](https://ci.appveyor.com/api/projects/status/3v8mpq0p35vlegda/branch/dev?svg=true)](https://ci.appveyor.com/project/chriswalpen/polaroider/branch/dev) |
+| Nuget | [![NuGet Version](https://img.shields.io/nuget/v/polaroider.svg?svg=true&label=Latest)](https://www.nuget.org/packages/polaroider/) [![NuGet Version](https://img.shields.io/nuget/vpre/polaroider.svg?svg=true&label=RC)](https://www.nuget.org/packages/polaroider/) |
 | Sonar | [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=WickedFlame_Polaroider&metric=coverage)](https://sonarcloud.io/summary/new_code?id=WickedFlame_Polaroider)|
 | Codacy | [![Codacy Badge](https://app.codacy.com/project/badge/Grade/34983ecbd3dc41bea645f6e255505016)](https://www.codacy.com/gh/WickedFlame/Polaroider/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WickedFlame/Polaroider&amp;utm_campaign=Badge_Grade) |
   
