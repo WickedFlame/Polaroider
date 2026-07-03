@@ -40,6 +40,85 @@ Visit [https://wickedflame.github.io/Polaroider/](https://wickedflame.github.io/
 When having trouble generating Snapshots or the **TestMethodNotFoundException** is thrown, please make sure that the option for Optimize code is disabled *.pdb files are generated and that the Test does not depend on async/await. 
 For more information visit [https://wickedflame.github.io/Polaroider/troubleshooting](https://wickedflame.github.io/Polaroider/troubleshooting)
   
+## Examples
+```csharp
+[Test]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+  
+### Update Snapshots
+Data changes and the snapshot has to be updated. This can be done by adding the UpdateSnapshot attribute to the test method or class.
+
+```csharp
+[Test]
+[UpdateSnapshot]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+It is important to remove the attribute after the snapshot is updated. Else the snapshot will be updated in every test run and the test will not fail when the data changes.
+  
+### Custom Snapshot Name
+Usig the SnapshotName attribute you can specify the name of the snapshot for a test method. This is useful to avoid long filenames of snapshots.
+```csharp
+[SnapshotName("CustomSnapshotName")]
+public void TestPerson()
+{
+    // act
+    var person = repository.LoadTestPerson(...);
+    // assert
+    person.MatchSnapshot();
+}
+```
+
+### Snapshot Metadata
+Metadata allows storing multiple snapshots for a single test. Each snapshot is identified by the metadata passed to `MatchSnapshot`. This is useful when a test asserts several variations of an object and each variation should be matched against its own snapshot.
+```csharp
+[Test]
+public void TestPerson()
+{
+    var person = repository.LoadTestPerson(...);
+    // match against the snapshot that has the metadata id = 1
+    person.MatchSnapshot(() => new { id = 1 });
+}
+```
+The metadata is written as a header into the snapshot file so multiple snapshots can be stored side by side.
+```
+---metadata
+id: 1
+---data
+data: this is a test
+value: 1
+```
+
+### Mocking changing data like DateTimes
+Some values, like `DateTime` or `Guid`, change with every test run and would make a snapshot fail even when nothing else changed. These values can be mocked to a constant so the snapshot stays stable.
+```csharp
+[Test]
+public void TestPerson()
+{
+    var person = repository.LoadTestPerson(...);
+    // mock all DateTimes to a constant value
+    person.MatchSnapshot(o => o.MockDateTimes());
+}
+```
+The builtin extensions `MockDateTimes()` and `MockGuids()` replace all occurrences with a constant value (e.g. `0000-00-00T00:00:00.0000`). For custom values a formatter can be registered instead.
+```csharp
+var options = SnapshotOptions.Create(o => o.AddFormatter<DateTime>(obj => "0000-00-00T00:00:00.0000"));
+person.MatchSnapshot(options);
+```
+See [Mocking data](https://wickedflame.github.io/Polaroider/mocking) for more details.
+
 ## Update from v1 to v2
 v1 was focused on simplicity. 
 v2 is focused on flexibility while maintaining simplicity.
